@@ -223,7 +223,7 @@ namespace ZzukBot.Engines.Party
             }
 
             if (InSignAll()) {
-                var unit=ObjectManager.Npcs.Where(i => TargetPartyMemberInCombat(i.TargetGuid)).OrderBy(i=>i.HealthPercent).FirstOrDefault(); 
+                var unit=ObjectManager.Npcs.Where(i => i.Health!=0&&TargetPartyMemberInCombat(i.TargetGuid)).OrderBy(i=> i.HealthPercent==1?1000000000:i.HealthPercent).FirstOrDefault(); 
                 if (unit != null) {
                     Grinder.Access.Info.Combat.RemoveFromBlacklist(unit.Guid);
                     ObjectManager.Player.SetTarget(unit);

@@ -81,7 +81,18 @@ namespace ZzukBot.Engines.Party
             }
             return false;
         }
-
+        internal static bool TargetPartyMemberInCombat(ulong targetGuid)
+        {
+            foreach (var member in members)
+            {
+                var player = member.instance();
+                if (player != null)
+                {
+                    if (player.Guid == targetGuid&&player.IsInCombat) return true;
+                }
+            }
+            return false;
+        }
 
         internal static void Init()
         {
@@ -212,8 +223,9 @@ namespace ZzukBot.Engines.Party
             }
 
             if (InSignAll()) {
-                var unit=ObjectManager.Npcs.Where(i =>!Grinder.Access.Info.Combat.BlacklistContains(i.Guid)&&TargetPartyMember(i.TargetGuid)).OrderBy(i=>i.HealthPercent).FirstOrDefault(); 
+                var unit=ObjectManager.Npcs.Where(i => TargetPartyMemberInCombat(i.TargetGuid)).OrderBy(i=>i.HealthPercent).FirstOrDefault(); 
                 if (unit != null) {
+                    Grinder.Access.Info.Combat.RemoveFromBlacklist(unit.Guid);
                     ObjectManager.Player.SetTarget(unit);
                 }
             }

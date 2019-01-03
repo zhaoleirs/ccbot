@@ -161,7 +161,7 @@ namespace ZzukBot.Engines.Party
                 else if (parMessage.StartsWith("bagempty_"))
                 {
                     int index = Convert.ToInt32(parMessage.Substring(9));
-                    members[index].OnReport(4);
+                    members[index].OnReport(5);
                 }
                 else if (parMessage=="vendor")
                 {

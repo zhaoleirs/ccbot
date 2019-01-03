@@ -19,7 +19,9 @@ namespace ZzukBot.Engines.CustomClass.Objects
 
         internal virtual WoWUnit Ptr { get; set; }
 
-        internal bool IsNull => Ptr == null;
+        public int Level => Ptr.Level;
+
+        public bool IsNull => Ptr == null;
 
         /// <summary>
         ///     Tells the units guid

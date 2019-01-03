@@ -59,6 +59,7 @@ XYZ* Navigation::CalculatePath(unsigned int mapId, XYZ start, XYZ end, bool useS
 
 
 	if (mapId == 0) {
+		//manager->unloadMap(1);
 		if (!manager->hasLoadedMap(mapId, zeroX[0], zeroY[0])){
 			for (int i = 0; i < 558 /*size*/; i++) {
 				manager->loadMap(mapId, zeroX[i], zeroY[i]);
@@ -66,6 +67,7 @@ XYZ* Navigation::CalculatePath(unsigned int mapId, XYZ start, XYZ end, bool useS
 		}
 	}
 	else if (mapId == 1) {
+		//manager->unloadMap(0);
 		if (!manager->hasLoadedMap(mapId, oneX[0], oneY[0])) {
 			for (int i = 0; i < 810 /*size*/; i++) {
 				manager->loadMap(mapId, oneX[i], oneY[i]);

@@ -52,6 +52,11 @@ namespace ZzukBot.Objects
             return Calc.Distance2D(Position, parOtherObject.Position);
         }
 
+        internal float Distance3DTo(WoWObject parOtherObject)
+        {
+            return Calc.Distance3D(Position, parOtherObject.Position);
+        }
+
         internal void Interact(bool parAutoLoot)
         {
             Functions.OnRightClickObject(Pointer, Convert.ToInt32(parAutoLoot));

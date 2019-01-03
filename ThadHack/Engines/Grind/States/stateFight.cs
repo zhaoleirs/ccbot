@@ -15,13 +15,16 @@ namespace ZzukBot.Engines.Grind.States
         private readonly Random ran = new Random();
 
         private WoWUnit target;
-
+        private ulong LastTargetGuid;
         internal override int Priority => 50;
 
         internal override bool NeedToRun => Grinder.Access.Info.Combat.Attackers.Count != 0;
 
         internal override string Name => "Fight";
 
+        internal virtual bool GroupRest() {
+            return false;
+        }
         internal override void Run()
         {
             if (Grinder.Access.Info.Vendor.GoBackToGrindAfterVendor
@@ -29,7 +32,6 @@ namespace ZzukBot.Engines.Grind.States
             {
                 Grinder.Access.Info.Vendor.RegenerateSubPath = true;
             }
-
             Grinder.Access.Info.PathAfterFightToWaypoint.SetAfterFightMovement();
             Grinder.Access.Info.Combat.LastFightTick = Environment.TickCount + ran.Next(50, 100);
             Grinder.Access.Info.Loot.RemoveRespawnedMobsFromBlacklist(Grinder.Access.Info.Combat.Attackers);
@@ -51,6 +53,32 @@ namespace ZzukBot.Engines.Grind.States
             target = ObjectManager.Target;
             if (target != null)
             {
+                // if (!GroupRest())
+                // {
+                //     if (target.Guid == LastTargetGuid)
+                //     {
+                //         if (Wait.For("attacktimeout", 20000)) {
+                //             if (target.HealthPercent > 90)
+                //             {
+                //                 Grinder.Access.Info.Combat.AddToBlacklist(target.Guid);
+                //             }
+                //             else
+                //             {
+                //                 Wait.Remove("attacktimeout");
+                //                 Grinder.Access.Info.Combat.RemoveFromBlacklist(target.Guid);
+                //             }
+                //         }
+
+                //     }
+                //     else
+                //     {
+                //         Wait.Remove("attacktimeout");
+                //         LastTargetGuid = target.Guid;
+                //     }
+                // }
+                // else {
+                //     Wait.Remove("attacktimeout");
+                // }
                 var player = ObjectManager.Player;
                 var IsCasting = !(player.Casting == 0 && player.Channeling == 0);
                 var targetIsMoving = (target.MovementState & 0x1) == 0x1;
@@ -58,21 +86,21 @@ namespace ZzukBot.Engines.Grind.States
                 var distanceToTarget =
                     Calc.Distance3D(player.Position, target.Position);
 
-                if (!Grinder.Access.Info.Combat.IsAttacker(target.Guid))
+                if (!Grinder.Access.Info.Combat.IsAttacker(target.Guid)&&!IsCasting)
                 {
                     var tmp = Grinder.Access.Info.Combat.Attackers.OrderBy(i => i.Health).FirstOrDefault();
                     if (tmp == null) return;
-                    ObjectManager.Player.SetTarget(tmp);
-                    ObjectManager.Player.Spells.StopCasting();
+                    player.SetTarget(tmp);
+                    player.Spells.StopCasting();
                     return;
                 }
 
-                if (ObjectManager.Player.IsCtmIdle &&
-                    (ObjectManager.Player.MovementState & (uint) Enums.MovementFlags.Back) != (uint) Enums.MovementFlags.Back
-                    && ObjectManager.Player.MovementState != 0)
+                if (player.IsCtmIdle &&
+                    (player.MovementState & (uint) Enums.MovementFlags.Back) != (uint) Enums.MovementFlags.Back
+                    && player.MovementState != 0)
                 {
-                    ObjectManager.Player.StopMovement(Enums.ControlBits.All);
-                    ObjectManager.Player.CtmStopMovement();
+                    player.StopMovement(Enums.ControlBits.All);
+                    player.CtmStopMovement();
                 }
 
                 if (distanceToTarget >= Grinder.Access.Info.Target.CombatDistance && ((!IsCasting
@@ -85,6 +113,7 @@ namespace ZzukBot.Engines.Grind.States
                     var tu = Grinder.Access.Info.PathToUnit.ToUnit(target);
                     if (tu.Item1)
                         player.CtmTo(tu.Item2);
+                    CCManager.MoveToTargetPulse(ref target);
                 }
                 else
                 {
@@ -92,12 +121,15 @@ namespace ZzukBot.Engines.Grind.States
                     {
                         if (playerIsMoving)
                         {
-                            if (!(Grinder.Access.Info.Target.CombatDistance < 4 && IsCasting && targetIsMoving))
+                            if (!(Grinder.Access.Info.Target.CombatDistance < 4 && IsCasting && targetIsMoving)) {
+
+                                //player.CtmSetToIdle();
                                 player.CtmStopMovement();
+                            }
                         }
                         else
                         {
-                            ObjectManager.Player.CtmSetToIdle();
+                            player.CtmSetToIdle();
                             player.Face(target);
                         }
                         Wait.Remove("FixFacingTimer");

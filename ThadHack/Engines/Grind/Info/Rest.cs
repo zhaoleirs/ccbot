@@ -19,10 +19,12 @@ namespace ZzukBot.Engines.Grind.Info
             get
             {
                 // health percent dropped below the resting threshold
-                if (ObjectManager.Player.HealthPercent < Options.RestHealthAt + ran.Next(-1, 3))
+                if (ObjectManager.Player.HealthPercent < Options.RestHealthAt + ran.Next(-1, 3)) 
                     // We want to continue eating even after being above
-                    // the threshold again
+                    // the threshold againif(needRest)
                     ContinueEat = true;
+                
+                   
                 else if (ContinueEat || ForceEatRest)
                 {
                     if (ForceEatRest)
@@ -42,7 +44,7 @@ namespace ZzukBot.Engines.Grind.Info
             }
         }
 
-        private bool ContinueDrink { get; set; }
+        internal bool ContinueDrink { get; set; }
         // decides if we should drink another drink
         internal bool NeedToDrink
         {
@@ -55,10 +57,11 @@ namespace ZzukBot.Engines.Grind.Info
                     tmp == Enums.ClassIds.Warrior) return false;
 
                 // mana percent dropped below the resting threshold
-                if (ObjectManager.Player.ManaPercent < Options.RestManaAt + ran.Next(-1, 3))
+                if (!ContinueDrink && ObjectManager.Player.ManaPercent < Options.RestManaAt + ran.Next(-1, 3)) 
                     // We want to continue drinking even after being above
-                    // the threshold again
+                    // the threshold againif(needRest)
                     ContinueDrink = true;
+                
                 else if (ContinueDrink || ForceManaRest)
                 {
                     if (ForceManaRest)

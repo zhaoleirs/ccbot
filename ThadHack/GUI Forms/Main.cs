@@ -37,29 +37,30 @@ namespace ZzukBot.GUI_Forms
             InitializeComponent();
             Text += " - " + Assembly.GetExecutingAssembly().GetName().Version;
             PrepareForLaunch();
-            while (true)
-            {
-                using (var login = new LoginForm())
-                {
-                    if (login.ShowDialog() == DialogResult.OK)
-                    {
-                        string reason;
-                        if (AuthProcessor.Instance.Auth(login.Email, login.Password, out reason))
-                        {
-                            Task.Run(() => EndLaunchPrepare());
-                            return;
-                        }
-                        else
-                        {
-                            MessageBox.Show($"Authentication failed: {reason}");
-                        }
-                    }
-                    else
-                    {
-                        Environment.Exit(0);
-                    }
-                }
-            }
+            Task.Run(() => EndLaunchPrepare());
+            //while (true)
+            //{
+            //    using (var login = new LoginForm())
+            //    {
+            //        if (login.ShowDialog() == DialogResult.OK)
+            //        {
+            //            string reason;
+            //            if (AuthProcessor.Instance.Auth(login.Email, login.Password, out reason))
+            //            {
+            //                Task.Run(() => EndLaunchPrepare());
+            //                return;
+            //            }
+            //            else
+            //            {
+            //                MessageBox.Show($"Authentication failed: {reason}");
+            //            }
+            //        }
+            //        else
+            //        {
+            //            Environment.Exit(0);
+            //        }
+            //    }
+            //}
         }
 
         public sealed override string Text
@@ -118,7 +119,19 @@ namespace ZzukBot.GUI_Forms
                 WinImports.SoundFlags.SND_ASYNC | WinImports.SoundFlags.SND_MEMORY);
         }
 
-
+        public  void AddLog(string log) {
+            Invoke(new MethodInvoker(delegate
+            {
+                dgChat.Rows.Add(log);
+            }));
+        }
+        public void ClearLog()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                dgChat.Rows.Clear();
+            }));
+        }
         internal void updateNotification(string parMessage)
         {
             Invoke(new MethodInvoker(delegate
@@ -159,21 +172,28 @@ namespace ZzukBot.GUI_Forms
                 //Monitor.SendChannelMessage("[" + e.Owner + "] " + (Enums.ChatType) e.Type + ": " + e.Message);
             }));
         }
-
-        //#region Modify, Save and load settings
-        /// <summary>
-        ///     Delegate used to update controls on the form
-        /// </summary>
-        internal void UpdateControl<T>(object Value, T control) where T : Control
+        internal void UpdateProgress(int Value, ProgressBar control)
         {
             Invoke(new MethodInvoker(delegate
             {
-                if (control.GetType() == typeof (TextBox))
+                control.Value = Value;
+
+            }));
+        }
+                //#region Modify, Save and load settings
+                /// <summary>
+                ///     Delegate used to update controls on the form
+                /// </summary>
+                internal void UpdateControl<T>(object Value, T control) where T : Control
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                if (control.GetType() == typeof(TextBox))
                 {
-                    if (Value.GetType() == typeof (string[]))
+                    if (Value.GetType() == typeof(string[]))
                     {
                         (control as TextBox).Text = "";
-                        foreach (var x in (string[]) Value)
+                        foreach (var x in (string[])Value)
                         {
                             (control as TextBox).Text
                                 += x + Environment.NewLine;
@@ -181,10 +201,10 @@ namespace ZzukBot.GUI_Forms
                     }
                     else if (Value is string)
                     {
-                        (control as TextBox).Text = (string) Value;
+                        (control as TextBox).Text = (string)Value;
                     }
                 }
-                else if (control.GetType() == typeof (NumericUpDown))
+                else if (control.GetType() == typeof(NumericUpDown))
                 {
                     var val = Convert.ToDecimal(Value);
                     if (val < (control as NumericUpDown).Minimum)
@@ -192,27 +212,31 @@ namespace ZzukBot.GUI_Forms
                         val = (control as NumericUpDown).Minimum;
                     (control as NumericUpDown).Value = Convert.ToDecimal(Value);
                 }
-                else if (control.GetType() == typeof (ComboBox))
+                else if (control.GetType() == typeof(ComboBox))
                 {
                     var i = 0;
                     for (; i < (control as ComboBox).Items.Count; i++)
                     {
                         if (
-                            (string) (control as ComboBox).Items[i] ==
-                            ((Enums.ItemQuality) Value).ToString())
+                            (string)(control as ComboBox).Items[i] ==
+                            ((Enums.ItemQuality)Value).ToString())
                         {
                             break;
                         }
                     }
                     (control as ComboBox).SelectedIndex = i;
                 }
-                else if (control.GetType() == typeof (Label))
+                else if (control.GetType() == typeof(Label))
                 {
-                    (control as Label).Text = (string) Value;
+                    (control as Label).Text = (string)Value;
                 }
-                else if (control.GetType() == typeof (CheckBox))
+                else if (control.GetType() == typeof(CheckBox))
                 {
-                    (control as CheckBox).Checked = (bool) Value;
+                    (control as CheckBox).Checked = (bool)Value;
+                }
+                else if (control.GetType() == typeof(ProgressBar))
+                {
+                    (control as ProgressBar).Value = (int)Value;
                 }
             }));
         }
@@ -228,10 +252,12 @@ namespace ZzukBot.GUI_Forms
             Options.NotifyOnRare = cbNotifyRare.Checked;
             Options.StopOnRare = cbStopOnRare.Checked;
 
+            Options.MountName = tbMount.Text;
             Options.PetFood = tbPetFood.Text;
             Options.AccountName = tbAccount.Text;
             Options.AccountPassword = tbPassword.Text;
             Options.RestManaAt = (int) nudDrinkAt.Value;
+            Options.LevelOut = (int)nudLevelOut.Value;
             Options.Drink = tbDrink.Text;
             Options.RestHealthAt = (int) nudEatAt.Value;
             Options.Food = tbFood.Text;
@@ -251,6 +277,10 @@ namespace ZzukBot.GUI_Forms
                 new[] {Environment.NewLine},
                 StringSplitOptions.None);
 
+            Options.GrindItems = tbGrindItems.Text.Split(
+               new[] { Environment.NewLine },
+               StringSplitOptions.None);
+
             Options.IRCBotChannel = tbIRCBotChannel.Text;
             Options.IRCBotNickname = tbIRCBotNickname.Text;
             Options.UseIRC = cbIRCConnect.Checked;
@@ -259,7 +289,19 @@ namespace ZzukBot.GUI_Forms
             Options.NinjaSkin = cbNinjaSkin.Checked;
             Options.Herb = cbHerb.Checked;
             Options.Mine = cbMine.Checked;
+            Options.TravelMode = checkBoxTravel.Checked;
             Options.LootUnits = cbLootUnits.Checked;
+            Options.GroupMode = cbGroupMode.Checked;
+            Options.Tanlet=tbTanlet.Text;
+
+            Options.Party.party1 = tbParty1.Text;
+            Options.Party.party2 = tbParty2.Text;
+            Options.Party.party3 = tbParty3.Text;
+            Options.Party.party4 = tbParty4.Text;
+            Options.Party.party5 = tbParty5.Text;
+            Options.Party.LeaderDistance = (int)nudLeaderDistance.Value;
+
+            Options.TargetZ = nudTargetZ.Value;
 
             OptionManager.SaveSettings();
 
@@ -284,7 +326,31 @@ namespace ZzukBot.GUI_Forms
         private void bGrindLoadProfile_Click(object sender, EventArgs e)
         {
             if (EngineManager.CurrentEngineType != Engines.Engines.None) return;
-            EngineManager.StartGrinder(cbLoadLastProfile.Checked);
+            ClearLog();
+            EngineManager.ChooseProfile(cbLoadLastProfile.Checked, () =>
+            {
+                EngineManager.StartGrinder();
+            });
+        }
+
+        private void Start(ref int FrameCounter, bool IsIngame)
+        {
+            if (IsIngame)
+            {
+                return;
+            }
+            if (FrameCounter % 200 == 0)
+            {
+               
+                if (Relog.LoginState == "login")
+                {
+                    Relog.Login();
+                }
+                else if (Relog.LoginState == "charselect")
+                {
+                    Relog.Enter();
+                }
+            }
         }
 
         #endregion
@@ -618,6 +684,7 @@ namespace ZzukBot.GUI_Forms
 
         private void bGrindStop_Click(object sender, EventArgs e)
         {
+            DirectX.StopRunning();
             if (EngineManager.CurrentEngineType != Engines.Engines.Grind) return;
             EngineManager.StopCurrentEngine();
             lGrindLoadProfile.Text = "Profile: ";
@@ -629,13 +696,19 @@ namespace ZzukBot.GUI_Forms
             if (Relog.LoginState == "login")
             {
                 DirectX.RunAndSwapback(LoginEndScene);
+            }else if(Relog.LoginState == "charselect")
+            {
+                DirectX.RunAndSwapback(LoginEndScene);
             }
         }
-
+     
         private void LoginEndScene(ref int FrameCounter, bool IsIngame)
         {
             if (IsIngame) return;
-            Relog.Login();
+            if (Relog.LoginState == "login")
+                Relog.Login();
+            else
+                Relog.Enter();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -692,6 +765,80 @@ namespace ZzukBot.GUI_Forms
         private void cbIgnoreZ_CheckedChanged(object sender, EventArgs e)
         {
         }
+
+        private void button1_Click_6(object sender, EventArgs e)
+        {
+            Options.BeepOnName = cbBeepName.Checked;
+            Options.BeepOnSay = cbBeepSay.Checked;
+            Options.BeepOnWhisper = cbBeepWhisper.Checked;
+            Options.NotifyOnRare = cbNotifyRare.Checked;
+            Options.StopOnRare = cbStopOnRare.Checked;
+            Options.MountName = tbMount.Text;
+            Options.PetFood = tbPetFood.Text;
+            Options.AccountName = tbAccount.Text;
+            Options.AccountPassword = tbPassword.Text;
+            Options.RestManaAt = (int)nudDrinkAt.Value;
+            Options.LevelOut = (int)nudLevelOut.Value;
+            Options.Drink = tbDrink.Text;
+            Options.RestHealthAt = (int)nudEatAt.Value;
+            Options.Food = tbFood.Text;
+            Options.MobSearchRange = (float)nudMobSearchRange.Value;
+            Options.MaxDiffToWp = (float)nudRoamFromWp.Value;
+            Options.CombatDistance = (float)nudCombatRange.Value;
+            Options.MinFreeSlotsBeforeVendor = (int)nudFreeSlots.Value;
+            Options.WaypointModifier = nudWaypointModifier.Value;
+            Options.KeepItemsFromQuality =
+                (int)Enum.Parse(typeof(Enums.ItemQuality),
+                    (string)cbKeepQuality.SelectedItem);
+
+            Options.ForceBreakAfter = (int)nudForceBreakAfter.Value;
+            Options.BreakFor = (int)nudBreakFor.Value;
+
+            Options.ProtectedItems = tbProtectedItems.Text.Split(
+                new[] { Environment.NewLine },
+                StringSplitOptions.None);
+
+            Options.GrindItems = tbGrindItems.Text.Split(
+               new[] { Environment.NewLine },
+               StringSplitOptions.None);
+
+            Options.IRCBotChannel = tbIRCBotChannel.Text;
+            Options.IRCBotNickname = tbIRCBotNickname.Text;
+            Options.UseIRC = cbIRCConnect.Checked;
+
+            Options.SkinUnits = cbSkinUnits.Checked;
+            Options.NinjaSkin = cbNinjaSkin.Checked;
+            Options.Herb = cbHerb.Checked;
+            Options.Mine = cbMine.Checked;
+            Options.TravelMode = checkBoxTravel.Checked;
+            Options.LootUnits = cbLootUnits.Checked;
+            Options.GroupMode = cbGroupMode.Checked;
+            Options.Tanlet = tbTanlet.Text;
+
+            Options.Party.party1 = tbParty1.Text;
+            Options.Party.party2 = tbParty2.Text;
+            Options.Party.party3 = tbParty3.Text;
+            Options.Party.party4 = tbParty4.Text;
+            Options.Party.party5 = tbParty5.Text;
+            Options.Party.LeaderDistance = (int)nudLeaderDistance.Value;
+
+            Options.TargetZ = nudTargetZ.Value;
+
+            OptionManager.SaveSettings();
+
+            SetupIrc();
+        }
+
+        private void cbIRCConnect_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbTanlet_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
 
         #endregion
 

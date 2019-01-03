@@ -67,9 +67,9 @@ namespace ZzukBot.Mem
             ObjectManager.Init();
 
             // Apply no collision hack with trees
-            var DisableCollision = new Hack(Hacks.DisableCollision, new byte[] {0x0F, 0x85, 0x1B, 0x01, 0x00, 0x00},
+            /*var DisableCollision = new Hack(Hacks.DisableCollision, new byte[] {0x0F, 0x85, 0x1B, 0x01, 0x00, 0x00},
                 "Collision");
-            HookWardenMemScan.AddHack(DisableCollision);
+            HookWardenMemScan.AddHack(DisableCollision);*/
             //DisableCollision.Apply();
             // Ctm Patch
             var CtmPatch = new Hack(Hacks.CtmPatch,
@@ -82,8 +82,9 @@ namespace ZzukBot.Mem
             //HookWardenMemScan.AddHack(Wallclimb);
             //Wallclimb.Apply();
 
-            var Collision3 = new Hack(Hacks.Collision3, new byte[] {0xEB, 0x69}, "Collision3");
-            HookWardenMemScan.AddHack(Collision3);
+            //Coll
+            /*var Collision3 = new Hack(Hacks.Collision3, new byte[] {0xEB, 0x69}, "Collision3");
+            HookWardenMemScan.AddHack(Collision3);*/
 
             // Loot patch
             var LootPatch = new Hack(Hacks.LootPatch, new byte[] {0xEB}, "LootPatch");
@@ -167,6 +168,7 @@ namespace ZzukBot.Mem
 
             Asm.Clear();
             Asm.AddLine("use32");
+
             foreach (var x in parInstructions)
             {
                 Asm.AddLine(x);

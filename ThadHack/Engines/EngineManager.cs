@@ -1,7 +1,9 @@
-﻿using System.Windows.Forms;
+﻿using System.IO;
+using System.Windows.Forms;
 using ZzukBot.Engines.Grind;
 using ZzukBot.Engines.ProfileCreation;
 using ZzukBot.GUI_Forms;
+using ZzukBot.Mem;
 using ZzukBot.Settings;
 
 namespace ZzukBot.Engines
@@ -16,10 +18,10 @@ namespace ZzukBot.Engines
     internal static class EngineManager
     {
         private static object _Engine;
-
+        private static string tmpProfileName;
         private static volatile bool IsWaitingForGeneration;
         private static Grinder tmpGrind;
-
+        internal delegate void Profile();
         private static bool IsEngineRunning => _Engine != null;
 
         internal static Engines CurrentEngineType
@@ -51,27 +53,29 @@ namespace ZzukBot.Engines
                 _Engine = new ProfileCreator();
             }));
         }
-
-        internal static void StartGrinder(bool parLoadLast)
-        {
-            if (IsEngineRunning) return;
-            string tmpProfileName;
+        internal static void ChooseProfile(bool parLoadLast, Profile profile) {
+           
             if (parLoadLast && Options.LastProfile != "")
             {
                 tmpProfileName = Options.LastProfile;
+                profile();
             }
             else
             {
                 using (var locateProfile = new OpenFileDialog())
                 {
+                    if (Directory.Exists(Paths.PathToWoW + "\\ZzukBot_Profiles"))
+                        locateProfile.InitialDirectory = Paths.PathToWoW + "\\ZzukBot_Profiles";
+                    else
+                        locateProfile.InitialDirectory = Paths.ProfileFolder;
                     locateProfile.CheckFileExists = true;
                     locateProfile.CheckPathExists = true;
                     locateProfile.Filter = "xml Profile (*.xml)|*.xml";
                     locateProfile.FilterIndex = 1;
-                    locateProfile.InitialDirectory = Paths.ProfileFolder;
                     if (locateProfile.ShowDialog() == DialogResult.OK)
                     {
                         tmpProfileName = locateProfile.FileName;
+                        profile();
                     }
                     else
                     {
@@ -79,6 +83,10 @@ namespace ZzukBot.Engines
                     }
                 }
             }
+        }
+        internal static void StartGrinder()
+        {
+            if (IsEngineRunning) return;
             tmpGrind = new Grinder();
             if (!IsWaitingForGeneration && tmpGrind.Prepare(tmpProfileName, Callback))
             {
@@ -97,7 +105,7 @@ namespace ZzukBot.Engines
             {
                 Main.MainForm.Invoke(new MethodInvoker(delegate
                 {
-                    Main.MainForm.lGrindLoadProfile.Text = "Profile: Loaded";
+                    Main.MainForm.lGrindLoadProfile.Text = "Profile:"+  Options.LastProfile.Substring(Options.LastProfile.LastIndexOf("\\")+1);
                     _Engine = tmpGrind;
                     IsWaitingForGeneration = false;
                 }));
@@ -107,17 +115,17 @@ namespace ZzukBot.Engines
         internal static void StopCurrentEngine()
         {
             var dispose = true;
-            if (!IsEngineRunning) return;
-            if (_Engine.GetType() == typeof (ProfileCreator))
-                dispose = EngineAs<ProfileCreator>().Dispose();
+            if (IsEngineRunning) { 
+                if (_Engine.GetType() == typeof (ProfileCreator))
+                    dispose = EngineAs<ProfileCreator>().Dispose();
 
-            if (_Engine.GetType() == typeof (Grinder))
-            {
-                EngineAs<Grinder>().Stop();
-                IsWaitingForGeneration = false;
-                tmpGrind = null;
+                if (_Engine.GetType() == typeof (Grinder))
+                {
+                    EngineAs<Grinder>().Stop();
+                    IsWaitingForGeneration = false;
+                    tmpGrind = null;
+                }
             }
-
             if (dispose)
                 _Engine = null;
         }

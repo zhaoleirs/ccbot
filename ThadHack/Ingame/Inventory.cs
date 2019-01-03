@@ -92,8 +92,11 @@ namespace ZzukBot.Ingame
                         if (tmpSlotGuid != 0)
                         {
                             var tmp = ObjectManager.Items
-                                .FirstOrDefault(x => x.Guid == tmpSlotGuid);
-                            if (!Options.ProtectedItems.Contains(tmp.Name))
+                               .FirstOrDefault(x => x.Guid == tmpSlotGuid);
+
+                            var itemName = Options.ProtectedItems.FirstOrDefault(x => x.StartsWith("*") && tmp.Name.Contains(x.TrimStart('*')));
+
+                            if (string.IsNullOrEmpty(itemName) && !Options.ProtectedItems.Contains(tmp.Name))
                             {
                                 if (tmp.Quality < Options.KeepItemsFromQuality)
                                 {
@@ -139,6 +142,7 @@ namespace ZzukBot.Ingame
                     var tmpItems = ObjectManager.Items.Where(i => inventoryGuids.Contains(i.Guid)).ToList();
                     foreach (var x in tmpItems)
                     {
+                        //GUI_Forms.Main.MainForm.AddLog("Equip:" + x.Name + "=>" + inventoryGuids.IndexOf(x.Guid));
                         var tmpDura = x.Durability;
                         var tmpDuraMax = x.MaxDurability;
 

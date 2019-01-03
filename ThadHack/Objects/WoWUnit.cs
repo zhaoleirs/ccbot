@@ -9,7 +9,7 @@ using Ptr = ZzukBot.Constants.Offsets;
 
 namespace ZzukBot.Objects
 {
-    internal class WoWUnit : WoWObject
+    public class WoWUnit : WoWObject
     {
         /// <summary>
         ///     Constructor taking guid aswell Ptr to object
@@ -34,6 +34,7 @@ namespace ZzukBot.Objects
         }
 
         internal float DistanceToPlayer => Calc.Distance3D(ObjectManager.Player.Position, Position);
+        internal float Distance2DToPlayer => Calc.Distance2D(ObjectManager.Player.Position, Position);
 
         /// <summary>
         ///     All auras on unit (only id)
@@ -57,7 +58,6 @@ namespace ZzukBot.Objects
                 return tmpAuras;
             }
         }
-
         /// <summary>
         ///     All debuffs on unit
         /// </summary>
@@ -133,7 +133,7 @@ namespace ZzukBot.Objects
                         break;
                     }
                 }
-                return nameBasePtr.Add(0x14).ReadString(30);
+                return nameBasePtr.Add(0x14).ReadString(30,Encoding.UTF8);
             }
         }
 
@@ -254,7 +254,7 @@ namespace ZzukBot.Objects
 
         internal int MaxHealth => GetDescriptor<int>(Offsets.Descriptors.MaxHealth);
 
-        internal int HealthPercent => (int) (Health/(float) MaxHealth*100);
+        public int HealthPercent => (int) (Health/(float) MaxHealth*100);
 
         /// <summary>
         ///     Mana
@@ -314,7 +314,7 @@ namespace ZzukBot.Objects
         internal bool IsTotem => Enums.CreatureType.Totem == CreatureType;
 
 
-        private int CreatureRank => Functions.GetCreatureRank(Pointer);
+        internal int CreatureRank => Functions.GetCreatureRank(Pointer);
 
         internal bool IsRareElite => CreatureRank == 2;
 
@@ -383,16 +383,18 @@ namespace ZzukBot.Objects
         /// <summary>
         ///     Got buff?
         /// </summary>
-        internal bool GotAura(string parName)
+        public bool GotAura(string parName)
         {
             var tmpAuras = Auras;
             return tmpAuras.Select(i => string.Equals(ObjectManager.Player.Spells.GetName(i), parName, StringComparison.OrdinalIgnoreCase)).Any(tmpBool => tmpBool);
+
+           
         }
 
         /// <summary>
         ///     Got debuff?
         /// </summary>
-        internal bool GotDebuff(string parName)
+        public bool GotDebuff(string parName)
         {
             var tmpAuras = Debuffs;
             return tmpAuras.Select(i => string.Equals(ObjectManager.Player.Spells.GetName(i), parName, StringComparison.OrdinalIgnoreCase)).Any(tmpBool => tmpBool);

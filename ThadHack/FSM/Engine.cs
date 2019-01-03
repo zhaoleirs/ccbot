@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ZzukBot.GUI_Forms;
 
 namespace ZzukBot.FSM
 {
@@ -20,6 +21,7 @@ namespace ZzukBot.FSM
             // and iterates its way to the lowest priority.
             foreach (var state in States)
             {
+
                 if (state.NeedToRun)
                 {
                     state.Run();
@@ -30,7 +32,7 @@ namespace ZzukBot.FSM
                     // this time around.
                 }
             }
-            return "";
+            return "No State";
         }
     }
 }

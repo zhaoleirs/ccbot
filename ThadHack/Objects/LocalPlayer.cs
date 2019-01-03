@@ -396,7 +396,10 @@ namespace ZzukBot.Objects
         {
             Functions.OnRightClickUnit(parUnit.Pointer, 1);
         }
-
+        internal void RightClick(WoWGameObject parUnit)
+        {
+            Functions.OnRightClickObject(parUnit.Pointer, 1);
+        }
         internal void RightClick(WoWUnit parUnit, bool parAuto)
         {
             var type = 0;

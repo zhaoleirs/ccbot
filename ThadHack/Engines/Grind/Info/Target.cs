@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ZzukBot.Constants;
+using ZzukBot.Engines.Party;
 using ZzukBot.Helpers;
 using ZzukBot.Mem;
 using ZzukBot.Objects;
@@ -23,7 +25,14 @@ namespace ZzukBot.Engines.Grind.Info
             InSightWithTarget = true;
             FixFacing = false;
         }
-
+        internal WoWGameObject NextGrind
+        {
+            get
+            {
+                var grinds  = ObjectManager.Grinds;
+                return grinds.Where(i => !Grinder.Access.Info.Loot.LootBlacklist.Contains(i.Guid) && Calc.Distance3D(i.Position, ObjectManager.Player.Position) <= Options.MobSearchRange && Math.Abs(ObjectManager.Player.Position.Z - i.Position.Z) <= (int)Options.TargetZ && Options.GrindItems.Any(p => p.Contains(i.Name))).OrderBy(i => Calc.Distance3D(i.Position, ObjectManager.Player.Position)).FirstOrDefault();
+            }
+        }
         // Get the next mob we should attack
         internal WoWUnit NextTarget
         {
@@ -34,16 +43,13 @@ namespace ZzukBot.Engines.Grind.Info
                 mobs = mobs
                     .Where(
                         i =>
-                            i.IsMob && i.Health != 0 && !Grinder.Access.Info.Combat.BlacklistContains(i.Guid) &&
-                            (Grinder.Access.Profile.Factions == null ||
-                             (Grinder.Access.Profile.Factions != null &&
-                              Grinder.Access.Profile.Factions.Contains(i.FactionID))) &&
-                            i.Reaction != Enums.UnitReaction.Friendly && !i.IsCritter && i.IsUntouched &&
-                            i.HealthPercent == 100 &&
+                            i.IsMob&&!i.IsPlayerPet &&ObjectManager.Player.Level-i.Level<Options.LevelOut&&i.CreatureRank==0 && i.Health != 0 && !Grinder.Access.Info.Combat.BlacklistContains(i) &&
+                            (Grinder.Access.Profile.Factions == null || Grinder.Access.Profile.Factions.Contains(i.FactionID)) &&
+                            (Grinder.Access.Profile.Ids == null || Grinder.Access.Profile.Ids.Contains(i.NpcID)) &&
+                            i.Reaction != Enums.UnitReaction.Friendly && (!i.TappedByOther || i.IsUntouched) &&
                             Calc.Distance3D(i.Position, ObjectManager.Player.Position) <= Options.MobSearchRange &&
-                            Math.Abs(ObjectManager.Player.Position.Z - i.Position.Z) <= 4 && i.SummonedBy == 0 &&
-                            i.TargetGuid == 0)
-                    .OrderBy(i => Calc.Distance3D(i.Position, ObjectManager.Player.Position)).ToList();
+                            Math.Abs(ObjectManager.Player.Position.Z - i.Position.Z) <= (int)Options.TargetZ && i.SummonedBy == 0 )
+                    .OrderBy(i =>Calc.Distance3D(i.Position, ObjectManager.Player.Position)).ToList();
                 return mobs.FirstOrDefault();
             }
         }
@@ -54,11 +60,11 @@ namespace ZzukBot.Engines.Grind.Info
             get
             {
                 var target = ObjectManager.Target;
-                if (target == null) return false;
+                if (target == null||target.Health==0) return false;
                 var ret =
                     target.IsMob && !Grinder.Access.Info.Combat.BlacklistContains(target.Guid) &&
                     target.Reaction != Enums.UnitReaction.Friendly /*&&
-                    (target.IsUntouched || target.IsMarked)*/&& !target.TappedByOther && target.HealthPercent == 100
+                    (target.IsUntouched || target.IsMarked)*/&&( Options.GroupMode||!target.TappedByOther && target.HealthPercent == 100)
                     && !target.IsCritter;
 
                 if (!ret)
@@ -74,7 +80,7 @@ namespace ZzukBot.Engines.Grind.Info
                 return ret;
             }
         }
-
+       
         // In range ton attack target
         internal float CombatDistance
         {

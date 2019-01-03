@@ -142,6 +142,7 @@ namespace ZzukBot.Engines.CustomClass.Objects
             {
                 if (!ObjectManager.Player.IsEating)
                 {
+                    
                     if (ObjectManager.Player.Inventory.ItemCount(parFoodName) != 0)
                     {
                         if (Wait.For("EatTimeout", 100))

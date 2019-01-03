@@ -11,9 +11,11 @@
     <RootNamespace>ZzukBot</RootNamespace>
     <AssemblyName>ZzukBot</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile></TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,7 +30,6 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -83,6 +84,31 @@
     <Compile Include="Constants\Structs.cs" />
     <Compile Include="Constants\WinImports.cs" />
     <Compile Include="Engines\EngineManager.cs" />
+    <Compile Include="Engines\CustomClass\PartyCustomClass.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateGroup.cs" />
+    <Compile Include="Engines\Grind\States\StateGrind.cs" />
+    <Compile Include="Engines\Grind\States\stateTanlet.cs" />
+    <Compile Include="Engines\Party\PartyAssist.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateAfterFightToPath.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateApproachTarget.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateBuff.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateDoRandomShit.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateFight.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateFindTarget.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateGhostWalk.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateIdle.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateLoadNextHotspot.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateLoadNextWaypoint.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateLoot.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateReleaseSpirit.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateRepair.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateRest.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateStartBreak.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateWaitAfterFight.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateWalk.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateWalkBackToGrind.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateWalkToRepair.cs" />
+    <Compile Include="Engines\Party\PartyMember.cs" />
     <Compile Include="FSM\Engine.cs" />
     <Compile Include="FSM\State.cs" />
     <Compile Include="GreyMagic\AllocatedMemory.cs" />

@@ -13,27 +13,22 @@ namespace ZzukBot.Engines.Grind
         private static readonly Random random = new Random();
 
         internal static bool IgnoreZAxis = false;
+        private static DateTime JumpTime=DateTime.Now;
 
         internal static void RandomJump()
         {
-            if (Wait.For("RandomJump1", 1000))
+            if (JumpTime.AddSeconds(20)<DateTime.Now)
             {
-                if (Wait.For("RandomJump2", ran.Next(30000, 50000)))
-                {
-                    //Functions.DoString("Jump()");
-                }
+                Functions.DoString("Jump()");
+                ResetJumper();
             }
         }
 
         internal static void ResetJumper()
         {
-            Wait.Remove("RandomJump1");
+            JumpTime = DateTime.Now;
         }
 
-        internal static void ResetJumperComplete()
-        {
-            Wait.Remove("RandomJump2");
-        }
 
         internal static void RandomResetJumper()
         {
@@ -46,7 +41,6 @@ namespace ZzukBot.Engines.Grind
             if (random.Next(1, 4) == 2)
             {
                 ResetJumper();
-                ResetJumperComplete();
             }
         }
     }

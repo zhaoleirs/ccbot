@@ -5,7 +5,9 @@ using System.Reflection;
 using System.Windows.Forms;
 using ZzukBot.AntiWarden;
 using ZzukBot.Engines.CustomClass;
+using ZzukBot.Engines.CustomClass.Objects;
 using ZzukBot.Engines.Grind.States;
+using ZzukBot.Engines.Party;
 using ZzukBot.FSM;
 using ZzukBot.GUI_Forms;
 using ZzukBot.Helpers;
@@ -25,7 +27,7 @@ namespace ZzukBot.Engines.Grind
             ErrorEnumHook.OnNewError += ErrorEnum_OnNewError;
         }
 
-        internal _StuckHelper StuckHelper { get; set; }
+        //internal _StuckHelper StuckHelper { get; set; }
         // holds details about the currently loaded profile
         internal GrindProfile Profile { get; private set; }
         // the fsm for our grindbot
@@ -34,7 +36,8 @@ namespace ZzukBot.Engines.Grind
         internal _Info Info { get; private set; }
         // the last state that got run
         internal string LastState { get; private set; }
-
+        internal string LastLastState { get; private set; }
+        
         private void ErrorEnum_OnNewError(ErrorEnumArgs e)
         {
             if (e.Message.StartsWith("Target not"))
@@ -119,6 +122,7 @@ namespace ZzukBot.Engines.Grind
 
         private void RelogRoutine()
         {
+
             if (Relog.CurrentWindowName == "RealmList")
             {
                 if (Wait.For("CancelRealmSelection", 2000))
@@ -130,33 +134,17 @@ namespace ZzukBot.Engines.Grind
             switch (Relog.LoginState)
             {
                 case "login":
-                    {
-                        var glueText = Relog.GetGlueDialogText().ToLower();
-                        if (!glueText.Contains("is full"))
+                    //var glueText = Relog.GetGlueDialogText().ToLower();
+                    if ( Wait.For("SendAccountDetailsWait", 2000))
                         {
-                            if (Wait.For("WrongInfo", 5000, false) && (glueText.Contains("the information you have") ||
-                                                                       glueText.Contains("disconnected")))
-                            {
-                                if (!Wait.For("RelogReset", 2000, false))
-                                {
-                                    if (!Wait.For("RelogReset2", 1, false))
-                                    {
-                                        Wait.Remove("PressLogin");
-                                        Relog.ResetLogin();
-                                    }
-                                }
-                            }
-                        }
-                        if (glueText == "" && Wait.For("SendAccountDetailsWait", 5000))
-                        {
-                            Relog.Login();
+                        Relog.ResetLogin();
+                        Relog.Login();
                             Wait.Remove("RelogReset");
                             Wait.Remove("RelogReset2");
                             Wait.Remove("StartGhostWalk");
                             Access.Info.SpiritWalk.GeneratePath = true;
                             Wait.Remove("WrongInfo");
                         }
-                    }
                     break;
 
                 case "charselect":
@@ -172,7 +160,8 @@ namespace ZzukBot.Engines.Grind
             {
                 if (FrameCounter%3 == 0)
                 {
-                    if (FrameCounter%15 == 0 && IsIngame)
+                    bool inSpaceTime = Info.BreakHelper.InSpaceTime();
+                    if (FrameCounter%15 == 0 && IsIngame&&!inSpaceTime)
                     {
                         var dottedUnitsToRemove =
                            Info.Combat.UnitsDottedByPlayer.Where(kvp => Environment.TickCount - kvp.Value >= 40000).ToList();
@@ -190,22 +179,44 @@ namespace ZzukBot.Engines.Grind
                                     Info.Combat.UnitsDottedByPlayer.Add(target.Guid, Environment.TickCount);
                             }
                         }
+                       
                     }
                     ObjectManager.Player.AntiAfk();
 
                     if (IsIngame)
                     {
-                        if (FrameCounter%300 == 0)
+                        if (!inSpaceTime)
                         {
-                            RareCheck();
-                            if (FrameCounter%1800 == 0)
+                            if (FrameCounter % 300 == 0)
                             {
-                                Refreshments();
+                                RareCheck();
+                                if (Options.GroupMode)
+                                {
+                                    PartyAssist.Update();
+                                }
+                                if (FrameCounter % 1800 == 0)
+                                {
+                                    Refreshments();
+                                }
                             }
-                        }
 
-                        LastState = Engine.Pulse();
-                        Main.MainForm.UpdateControl("State: " + LastState, Main.MainForm.lGrindState);
+                            LastState = Engine.Pulse();
+                            if (LastState == "Resting" && LastLastState != "Resting")
+                            {
+                                PartyAssist.Local.Report(3);
+                            }
+
+                            if (LastLastState == "Resting" && LastState != "Resting")
+                            {
+                                PartyAssist.Local.Report(4);
+                            }
+                            LastLastState = LastState;
+                            Main.MainForm.UpdateControl("State: " + LastState, Main.MainForm.lGrindState);
+                            Main.MainForm.UpdateControl("Exp: " + ObjectManager.Player.Level + "(" + ObjectManager.Player.CurrentXp + "/" + ObjectManager.Player.NextLevelXp + ") Players:" + ObjectManager.Players.Count, Main.MainForm.lbExp);
+                            Main.MainForm.UpdateControl(ObjectManager.Player.HealthPercent, Main.MainForm.pbHP);
+                            Main.MainForm.UpdateControl("Money:"+(ObjectManager.Player.Money/10000)+"g "+ ((ObjectManager.Player.Money % 10000)/100)+"s " + (ObjectManager.Player.Money %100)+"c", Main.MainForm.lbMoney);
+                            
+                        }
                     }
                     else
                     {
@@ -229,8 +240,10 @@ namespace ZzukBot.Engines.Grind
                 // disable all current ingame movements if we are ingame
                 ObjectManager.Player.CtmStopMovement();
             }
-            HookWardenMemScan.GetHack("Collision3").Remove();
-            HookWardenMemScan.GetHack("Collision").Remove();
+            if(HookWardenMemScan.GetHack("Collision3")!=null)
+                HookWardenMemScan.GetHack("Collision3").Remove();
+            if(HookWardenMemScan.GetHack("Collision") !=null)
+                HookWardenMemScan.GetHack("Collision").Remove();
             // we arent running anymore
             Access = null;
             ErrorEnumHook.OnNewError -= ErrorEnum_OnNewError;
@@ -248,51 +261,104 @@ namespace ZzukBot.Engines.Grind
             Profile = new GrindProfile(parProfilePath);
             if (!Profile.ProfileValid) return false;
 
-            if (!CCManager.ChooseCustomClassByWowClass((byte) ObjectManager.Player.Class))
+            if (!CCManager.ChooseCustomClassByWowClass((byte)ObjectManager.Player.Class))
             {
                 MessageBox.Show("Couldnt find a Custom Class we can use");
                 return false;
             }
 
-            StuckHelper = new _StuckHelper();
+           // StuckHelper = new _StuckHelper();
             Info = new _Info();
             Info.Waypoints.LoadFirstWaypointsAsync(parCallback);
+            if (Options.GroupMode)
+            {
+                var tmpStates = new List<State>
+                {
+                new PartyStateIdle(),
+                new PartyStateLoadNextHotspot(),
+                new PartyStateLoadNextWaypoint(),
+                new PartyStateWalk(),
+                new PartyStateFindTarget(),
+                new PartyStateApproachTarget(),
+                new PartyStateFight(),
+                new PartyStateRest(),
+                new PartyStateBuff()
+                };
+                //if (Options.LootUnits)
+                //{
+                tmpStates.Add(new PartyStateLoot());
+                // }
+                tmpStates.Add(new PartyStateReleaseSpirit());
+                tmpStates.Add(new PartyStateGhostWalk());
+                tmpStates.Add(new PartyStateWalkToRepair());
+                tmpStates.Add(new PartyStateWalkBackToGrind());
+                tmpStates.Add(new PartyStateAfterFightToPath());
+                tmpStates.Add(new PartyStateWaitAfterFight());
+                tmpStates.Add(new PartyStateDoRandomShit());
+                tmpStates.Add(new PartyStateGroup());
 
-            var tmpStates = new List<State>
+                if (Options.BreakFor != 0 && Options.ForceBreakAfter != 0)
+                {
+                    Info.BreakHelper.SetBreakAt(60000);
+                    tmpStates.Add(new PartyStateStartBreak());
+                }
+                tmpStates.Add(new StateTanlet());
+
+                if (Profile.RepairNPC != null)
+                    tmpStates.Add(new PartyStateRepair());
+                tmpStates.Sort();
+
+                Engine = new _Engine(tmpStates);
+            }
+            else
+            {
+                var tmpStates = new List<State>
             {
                 new StateIdle(),
                 new StateLoadNextHotspot(),
                 new StateLoadNextWaypoint(),
                 new StateWalk(),
-                new StateFindTarget(),
                 new StateApproachTarget(),
                 new StateFight(),
                 new StateRest(),
                 new StateBuff()
             };
-            if (Options.LootUnits)
-            {
-                tmpStates.Add(new StateLoot());
+                if (Options.LootUnits)
+                {
+                    tmpStates.Add(new StateLoot());
+                }
+                if (Options.Mine || Options.Herb)
+                {
+                    //tmpStates.Add(new StateFindGrind());
+                    tmpStates.Add(new StateGrind());
+                }
+                else
+                {
+                    tmpStates.Add(new StateFindTarget());
+                }
+                tmpStates.Add(new StateReleaseSpirit());
+                tmpStates.Add(new StateGhostWalk());
+                tmpStates.Add(new StateWalkToRepair());
+                tmpStates.Add(new StateWalkBackToGrind());
+                tmpStates.Add(new StateAfterFightToPath());
+                tmpStates.Add(new StateWaitAfterFight());
+                tmpStates.Add(new StateDoRandomShit());
+
+                if (Options.BreakFor != 0 && Options.ForceBreakAfter != 0)
+                {
+                    Info.BreakHelper.SetBreakAt(60000);
+                    tmpStates.Add(new StateStartBreak());
+                }
+                tmpStates.Add(new StateTanlet());
+
+                if (Profile.RepairNPC != null)
+                    tmpStates.Add(new StateRepair());
+
+                tmpStates.Sort();
+
+                Engine = new _Engine(tmpStates);
+
             }
-            tmpStates.Add(new StateReleaseSpirit());
-            tmpStates.Add(new StateGhostWalk());
-            tmpStates.Add(new StateWalkToRepair());
-            tmpStates.Add(new StateWalkBackToGrind());
-            tmpStates.Add(new StateAfterFightToPath());
-            tmpStates.Add(new StateWaitAfterFight());
-            tmpStates.Add(new StateDoRandomShit());
-
-            if (Options.BreakFor != 0 && Options.ForceBreakAfter != 0)
-            {
-                Info.BreakHelper.SetBreakAt(60000);
-                tmpStates.Add(new StateStartBreak());
-            }
-
-            if (Profile.RepairNPC != null)
-                tmpStates.Add(new StateRepair());
-            tmpStates.Sort();
-
-            Engine = new _Engine(tmpStates);
             return true;
         }
 
@@ -303,6 +369,12 @@ namespace ZzukBot.Engines.Grind
         internal bool Run()
         {
             if (!ObjectManager.EnumObjects()) return false;
+            Main.MainForm.UpdateControl("State: Party Loading", Main.MainForm.lGrindState);
+            if (Options.GroupMode )
+            {
+                PartyAssist.Init();
+            }
+            Main.MainForm.UpdateControl("State: Party Loaded", Main.MainForm.lGrindState);
             // start running the grindbot in endscene
             if (DirectX.RunInEndScene(RunGrinder))
             {

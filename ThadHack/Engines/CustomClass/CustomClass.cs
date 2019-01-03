@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using ZzukBot.Engines.Grind;
+using ZzukBot.Mem;
 using ZzukBot.Settings;
 using obj = ZzukBot.Engines.CustomClass.Objects;
 
@@ -35,6 +37,13 @@ namespace ZzukBot.Engines.CustomClass
         ///     The list of attackers
         /// </value>
         public IReadOnlyList<obj._Unit> Attackers => CCManager._Attackers.AsReadOnly();
+        /// <summary>
+        ///     A readonly list of units we are in combat with
+        ///     <para>Will only be populated while calling Fight</para>
+        ///     Will have no elements while calling PreFight
+        /// </summary>
+        /// <seealso cref="Fight" />
+        /// <seealso cref="PreFight" />
 
 
         /// <summary>
@@ -44,7 +53,6 @@ namespace ZzukBot.Engines.CustomClass
         ///     The characters object
         /// </value>
         public obj._Player Player => CCManager._Player;
-
 
         /// <summary>
         ///     Access to the target object
@@ -91,9 +99,13 @@ namespace ZzukBot.Engines.CustomClass
         /// </summary>
         public virtual void PreFight()
         {
+            
         }
 
-
+        /// <summary>
+        ///     是否在战斗中
+        /// </summary>
+        public bool inCombot => Player.Ptr.IsInCombat;
         /// <summary>
         ///     Resting method
         ///     <para>Will be called when the character needs to rest</para>
@@ -106,6 +118,17 @@ namespace ZzukBot.Engines.CustomClass
             Player.Eat();
         }
 
+        public void EndRest() {
+            Grinder.Access.Info.Rest.ContinueDrink = false;
+        }
+
+        /// <summary>
+        ///     Loot method
+        /// </summary>
+        public virtual void LootAll()
+        {
+            ObjectManager.Player.LootAll();
+        }
         // Buff function override
 
 
@@ -147,6 +170,10 @@ namespace ZzukBot.Engines.CustomClass
         {
             if (parModifier <= 0.5 && parModifier >= -0.5)
                 Grinder.Access.SetWaypointModifier(parModifier);
+        }
+
+        public virtual void MoveTarget()
+        {
         }
 
         #endregion

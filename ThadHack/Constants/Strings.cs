@@ -7,7 +7,7 @@
         /// </summary>
         internal const string WandStop = "if IsAutoRepeatAction(23) == 1 then CastSpellByName('Shoot') end";
 
-        internal const string WandStart = "if IsAutoRepeatAction(23) == nil then CastSpellByName('Shoot') end";
+        internal const string WandStart = "if IsAutoRepeatAction(23) ~= 1 then CastSpellByName('Shoot') end";
         internal const string Attack = "if IsCurrentAction('24') == nil then CastSpellByName('Attack') end";
         internal const string StopAttack = "if IsCurrentAction('24') ~= nil then CastSpellByName('Attack') end";
         internal const string CheckWand = "thisHasWandEquipped = HasWandEquipped()";

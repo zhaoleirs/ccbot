@@ -1,9 +1,11 @@
-﻿namespace ZzukBot.Settings
+﻿using System.Collections.Generic;
+
+namespace ZzukBot.Settings
 {
     /// <summary>
     ///     The class containing settings the user made
     /// </summary>
-    internal static class Options
+    public static class Options
     {
         internal static string ZzukAccountMail = "";
         internal static string ZzukAccountPassword = "";
@@ -48,5 +50,24 @@
         internal static bool LootUnits = true;
         internal static bool Herb = false;
         internal static bool Mine = false;
+        internal static bool TravelMode=false;
+        public static bool GroupMode = false;
+        internal static string Tanlet;
+        internal static decimal TargetZ;
+        internal static int LevelOut;
+        internal static string[] GrindItems = { };
+        internal static int SpaceTime=0;
+        internal static string MountName;
+
+        public static class Party
+        {
+
+            public static string party1;
+            public static string party2;
+            public static string party3;
+            public static string party4;
+            public static string party5;
+            internal static int LeaderDistance;
+        }
     }
 }

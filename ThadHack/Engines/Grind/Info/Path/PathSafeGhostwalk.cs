@@ -83,24 +83,24 @@ namespace ZzukBot.Engines.Grind.Info.Path
                 if (hostileCount == 0)
                 {
                     var superRandom = Navigation.CalculatePath(pos, randomPoint, true);
-                    if (Calc.Distance2D(superRandom[superRandom.Length - 1], randomPoint) >= 2 ||
-                        Math.Abs(superRandom[superRandom.Length - 1].Z - ObjectManager.Player.CorpsePosition.Z) > 15 ||
-                        Calc.Distance3D(superRandom[superRandom.Length - 1], ObjectManager.Player.CorpsePosition) >=
-                        GameConstants.MaxResurrectDistance
-                        )
-                    {
-                        attempts++;
-                        continue;
-                    }
+                    //if (Calc.Distance2D(superRandom[superRandom.Length - 1], randomPoint) >= 2 ||
+                    //    Math.Abs(superRandom[superRandom.Length - 1].Z - ObjectManager.Player.CorpsePosition.Z) > 15 ||
+                    //    Calc.Distance3D(superRandom[superRandom.Length - 1], ObjectManager.Player.CorpsePosition) >=
+                    //    GameConstants.MaxResurrectDistance
+                    //    )
+                    //{
+                    //    attempts++;
+                    //    continue;
+                    //}
                     ResurrectSafePath = superRandom;
                     FoundSafePath = true;
                     currentSafeIndex = 1;
                     return true;
                 }
-                listSpots.Add(new Safespot(hostileCount, randomPoint));
+                //listSpots.Add(new Safespot(hostileCount, randomPoint));
                 attempts++;
 
-                if (attempts == 500)
+                if (attempts == 100)
                 {
                     //FoundSafePath = false;
                     //ResurrectSafePath = new XYZ[0];
@@ -108,23 +108,23 @@ namespace ZzukBot.Engines.Grind.Info.Path
                 }
             }
 
-            listSpots = listSpots.OrderBy(i => i.HostileUnits).ToList();
-            foreach (var x in listSpots)
-            {
-                var superRandom = Navigation.CalculatePath(pos, x.Position, true);
-                if (Calc.Distance2D(superRandom[superRandom.Length - 1], x.Position) >= 2 ||
-                    Math.Abs(superRandom[superRandom.Length - 1].Z - ObjectManager.Player.CorpsePosition.Z) > 15 ||
-                    Calc.Distance3D(superRandom[superRandom.Length - 1], ObjectManager.Player.CorpsePosition) >=
-                    GameConstants.MaxResurrectDistance
-                    )
-                {
-                    continue;
-                }
-                ResurrectSafePath = superRandom;
-                FoundSafePath = true;
-                currentSafeIndex = 1;
-                return true;
-            }
+            //listSpots = listSpots.OrderBy(i => i.HostileUnits).ToList();
+            //foreach (var x in listSpots)
+            //{
+            //    var superRandom = Navigation.CalculatePath(pos, x.Position, true);
+            //    if (Calc.Distance2D(superRandom[superRandom.Length - 1], x.Position) >= 2 ||
+            //        Math.Abs(superRandom[superRandom.Length - 1].Z - ObjectManager.Player.CorpsePosition.Z) > 15 ||
+            //        Calc.Distance3D(superRandom[superRandom.Length - 1], ObjectManager.Player.CorpsePosition) >=
+            //        GameConstants.MaxResurrectDistance
+            //        )
+            //    {
+            //        continue;
+            //    }
+            //    ResurrectSafePath = superRandom;
+            //    FoundSafePath = true;
+            //    currentSafeIndex = 1;
+            //    return true;
+            //}
 
             FoundSafePath = false;
             ResurrectSafePath = new XYZ[0];

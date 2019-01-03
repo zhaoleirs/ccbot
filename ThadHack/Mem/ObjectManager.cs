@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using ZzukBot.Constants;
+using ZzukBot.GUI_Forms;
 using ZzukBot.Helpers;
 using ZzukBot.Ingame;
 using ZzukBot.Objects;
+using obj = ZzukBot.Engines.CustomClass.Objects;
 
 namespace ZzukBot.Mem
 {
@@ -61,7 +63,10 @@ namespace ZzukBot.Mem
             get { return Objects.OfType<WoWUnit>().Where(i => i.WoWType == Enums.WoWObjectTypes.OT_UNIT).ToList(); }
         }
 
-
+        internal static List<WoWGameObject> Grinds
+        {
+            get { return Objects.OfType<WoWGameObject>().Where(i => i.WoWType == Enums.WoWObjectTypes.OT_GAMEOBJ).ToList(); }
+        }
         internal static List<WoWGameObject> GameObjects => Objects.OfType<WoWGameObject>()
             .ToList();
 
@@ -114,6 +119,7 @@ namespace ZzukBot.Mem
                 if (Player == null || playerObject != Player.Pointer)
                     Player = new LocalPlayer(playerGuid, playerObject, Enums.WoWObjectTypes.OT_PLAYER);
 
+                Main.MainForm.Text = ObjectManager.Player.Name;
                 if (ShouldUpdateSpells)
                 {
                     Player.RefreshSpells();
@@ -159,13 +165,11 @@ namespace ZzukBot.Mem
                     case Enums.WoWObjectTypes.OT_CONTAINER:
                     case Enums.WoWObjectTypes.OT_ITEM:
                         var tmpItem = new WoWItem(guid, ptr, objType);
-
                         _Objects.Add(guid, tmpItem);
                         break;
 
                     case Enums.WoWObjectTypes.OT_UNIT:
                         var tmpUnit = new WoWUnit(guid, ptr, objType);
-
                         _Objects.Add(guid, tmpUnit);
                         break;
 

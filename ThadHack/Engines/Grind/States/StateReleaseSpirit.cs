@@ -14,7 +14,7 @@ namespace ZzukBot.Engines.Grind.States
 
         internal override void Run()
         {
-            if (!Wait.For("ReleasingSpirit", 250)) return;
+            if (!Wait.For("ReleasingSpirit", 1250)) return;
             ObjectManager.Player.CtmStopMovement();
             Wait.Remove("StartGhostWalk");
             Functions.DoString("RepopMe()");

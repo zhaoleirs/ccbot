@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ZzukBot.Constants;
+using ZzukBot.GUI_Forms;
 using ZzukBot.Helpers;
 using ZzukBot.Mem;
 
@@ -9,6 +10,7 @@ namespace ZzukBot.Engines.Grind.Info.Path.Base
     {
         private int SubPathIndex;
         private readonly List<SubPath> SubPaths;
+        private XYZ LastPostion;
 
         internal BasePath(List<Waypoint> parWaypoints)
         {
@@ -35,8 +37,36 @@ namespace ZzukBot.Engines.Grind.Info.Path.Base
                 }
             }
         }
+        internal void SetCurrentWaypointToClosest()
+        {
+            var closestIndex = SubPathIndex;
+            for (var i = SubPathIndex; i < SubPaths.Count; i++)
+            {
+                float disA;
+                float disB;
 
-        private SubPath CurrentSubPath => SubPaths[SubPathIndex];
+                if (Shared.IgnoreZAxis)
+                {
+                    disA = Calc.Distance2D(ObjectManager.Player.Position, SubPaths[closestIndex].EndPoint.Position);
+                    disB = Calc.Distance2D(ObjectManager.Player.Position, SubPaths[i].EndPoint.Position);
+                }
+                else
+                {
+                    disA = Calc.Distance3D(ObjectManager.Player.Position, SubPaths[closestIndex].EndPoint.Position);
+                    disB = Calc.Distance3D(ObjectManager.Player.Position, SubPaths[i].EndPoint.Position);
+                }
+
+
+
+                if (disB < disA)
+                {
+                    closestIndex = i;
+                }
+            }
+            SubPathIndex = closestIndex;
+        }
+
+        internal SubPath CurrentSubPath => SubPaths[SubPathIndex];
 
         internal bool NeedToLoadNextSubPath => CurrentSubPath.ArrivedAtEndPoint;
 
@@ -58,6 +88,23 @@ namespace ZzukBot.Engines.Grind.Info.Path.Base
                 if (NeedToLoadNextSubPath)
                 {
                     LoadNextSubPath();
+                }
+                var playerPosition = ObjectManager.Player.Position;
+                if (LastPostion==null)
+                {
+                    LastPostion= playerPosition;
+                }
+                else if (Wait.For("basepathout", 5000))
+                {
+                   // Main.MainForm.AddLog("basepathout:"+ Calc.Distance3D(playerPosition, LastPostion));
+                    if (Calc.Distance3D(playerPosition, LastPostion) < 3)
+                    {
+                        RegenerateSubPath();
+                    }
+                    else
+                    {
+                        LastPostion = playerPosition;
+                    }
                 }
                 return CurrentSubPath.CurrentWaypoint;
             }

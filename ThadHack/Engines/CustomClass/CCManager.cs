@@ -24,6 +24,7 @@ namespace ZzukBot.Engines.CustomClass
         internal static WoWUnit AfterFightTarget;
         internal static obj._Player _Player = new obj._Player();
         internal static List<obj._Unit> _Attackers = new List<obj._Unit>();
+        internal static List<obj._Unit> _Players = new List<obj._Unit>();
         internal static obj._Target _Target = new obj._Target();
         internal static obj._Pet _Pet = new obj._Pet();
 
@@ -45,7 +46,6 @@ namespace ZzukBot.Engines.CustomClass
             Initialisate();
             GetCustomClasses();
         }
-
         [Obfuscation(Feature = "virtualization", Exclude = false)]
         private static void GetCustomClasses()
         {
@@ -74,7 +74,7 @@ namespace ZzukBot.Engines.CustomClass
                             foreach (var t in compiledSource.CompiledAssembly.GetTypes())
                             {
                                 if (t.BaseType != null &&
-                                    t.BaseType.FullName == "ZzukBot.Engines.CustomClass.CustomClass")
+                                    (t.BaseType.FullName == "ZzukBot.Engines.CustomClass.CustomClass"|| t.BaseType.FullName == "ZzukBot.Engines.CustomClass.PartyCustomClass"))
                                 {
                                     var cc = compiledSource.TryLoadCompiledType(t.FullName) as CustomClass;
                                     if (cc != null)
@@ -150,6 +150,10 @@ namespace ZzukBot.Engines.CustomClass
             return false;
         }
 
+        internal static void MoveToTargetPulse(ref WoWUnit parTarget) {
+            if (parTarget == null) return;
+            CurrentCC.MoveTarget();
+        }
         internal static void FightPulse(ref WoWUnit parTarget)
         {
             try
@@ -203,7 +207,7 @@ namespace ZzukBot.Engines.CustomClass
 
         private static bool DoActions()
         {
-            var res = Wait.For("FightTimeout", 100);
+            var res = Wait.For("FightTimeout", 200,true);
             if (res)
             {
                 if (SpellBlacklist.Count != 0)
@@ -276,7 +280,7 @@ namespace ZzukBot.Engines.CustomClass
         {
             try
             {
-                if (Wait.For("Restup133278", 500))
+                if (Wait.For("Restup133278", 1800))
                     CurrentCC.Rest();
             }
             catch

@@ -1,4 +1,5 @@
 ﻿using ZzukBot.FSM;
+using ZzukBot.Settings;
 
 namespace ZzukBot.Engines.Grind.States
 {
@@ -12,8 +13,14 @@ namespace ZzukBot.Engines.Grind.States
 
         internal override void Run()
         {
-            // Load the next hotspot in line
-            Grinder.Access.Info.Waypoints.LoadNextHotspot();
+            if (Options.TravelMode && Grinder.Access.Info.Waypoints.isReachOriginalWaypointEnd(1.8f))
+            {
+                EngineManager.StopCurrentEngine();
+            }
+            else
+            {
+                Grinder.Access.Info.Waypoints.LoadNextHotspot();
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ namespace ZzukBot.Engines.Grind.Info
             LootBlacklist = new List<ulong>();
         }
 
-        private List<ulong> LootBlacklist { get; }
+        internal List<ulong> LootBlacklist { get; }
 
         internal WoWUnit LootableMob
         {
@@ -29,7 +29,7 @@ namespace ZzukBot.Engines.Grind.Info
                         )
                                 && !LootBlacklist.Contains(i.Guid)
                                 && !i.IsSwimming
-                                && Calc.Distance3D(i.Position, ObjectManager.Player.Position) < 32)
+                                && Calc.Distance3D(i.Position, ObjectManager.Player.Position) < 36)
                     .OrderBy(i => Calc.Distance3D(i.Position, ObjectManager.Player.Position))
                     .FirstOrDefault();
             }
@@ -46,7 +46,7 @@ namespace ZzukBot.Engines.Grind.Info
                     BlacklistCurrentLoot = false;
                     return false;
                 }
-                return ObjectManager.Player.Inventory.FreeSlots >= Options.MinFreeSlotsBeforeVendor && tmp != null;
+                return tmp != null;
             }
         }
 

@@ -139,7 +139,7 @@ namespace ZzukBot.Mem
             if (value == IntPtr.Zero) return "";
             if ((int)value < 00401000) return "";
             if (encoding == null)
-                encoding = Encoding.ASCII;
+                encoding = Encoding.Default;
             try
             {
                 return Mem.Memory.Reader.ReadString(value, encoding, length);
@@ -155,7 +155,7 @@ namespace ZzukBot.Mem
             if (value == 0) return "";
             if ((int)value < 00401000) return "";
             if (encoding == null)
-                encoding = Encoding.ASCII;
+                encoding = Encoding.Default;
             try
             {
                 return Mem.Memory.Reader.ReadString((IntPtr)value, encoding, length);
@@ -171,7 +171,7 @@ namespace ZzukBot.Mem
             if (value == 0) return "";
             if ((int)value < 00401000) return "";
             if (encoding == null)
-                encoding = Encoding.ASCII;
+                encoding = Encoding.Default;
             try
             {
                 return Mem.Memory.Reader.ReadString((IntPtr)value, encoding, length);

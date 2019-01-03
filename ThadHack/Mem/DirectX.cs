@@ -23,6 +23,7 @@ namespace ZzukBot.Mem
         private static volatile int frameCounter = -1;
 
         private static volatile Run _Run = RunDummy;
+        private static volatile Run _Next = null;
         private static volatile bool _CanRun = true;
 
         private static volatile bool IsIngame;
@@ -62,6 +63,10 @@ namespace ZzukBot.Mem
         private static void RunDummy(ref int parFrameCount, bool ParIsIngame)
         {
             _CanRun = true;
+            if (_Next != null) {
+                RunInEndScene(_Next);
+                _Next = null;
+            }
         }
 
         /// <summary>
@@ -101,7 +106,10 @@ namespace ZzukBot.Mem
             _Run = RunDummy;
         }
 
-
+        internal static void StopRunning(Run next)
+        {
+            _Next = next;
+        }
         internal static void RemoveHookAsync()
         {
             RemoveHook = true;

@@ -64,6 +64,7 @@ namespace ZzukBot.Engines.Grind.States
                     var tu = Grinder.Access.Info.PathToUnit.ToUnit(target);
                     if (tu.Item1)
                         player.CtmTo(tu.Item2);
+                    CCManager.MoveToTargetPulse(ref target);
                 }
                 else
                 {

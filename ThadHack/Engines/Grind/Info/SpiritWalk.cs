@@ -14,6 +14,6 @@ namespace ZzukBot.Engines.Grind.Info
             ArrivedAtCorpse = false;
         }
 
-        internal float DistanceToCorpse => Calc.Distance3D(ObjectManager.Player.Position, ObjectManager.Player.CorpsePosition);
+        internal float DistanceToCorpse => Calc.Distance2D(ObjectManager.Player.Position, ObjectManager.Player.CorpsePosition);
     }
 }

@@ -12,6 +12,7 @@ namespace ZzukBot.Engines.Grind.Info
         private readonly Random ran = new Random();
         private int ResumeAt;
         private bool SetResumeTime;
+        private int SpaceTimeTotal=0;
 
         internal _BreakHelper()
         {
@@ -55,6 +56,20 @@ namespace ZzukBot.Engines.Grind.Info
 
         private bool NeedToResume => Environment.TickCount > ResumeAt;
 
+        internal void SetSpaceTime(int parModifier)
+        {
+            if (Options.SpaceTime == 0) return;
+
+            SpaceTimeTotal = Environment.TickCount + Options.SpaceTime * 60 * 1000 + parModifier;
+            Options.SpaceTime = 0;
+        }
+
+        internal bool InSpaceTime() {
+            bool pRet = SpaceTimeTotal >= Environment.TickCount;
+           //if (pRet&&Helpers.Wait.For("InSpaceTime", 60000))
+           //    GUI_Forms.Main.MainForm.AddLog(SpaceTimeTotal + "," + Environment.TickCount);
+            return pRet;
+        }
         internal void SetBreakAt(int parModifier)
         {
             if (Options.ForceBreakAfter < 5)

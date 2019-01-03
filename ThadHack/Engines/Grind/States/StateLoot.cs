@@ -14,7 +14,7 @@ namespace ZzukBot.Engines.Grind.States
         private int randomOpenLootDelay;
         private int randomTakeLootDelay;
 
-        internal override int Priority => 36;
+        internal override int Priority => 51;
 
         internal override bool NeedToRun => Grinder.Access.Info.Loot.NeedToLoot && !Grinder.Access.Info.Vendor.GoBackToGrindAfterVendor
                                             && !Grinder.Access.Info.Vendor.TravelingToVendor;
@@ -32,7 +32,7 @@ namespace ZzukBot.Engines.Grind.States
                 Wait.Remove("RunToLoot");
                 Wait.Remove("Looting");
             }
-            if (Calc.Distance3D(mob.Position, ObjectManager.Player.Position) > 2)
+            if (Calc.Distance3D(mob.Position, ObjectManager.Player.Position) > 4.8)
             {
                 var tu = Grinder.Access.Info.PathToUnit.ToUnit(mob);
                 if (tu.Item1)

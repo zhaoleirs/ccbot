@@ -22,6 +22,8 @@ namespace ZzukBot.Engines.Grind.States
             var to = Grinder.Access.Info.PathManager.GrindToVendor.NextWaypoint;
             ObjectManager.Player.CtmTo(to);
 
+            Shared.RandomJump();
+
             if (Grinder.Access.Info.PathManager.GrindToVendor.ArrivedAtDestination)
             {
                 Grinder.Access.Info.Vendor.TravelingToVendor = false;

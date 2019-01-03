@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ZzukBot.Constants;
 using ZzukBot.Mem;
 
@@ -81,10 +82,16 @@ namespace ZzukBot.Helpers
                 ToStruct.Z = value;
             }
         }
-
+        public void ParseString(string value)
+        {
+            var p = value.Split(':').Select(float.Parse).ToList();
+            X = p[0];
+            Y = p[1];
+            Z = p[2];
+        }
         public override string ToString()
         {
-            return $"X: {X} Y: {Y} Z: {Z}";
+            return $"{X}:{Y}:{Z}";
         }
     }
 

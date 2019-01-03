@@ -18,6 +18,7 @@ namespace ZzukBot.Settings
         private static XDocument doc;
 
         private static string ProtectedItems => Paths.Root + "\\Settings\\ProtectedItems.ini";
+        private static string GrindItems => Paths.Root + "\\Settings\\GrindItems.ini";
 
         internal static bool SaveZzukPassword
         {
@@ -50,8 +51,24 @@ namespace ZzukBot.Settings
         {
             LoadFromXml();
             AppendProtectedItemsFromFile(Main.MainForm.tbProtectedItems);
+            AppendGrindItemsFromFile(Main.MainForm.tbGrindItems);
         }
+        private static void AppendGrindItemsFromFile(TextBox parTb)
+        {
+            if (!File.Exists(GrindItems))
+                File.Create(GrindItems).Close();
 
+            var tmpItems = new List<string>();
+            parTb.Clear();
+            foreach (var x in File.ReadAllLines(GrindItems))
+            {
+                var tmp = x.Trim();
+                if (string.IsNullOrWhiteSpace(tmp)) continue;
+                tmpItems.Add(tmp);
+                parTb.Text += tmp + Environment.NewLine;
+            }
+            Options.GrindItems = tmpItems.ToArray();
+        }
         private static void AppendProtectedItemsFromFile(TextBox parTb)
         {
             if (!File.Exists(ProtectedItems))
@@ -87,6 +104,10 @@ namespace ZzukBot.Settings
                 ref Options.PetFood,
                 Main.MainForm.tbPetFood);
 
+            GetElement("MountName",
+                ref Options.MountName,
+                Main.MainForm.tbMount);
+
 
             GetElement("AccountPassword",
                 ref Options.AccountPassword,
@@ -96,6 +117,11 @@ namespace ZzukBot.Settings
             GetElement("RestManaAt",
                 ref Options.RestManaAt,
                 Main.MainForm.nudDrinkAt);
+
+
+            GetElement("LevelOut",
+                ref Options.LevelOut,
+                Main.MainForm.nudLevelOut);
 
             GetElement("Drink",
                 ref Options.Drink,
@@ -186,6 +212,47 @@ namespace ZzukBot.Settings
                 ref Options.Mine,
                 Main.MainForm.cbMine);
 
+            GetElement("TravelMode",
+                ref Options.TravelMode,
+                Main.MainForm.checkBoxTravel);
+
+
+            GetElement("GroupMode",
+                ref Options.GroupMode,
+                Main.MainForm.cbGroupMode);
+
+            GetElement("Tanlet",
+                ref Options.Tanlet,
+                Main.MainForm.tbTanlet);
+
+
+            GetElement("TargetZ",
+                ref Options.TargetZ,
+                Main.MainForm.nudTargetZ);
+
+            GetElement("Party1",
+            ref Options.Party.party1,
+            Main.MainForm.tbParty1);
+
+            GetElement("Party2",
+            ref Options.Party.party2,
+            Main.MainForm.tbParty2); 
+
+            GetElement("Party3",
+            ref Options.Party.party3,
+            Main.MainForm.tbParty3);
+
+            GetElement("Party4",
+            ref Options.Party.party4,
+            Main.MainForm.tbParty4);
+
+            GetElement("Party5",
+            ref Options.Party.party5,
+            Main.MainForm.tbParty5);
+
+            GetElement("LeaderDistance",
+            ref Options.Party.LeaderDistance,
+            Main.MainForm.nudLeaderDistance);
             //GetProtectedItems(ref Options.ProtectedItems, Main.MainForm.tbProtectedItems);
         }
 
@@ -197,9 +264,11 @@ namespace ZzukBot.Settings
             SaveElement("AccountName", Options.AccountName);
             SaveElement("AccountPassword", Options.AccountPassword);
             SaveElement("RestManaAt", Options.RestManaAt);
+            SaveElement("LevelOut", Options.LevelOut);
             SaveElement("Drink", Options.Drink);
             SaveElement("RestHealthAt", Options.RestHealthAt);
             SaveElement("Food", Options.Food);
+            SaveElement("MountName", Options.MountName);
             SaveElement("MobSearchRange", Options.MobSearchRange);
             SaveElement("MaxDiffToWp", Options.MaxDiffToWp);
             SaveElement("CombatDistance", Options.CombatDistance);
@@ -227,11 +296,21 @@ namespace ZzukBot.Settings
             SaveElement("NinjaSkin", Options.NinjaSkin);
             SaveElement("Herb", Options.Herb);
             SaveElement("Mine", Options.Mine);
-
+            SaveElement("Tanlet", Options.Tanlet);
+            SaveElement("TargetZ", Options.TargetZ);
             SaveElement("CapFps", Options.CapFpsTo);
 
+            SaveElement("TravelMode", Options.TravelMode);
+            SaveElement("GroupMode", Options.GroupMode);
+            SaveElement("Party1", Options.Party.party1);
+            SaveElement("Party2", Options.Party.party2);
+            SaveElement("Party3", Options.Party.party3);
+            SaveElement("Party4", Options.Party.party4);
+            SaveElement("Party5", Options.Party.party5);
+            SaveElement("LeaderDistance", Options.Party.LeaderDistance);
 
             UpdateProtectedItems();
+            UpdateGrindItems();
         }
 
         internal static string LoadZzukLogin()
@@ -330,6 +409,22 @@ namespace ZzukBot.Settings
                 }
             }
             File.WriteAllText(ProtectedItems, tmpText);
+        }
+
+        private static void UpdateGrindItems()
+        {
+            File.Create(GrindItems).Close();
+            var tmpText = "";
+            // ReSharper disable once LoopCanBeConvertedToQuery
+            foreach (string t in Options.GrindItems)
+            {
+                var tmp = t.Trim();
+                if (!string.IsNullOrWhiteSpace(tmp))
+                {
+                    tmpText += tmp + Environment.NewLine;
+                }
+            }
+            File.WriteAllText(GrindItems, tmpText);
         }
     }
 }

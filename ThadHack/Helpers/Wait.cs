@@ -30,9 +30,14 @@ namespace ZzukBot.Helpers
             }
             // the item exists! lets check when it got created
             var Elapsed = (DateTime.Now - tmpItem.Added).TotalMilliseconds >= parMs;
-            // the time passed in parMs elapsed since the item creation
-            // remove the item and return true
-            if (Elapsed && tmpItem.AutoReset) Items.Remove(tmpItem);
+            if (Elapsed) {
+                if (tmpItem.AutoReset)
+                {  
+                    // the time passed in parMs elapsed since the item creation
+                   // remove the item and return true
+                    Items.Remove(tmpItem);
+                }
+            }
             return Elapsed;
         }
 
@@ -46,7 +51,8 @@ namespace ZzukBot.Helpers
 
         internal static void RemoveAll()
         {
-            Items = new List<Item>();
+            //Items = new List<Item>();
+            Items.Clear();
         }
 
         /// <summary>

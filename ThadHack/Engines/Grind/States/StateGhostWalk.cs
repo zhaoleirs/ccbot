@@ -8,7 +8,7 @@ using ZzukBot.Mem;
 
 namespace ZzukBot.Engines.Grind.States
 {
-    internal class StateGhostWalk : State
+    internal  class StateGhostWalk : State
     {
         internal override int Priority => 54;
 
@@ -18,10 +18,11 @@ namespace ZzukBot.Engines.Grind.States
 
         internal override void Run()
         {
-            if (!Wait.For("StartGhostWalk", 5000, false))
+            if (!Wait.For("StartGhostWalk", 2000, false))
             {
                 return;
             }
+            Shared.RandomJump();
             if (Grinder.Access.Info.SpiritWalk.GeneratePath)
             {
                 var waypoints = new List<Waypoint>();
@@ -57,22 +58,23 @@ namespace ZzukBot.Engines.Grind.States
                 else
                 {
                     Grinder.Access.Info.SpiritWalk.ArrivedAtCorpse = true;
-                    if (Grinder.Access.Info.PathSafeGhostwalk.FindSafePath())
-                    {
-                        var poi = Grinder.Access.Info.PathSafeGhostwalk.NextSafeWaypoint;
-                        if (!poi.Item2)
-                        {
-                            ObjectManager.Player.CtmTo(poi.Item1);
-                        }
-                        else
-                        {
-                            Resurrect();
-                        }
-                    }
-                    else
-                    {
-                        Resurrect();
-                    }
+                    Resurrect();
+                    //if (Grinder.Access.Info.PathSafeGhostwalk.FindSafePath())
+                    //{
+                    //    var poi = Grinder.Access.Info.PathSafeGhostwalk.NextSafeWaypoint;
+                    //    if (!poi.Item2)
+                    //    {
+                    //        ObjectManager.Player.CtmTo(poi.Item1);
+                    //    }
+                    //    else
+                    //    {
+                    //        Resurrect();
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    Resurrect();
+                    //}
                 }
             }
             else
@@ -83,18 +85,18 @@ namespace ZzukBot.Engines.Grind.States
             }
         }
 
-        private void Resurrect()
+        internal virtual void Resurrect()
         {
             if (Wait.For("ResurrectTimer112", 500))
             {
                 if (ObjectManager.Player.TimeUntilResurrect == 0)
                 {
-                    if (HookWardenMemScan.GetHack("Collision").IsActivated)
+                    if (HookWardenMemScan.GetHack("Collision")!=null&&HookWardenMemScan.GetHack("Collision").IsActivated)
                     {
                         HookWardenMemScan.GetHack("Collision").Remove();
-                        ObjectManager.Player.CtmStopMovement();
-                        Grinder.Access.Info.Rest.ForceRest();
                     }
+                    ObjectManager.Player.CtmStopMovement();
+                    Grinder.Access.Info.Rest.ForceRest();
                     Functions.DoString("RetrieveCorpse()");
                 }
             }

@@ -1,7 +1,9 @@
 ﻿using System;
 using ZzukBot.Constants;
 using ZzukBot.FSM;
+using ZzukBot.Helpers;
 using ZzukBot.Mem;
+using ZzukBot.Settings;
 
 namespace ZzukBot.Engines.Grind.States
 {
@@ -11,21 +13,29 @@ namespace ZzukBot.Engines.Grind.States
 
         internal override int Priority => 10;
 
-        internal override bool NeedToRun => (((ObjectManager.Player.MovementState &
-                                               (int) Enums.MovementFlags.Front)
-                                              != (int) Enums.MovementFlags.Front)
-                                             || !Grinder.Access.Info.Waypoints.NeedToLoadNextWaypoint())
+        internal override bool NeedToRun => (((ObjectManager.Player.MovementState &(int) Enums.MovementFlags.Front)!= (int) Enums.MovementFlags.Front)
+                                                || !Grinder.Access.Info.Waypoints.NeedToLoadNextWaypoint()
+                                                ||GroupCondition())
                                             && ObjectManager.Player.Casting == 0
                                             && ObjectManager.Player.Channeling == 0;
 
         internal override string Name => "Walking";
 
+        internal virtual bool GroupCondition() {
+            return false;
+        }
         internal override void Run()
         {
             // start movement to the current waypoint
             if (ObjectManager.Player.Casting != 0)
                 return;
-
+            if (!string.IsNullOrEmpty(Options.MountName)) {
+                if (Calc.Distance2D(ObjectManager.Player.Position, Grinder.Access.Info.Waypoints.CurrentHotspot) > 50) {
+                    if (!ObjectManager.Player.IsMounted) {
+                        ObjectManager.Player.Inventory.UseItem(Options.MountName);
+                    }
+                }
+            }
             Shared.RandomJump();
             Grinder.Access.Info.PathAfterFightToWaypoint.AdjustPath();
 

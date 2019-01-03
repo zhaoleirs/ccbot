@@ -9,7 +9,7 @@ namespace ZzukBot.Engines.Grind.Info
     internal class _Waypoints
     {
         private Action LoadFirstWaypointCallback;
-
+        private XYZ LastPostion = null;
         internal _Waypoints()
         {
             CurrentWaypointIndex = 0;
@@ -18,6 +18,14 @@ namespace ZzukBot.Engines.Grind.Info
 
         // index of the current waypoint
         internal int CurrentWaypointIndex { get; private set; }
+
+        internal bool isReachOriginalWaypointEnd(float disToPoint = 1.3f)
+        {
+            var point = Grinder.Access.Profile.OriginalHotspots[Grinder.Access.Profile.OriginalHotspots.Length - 1];
+            var dis = Calc.Distance2D(ObjectManager.Player.Position, point.Position);
+            return dis <= disToPoint + (float)Options.WaypointModifier;
+        }
+
         // index of the current hotspot
         internal int CurrentHotspotIndex { get; set; }
         // list of waypoints generated from player to hotspot
@@ -31,7 +39,29 @@ namespace ZzukBot.Engines.Grind.Info
         /// <summary>
         ///     Object of our current waypoint
         /// </summary>
-        internal XYZ CurrentWaypoint => CurrentWaypoints[CurrentWaypointIndex];
+        internal XYZ CurrentWaypoint
+        {
+            get
+            {
+                var playerPosition = ObjectManager.Player.Position;
+                if (LastPostion==null)
+                {
+                    LastPostion= playerPosition;
+                }
+                if (Wait.For("waypointout", 5000))
+                {
+                    if (Calc.Distance3D(playerPosition, LastPostion) < 3)
+                    {
+                        LoadWaypoints();
+                    }
+                    else
+                    {
+                        LastPostion = playerPosition;
+                    }
+                }
+                return CurrentWaypoints[CurrentWaypointIndex];
+            }
+        }
 
         /// <summary>
         ///     Did we arrive at the last waypoint?
@@ -186,7 +216,17 @@ namespace ZzukBot.Engines.Grind.Info
             var dis = Calc.Distance2D(ObjectManager.Player.Position, parPoint);
             return dis <= disToPoint + (float) Options.WaypointModifier;
         }
-
+        internal bool distanceBigger(XYZ parPoint, float disToPoint = 1.3f)
+        {
+            if (ObjectManager.Player.Health == 0) return false;
+            var dis = Calc.Distance2D(ObjectManager.Player.Position, parPoint);
+            return dis > disToPoint + (float)Options.WaypointModifier;
+        }
+        internal float distanceToNextWaypoint()
+        {
+            var dis = Calc.Distance2D(ObjectManager.Player.Position, CurrentWaypoint);
+            return dis;
+        }
         internal bool NeedToLoadNextWaypoint(float disToPoint = 1.3f)
         {
             var dis = Calc.Distance2D(ObjectManager.Player.Position, CurrentWaypoint);

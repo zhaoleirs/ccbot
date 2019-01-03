@@ -1,5 +1,9 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
 using ZzukBot.Constants;
+using ZzukBot.Engines.Grind;
+using ZzukBot.Engines.Party;
 using ZzukBot.Mem;
 
 namespace ZzukBot.Hooks
@@ -32,7 +36,7 @@ namespace ZzukBot.Hooks
         /// </summary>
         private static chatMessageDelegate _chatMessageDelegate;
 
-        private static bool Applied;
+        private static bool Applied=false;
         internal static event ChatMessageEventHandler OnNewChatMessage;
 
         private static void OnNewMessageEvent(ChatMessage e)
@@ -82,11 +86,7 @@ namespace ZzukBot.Hooks
         /// </summary>
         private static void ChatMessageHook(int parType, string parOwner, string parMessage)
         {
-            var msg = new ChatMessage(parType,
-                parOwner,
-                parMessage);
-
-            OnNewMessageEvent(msg);
+            PartyAssist.OnChatMsg(parType, parOwner, parMessage);
         }
 
         /// <summary>

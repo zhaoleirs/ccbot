@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using ZzukBot.Constants;
+using ZzukBot.Engines.Party;
 using ZzukBot.Helpers;
 using ZzukBot.Mem;
 using ZzukBot.Objects;
+using ZzukBot.Settings;
 
 namespace ZzukBot.Engines.Grind.Info
 {
@@ -29,22 +31,28 @@ namespace ZzukBot.Engines.Grind.Info
             get
             {
                 var mobs = ObjectManager.Npcs;
+                if (Options.GroupMode)
+                {
+                        mobs = mobs
+                        .Where(i => !Grinder.Access.Info.Combat.BlacklistContains(i) && i.IsMob && !i.IsPlayerPet && i.Health != 0 &&(PartyAssist.TargetPartyMember(i.TargetGuid)||(i.Reaction != Enums.UnitReaction.Friendly&&PartyAssist.PartyMemberTarget(i.Guid)))).ToList();//
+                }
+                else {
                 mobs = mobs
                     .Where(i =>
                         i.IsMob && i.Health != 0 && i.Reaction != Enums.UnitReaction.Friendly &&
-                        (
-                            i.TargetGuid == ObjectManager.Player.Guid ||
-                            (ObjectManager.Player.HasPet && i.TargetGuid == ObjectManager.Player.Pet.Guid)
-                            ||
+                        (i.TargetGuid == ObjectManager.Player.Guid || ObjectManager.Player.TargetGuid == i.Guid ||
+                            (ObjectManager.Player.HasPet && i.TargetGuid == ObjectManager.Player.Pet.Guid)||
                             (i.IsInCombat && i.TappedByMe &&
-                             (((i.Debuffs.Count > 0 || i.IsCrowdControlled) && UnitsDottedByPlayer.ContainsKey(i.Guid) && !ObjectManager.Player.IsEating && !ObjectManager.Player.IsDrinking)
-                             || ObjectManager.Player.TargetGuid == i.Guid)
-                                )) && !i.IsPlayerPet
+                             (i.Debuffs.Count > 0 || i.IsCrowdControlled) && UnitsDottedByPlayer.ContainsKey(i.Guid) && !ObjectManager.Player.IsEating && !ObjectManager.Player.IsDrinking
+                             )) && !i.IsPlayerPet
                     )
                     .ToList();
+                }
                 return mobs;
             }
         }
+        //
+   
 
         private List<ulong> BlacklistedUnits { get; }
         private ulong OldGuid { get; set; }
@@ -102,9 +110,20 @@ namespace ZzukBot.Engines.Grind.Info
                 BlacklistedUnits.Add(parGuid);
         }
 
+        internal void RemoveFromBlacklist(ulong parGuid)
+        {
+            if (BlacklistedUnits.Contains(parGuid))
+                BlacklistedUnits.Remove(parGuid);
+        }
+
         internal bool BlacklistContains(ulong parGuid)
         {
             return BlacklistedUnits.Contains(parGuid);
+        }
+
+        internal bool BlacklistContains(WoWUnit unit)
+        {
+            return BlacklistContains(unit.Guid)&& unit.DistanceToPlayer>4;
         }
     }
 }

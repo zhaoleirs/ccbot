@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ZzukBot.Constants;
+using ZzukBot.Engines.Party;
 using ZzukBot.Helpers;
 using ZzukBot.Mem;
 using ZzukBot.Settings;
@@ -9,7 +10,6 @@ namespace ZzukBot.Engines.Grind.Info
     internal class _Vendor
     {
         internal bool GoBackToGrindAfterVendor = false;
-        internal List<XYZ> HotspotsToVendor;
         internal bool RegenerateSubPath = false;
 
         internal bool TravelingToVendor;
@@ -22,6 +22,25 @@ namespace ZzukBot.Engines.Grind.Info
 
         private bool _NeedToVendor { get; set; }
 
+
+         internal bool NeedToVendorParty
+        {
+            get
+            {
+                NeedToVendorPartyCheck();
+                return PartyAssist.FocusToVendor&&(PartyAssist.Local.isLeader|| Calc.Distance2D(ObjectManager.Player.Position, Grinder.Access.Profile.RepairNPC.Coordinates) < 40);
+            }
+        }
+        private void NeedToVendorPartyCheck()
+        {
+            if (!PartyAssist.FocusToVendor) {
+                if ( ObjectManager.Player.Inventory.DurabilityPercentage < 30)
+                {
+                    Lua.RunInMainthread("SendChatMessage('vendor','PARTY')");
+                    PartyAssist.FocusToVendor = true;
+                }
+            }
+        }
         internal bool NeedToVendor
         {
             get
@@ -46,6 +65,8 @@ namespace ZzukBot.Engines.Grind.Info
         internal void DoneVendoring()
         {
             _NeedToVendor = false;
+            PartyAssist.FocusToVendor = false;
+            PartyAssist.Local.Report(5);
         }
     }
 }

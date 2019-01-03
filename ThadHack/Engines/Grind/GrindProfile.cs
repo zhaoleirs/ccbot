@@ -32,12 +32,15 @@ namespace ZzukBot.Engines.Grind
                 var tmpVendor = sub.Element("Vendor");
                 var tmpRepair = sub.Element("Repair");
                 var tmpRestock = sub.Element("Restock");
+                var tmpIds= sub.Element("Ids");
                 var tmpRestockItems = sub.Element("RestockItems");
                 Shared.IgnoreZAxis = tmpIgnoreZAxis != null;
 
                 ExtractHotspots(tmpHotspots);
                 // parse all faction ids if avaible
                 ExtractFactions(tmpFactions);
+                // parse all ids if avaible
+                ExtractIds(tmpIds);
                 // parse the vendor
                 ExtractVendor(tmpVendor);
                 // parse the Repair
@@ -186,7 +189,22 @@ namespace ZzukBot.Engines.Grind
                     vec3, "");
             }
         }
+        private void ExtractIds(XElement tmpIds)
+        {
+            if (tmpIds != null)
+            {
+                var tmpListIds = new List<int>();
+                // ReSharper disable once LoopCanBeConvertedToQuery
+                foreach (var x in tmpIds.Nodes().ToList())
+                {
+                    var tmpX = x as XElement;
+                    if (tmpX.Name == "Id")
+                        tmpListIds.Add(Convert.ToInt32(tmpX.Value));
 
+                }
+                Ids = tmpListIds.ToArray();
+            }
+        }
         private void ExtractFactions(XElement tmpFactions)
         {
             if (tmpFactions != null)
@@ -252,6 +270,7 @@ namespace ZzukBot.Engines.Grind
         internal Waypoint[] GhostHotspots { get; private set; }
         // Holding all factions to kill
         internal int[] Factions { get; private set; }
+        internal int[] Ids { get; private set; }
         // Vendor infos
         internal NPC VendorNPC { get; private set; }
         // Repair infos

@@ -22,7 +22,8 @@ namespace ZzukBot.Engines.Grind.States
         internal override void Run()
         {
             // close enough to vendor?
-            if (Calc.Distance2D(ObjectManager.Player.Position, Grinder.Access.Profile.RepairNPC.Coordinates) < 4.0f)
+            //GUI_Forms.Main.MainForm.AddLog(Calc.Distance3D(ObjectManager.Player.Position, Grinder.Access.Profile.RepairNPC.Coordinates).ToString());
+            if (Calc.Distance3D(ObjectManager.Player.Position, Grinder.Access.Profile.RepairNPC.Coordinates) < 5)
             {
                 Grinder.Access.Info.PathAfterFightToWaypoint.DisableAfterFightMovement();
                 ObjectManager.Player.CtmStopMovement();
@@ -40,54 +41,58 @@ namespace ZzukBot.Engines.Grind.States
                 else
                 {
                     // sell our shit
-                    if (!Wait.For("SellItemsTimer112", Grinder.Access.Info.Latency*2 + 200)) return;
+                    if (!Wait.For("SellItemsTimer112", Grinder.Access.Info.Latency * 2 + 200)) return;
                     BackToPath =
                         !ObjectManager.Player.Inventory.VendorItems();
                     if (BackToPath)
                     {
                         ObjectManager.Player.Inventory.RepairAll();
                         Grinder.Access.Info.Vendor.DoneVendoring();
-                        Grinder.Access.Info.Vendor.GoBackToGrindAfterVendor = true;
-
-                        Grinder.Access.Info.Waypoints.ResetGrindPath();
-                        var tmpList = new List<Waypoint>();
-
-                        if (Grinder.Access.Profile.VendorHotspots != null &&
-                            Grinder.Access.Profile.VendorHotspots.Length != 0)
+                        if (GroupCondition())
                         {
-                            for (var i = Grinder.Access.Profile.VendorHotspots.Length - 1; i >= 0; i--)
-                            {
-                                tmpList.Add(Grinder.Access.Profile.VendorHotspots[i]);
-                            }
-                        }
-                        tmpList.Add(Grinder.Access.Profile.Hotspots[0]);
+                            Grinder.Access.Info.Vendor.GoBackToGrindAfterVendor = true;
 
-                        Grinder.Access.Info.PathManager.VendorToGrind = new BasePath(tmpList);
+                            Grinder.Access.Info.Waypoints.ResetGrindPath();
+                            var tmpList = new List<Waypoint>();
+
+                            if (Grinder.Access.Profile.VendorHotspots != null &&
+                                Grinder.Access.Profile.VendorHotspots.Length != 0)
+                            {
+                                for (var i = Grinder.Access.Profile.VendorHotspots.Length - 1; i >= 0; i--)
+                                {
+                                    tmpList.Add(Grinder.Access.Profile.VendorHotspots[i]);
+                                }
+                            }
+                            tmpList.Add(Grinder.Access.Profile.Hotspots[0]);
+
+                            Grinder.Access.Info.PathManager.VendorToGrind = new BasePath(tmpList);
+                            //GUI_Forms.Main.MainForm.AddLog("SetSpaceTime:" + Settings.Options.SpaceTime);
+                            Grinder.Access.Info.BreakHelper.SetSpaceTime(60000);
+                        }
                     }
                 }
             }
             // not close enough? lets travel to the vendor using another state!
-            else
+            else if(!Grinder.Access.Info.Vendor.TravelingToVendor)
             {
                 Grinder.Access.Info.Vendor.TravelingToVendor = true;
                 var tmpList = new List<Waypoint>();
 
                 //if (Grinder.Profile.VendorHotspots == null || Grinder.Profile.VendorHotspots.Length == 0)
                 //    return;
-
-                Grinder.Access.Info.Waypoints.RevertHotspotsToOriginal();
-                var curHotspot = Grinder.Access.Info.Waypoints.CurrentHotspotIndex;
-
-                if (curHotspot > 0)
+                if (GroupCondition())
                 {
-                    for (var i = curHotspot - 1; i >= 0; i--)
+                    Grinder.Access.Info.Waypoints.RevertHotspotsToOriginal();
+                    var curHotspot = Grinder.Access.Info.Waypoints.CurrentHotspotIndex;
+
+                    if (curHotspot > 0)
                     {
-                        tmpList.Add(Grinder.Access.Profile.Hotspots[i]);
+                        tmpList.Add(Grinder.Access.Profile.Hotspots[curHotspot]);
                     }
-                }
-                if (Grinder.Access.Profile.VendorHotspots != null && Grinder.Access.Profile.VendorHotspots.Length != 0)
-                {
-                    tmpList.AddRange(Grinder.Access.Profile.VendorHotspots);
+                    if (Grinder.Access.Profile.VendorHotspots != null && Grinder.Access.Profile.VendorHotspots.Length != 0)
+                    {
+                        tmpList.AddRange(Grinder.Access.Profile.VendorHotspots);
+                    }
                 }
                 var tmpWp = new Waypoint
                 {
@@ -95,9 +100,13 @@ namespace ZzukBot.Engines.Grind.States
                     Type = Enums.PositionType.Hotspot
                 };
                 tmpList.Add(tmpWp);
-
                 Grinder.Access.Info.PathManager.GrindToVendor = new BasePath(tmpList);
             }
+        }
+
+        internal virtual bool GroupCondition()
+        {
+            return true;
         }
     }
 }

@@ -212,7 +212,7 @@ namespace ZzukBot.Engines.Party
             }
 
             if (InSignAll()) {
-                var unit=ObjectManager.Npcs.Where(i =>!Grinder.Access.Info.Combat.BlacklistContains(i.Guid)&&i.Guid!=ObjectManager.Player.TargetGuid&&TargetPartyMember(i.TargetGuid)).OrderBy(i=>i.HealthPercent).FirstOrDefault();
+                var unit=ObjectManager.Npcs.Where(i =>!Grinder.Access.Info.Combat.BlacklistContains(i.Guid)&&TargetPartyMember(i.TargetGuid)).OrderBy(i=>i.HealthPercent).FirstOrDefault(); 
                 if (unit != null) {
                     ObjectManager.Player.SetTarget(unit);
                 }

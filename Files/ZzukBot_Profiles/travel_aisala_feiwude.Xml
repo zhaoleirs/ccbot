@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<GlideProfile>
+ <MinLevel>1</MinLevel>
+ <MaxLevel>70</MaxLevel>
+ <NaturalRun>True</NaturalRun>
+ <LureMinutes>0</LureMinutes>
+ <SkipWaypoints>True</SkipWaypoints>
+ <Factions>0</Factions>
+ <Waypoint>3706.25 -5412.50</Waypoint>
+ <Waypoint>3691.67 -5200.00</Waypoint>
+ <Waypoint>3516.67 -5079.17</Waypoint>
+ <Waypoint>3472.92 -4933.33</Waypoint>
+ <Waypoint>3400.00 -4831.25</Waypoint>
+ <Waypoint>3427.08 -4718.75</Waypoint>
+ <Waypoint>2860.42 -4158.33</Waypoint>
+ <Waypoint>2741.67 -3950.00</Waypoint>
+ <Waypoint>2800.00 -3814.58</Waypoint>
+ <Waypoint>2856.25 -3735.42</Waypoint>
+ <Waypoint>2891.67 -3543.75</Waypoint>
+ <Waypoint>2543.75 -2889.58</Waypoint>
+ <Waypoint>2543.75 -2837.50</Waypoint>
+ <Waypoint>2164.58 -2625.00</Waypoint>
+ <Waypoint>1929.17 -2193.75</Waypoint>
+ <Waypoint>1970.83 -1995.83</Waypoint>
+ <Waypoint>1989.58 -1937.50</Waypoint>
+ <Waypoint>2254.17 -1731.25</Waypoint>
+ <Waypoint>2537.50 -1864.58</Waypoint>
+ <Waypoint>2725.00 -2014.58</Waypoint>
+ <Waypoint>3393.75 -1522.92</Waypoint>
+ <Waypoint>3641.67 -1508.33</Waypoint>
+ <Waypoint>3735.42 -1483.33</Waypoint>
+ <Waypoint>3891.67 -1306.25</Waypoint>
+ <Waypoint>3920.83 -1106.25</Waypoint>
+ <Waypoint>4233.33 -885.42</Waypoint>
+ <Waypoint>4281.25 -847.92</Waypoint>
+ <Waypoint>4895.83 -739.58</Waypoint>
+ <Waypoint>5183.33 -741.67</Waypoint>
+ <Waypoint>5262.50 -714.58</Waypoint>
+ <Waypoint>5316.67 -714.58</Waypoint>
+ <Waypoint>5483.33 -612.50</Waypoint>
+ <Waypoint>5652.08 -583.33</Waypoint>
+ <Waypoint>5889.58 -679.17</Waypoint>
+ <Waypoint>6222.92 -714.58</Waypoint>
+ <Waypoint>6302.08 -975.00</Waypoint>
+ <Waypoint>6597.92 -1241.67</Waypoint>
+ <Waypoint>6568.75 -1645.83</Waypoint>
+ <Waypoint>6518.75 -1868.75</Waypoint>
+ <Waypoint>6564.58 -2077.08</Waypoint>
+ <Waypoint>6789.58 -2083.33</Waypoint>
+ <EditPatrol>
+  <Color_1>FF</Color_1>
+  <Color_2>FF0000</Color_2>
+  <Color_3>FF00FF</Color_3>
+  <Color_4>FFFF00</Color_4>
+  <SpotLoc>1</SpotLoc>
+  <Continent>1</Continent>
+  <CharLevel>1</CharLevel>
+  <SHOWFLAG>4C0000FFFFFE0081</SHOWFLAG>
+  <Color_0>FF00</Color_0>
+ </EditPatrol>
+</GlideProfile>

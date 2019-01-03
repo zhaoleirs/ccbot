@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Start: Tanaris 40/32 -->
+<Profile>
+	<Hotspots>
+		<Hotspot>
+			<!-- Pos: 51/29 -->
+			<X>-7861.437</X>
+			<Y>-3625.165</Y>
+			<Z>51.59823</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 51/28 -->
+			<X>-7713.856</X>
+			<Y>-3325.313</Y>
+			<Z>67.1558</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+	</Hotspots>
+	<Factions>
+		<Faction>73</Faction>
+		<Faction>38</Faction>
+		<Faction>49</Faction>
+		<Faction>413</Faction>
+	</Factions>
+	<VendorHotspots>
+		<VendorHotspot>
+			<!-- Pos: 51/29 -->
+			<X>-7220.359</X>
+			<Y>-3773.371</Y>
+			<Z>8.370302</Z>
+			<Type>Hotspot</Type>
+		</VendorHotspot>
+		<VendorHotspot>
+			<!-- Pos: 51/28 -->
+			<X>-7202.139</X>
+			<Y>-3771.155</Y>
+			<Z>8.471691</Z>
+			<Type>Hotspot</Type>
+		</VendorHotspot>
+	</VendorHotspots>
+	<Repair>
+		<!-- Pos: 51/28 -->
+		<Position>
+			<X>-7200.43</X>
+			<Y>-3769.82</Y>
+			<Z>8.67638</Z>
+		</Position>
+		<Name>Krinkle Goodsteel</Name>
+	</Repair>
+	<GhostHotspots>
+		<GhostHotspot>
+			<!-- Pos: 53/30 -->
+			<X>-7266.44</X>
+			<Y>-3939.984</Y>
+			<Z>8.978187</Z>
+			<Type>Hotspot</Type>
+		</GhostHotspot>
+		<GhostHotspot>
+			<!-- Pos: 53/32 -->
+			<X>-7353.262</X>
+			<Y>-3880.778</Y>
+			<Z>10.73408</Z>
+			<Type>Hotspot</Type>
+		</GhostHotspot>
+	</GhostHotspots>
+</Profile>

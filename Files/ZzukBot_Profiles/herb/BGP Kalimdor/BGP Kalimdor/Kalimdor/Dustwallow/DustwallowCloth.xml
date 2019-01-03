@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GrinderProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GrinderZones>
+    <GrinderZone>
+      <Name>Dustwallow Marsh</Name>
+      <Hotspots>false</Hotspots>
+      <RandomizingHotspots>false</RandomizingHotspots>
+      <MinLevel>0</MinLevel>
+      <MaxLevel>100</MaxLevel>
+      <MinTargetLevel>0</MinTargetLevel>
+      <MaxTargetLevel>110</MaxTargetLevel>
+      <TargetEntry>
+        <int>5057</int>
+      </TargetEntry>
+      <TargetFactions />
+      <Vectors3>
+        <Vector3 X="-3943.476" Y="-2903.917" Z="40.33834" />
+        <Vector3 X="-3932.153" Y="-2900.035" Z="43.02474" />
+        <Vector3 X="-3923.609" Y="-2898.15" Z="42.59324" />
+        <Vector3 X="-3910.424" Y="-2892.944" Z="41.80627" />
+        <Vector3 X="-3901.974" Y="-2887.852" Z="40.30797" />
+        <Vector3 X="-3895.672" Y="-2881.784" Z="42.82396" />
+        <Vector3 X="-3889.926" Y="-2865.261" Z="41.67756" />
+        <Vector3 X="-3888.897" Y="-2857.7" Z="42.70392" />
+        <Vector3 X="-3891.854" Y="-2849.451" Z="43.41571" />
+        <Vector3 X="-3898.037" Y="-2837.914" Z="40.80849" />
+        <Vector3 X="-3912.523" Y="-2813.441" Z="37.66607" />
+        <Vector3 X="-3922.508" Y="-2814.07" Z="37.86955" />
+        <Vector3 X="-3932.505" Y="-2818.461" Z="40.78482" />
+        <Vector3 X="-3940.756" Y="-2825.716" Z="41.04774" />
+        <Vector3 X="-3946.119" Y="-2835.229" Z="40.94336" />
+        <Vector3 X="-3952.91" Y="-2847.706" Z="43.05418" />
+        <Vector3 X="-3955.177" Y="-2856.157" Z="42.72686" />
+        <Vector3 X="-3960.678" Y="-2884.04" Z="41.93734" />
+        <Vector3 X="-3952.238" Y="-2895.471" Z="40.88909" />
+        <Vector3 X="-3943.948" Y="-2902.58" Z="40.86551" />
+      </Vectors3>
+      <Npc />
+      <BlackListRadius />
+      <NotLoop>false</NotLoop>
+    </GrinderZone>
+  </GrinderZones>
+</GrinderProfile>

@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Start: Tirisfal Glades 35/58 -->
+<Profile>
+	<Hotspots>
+		<Hotspot>
+			<!-- Pos: 35/58 -->
+			<X>2062.297</X>
+			<Y>1446.852</Y>
+			<Z>67.41062</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 35/59 -->
+			<X>2041.538</X>
+			<Y>1435.106</Y>
+			<Z>65.21469</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 36/58 -->
+			<X>2073.388</X>
+			<Y>1390.234</Y>
+			<Z>60.16999</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 36/56 -->
+			<X>2136.374</X>
+			<Y>1366.378</Y>
+			<Z>66.1819</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 37/58 -->
+			<X>2081.983</X>
+			<Y>1332.43</Y>
+			<Z>62.99789</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 37/58 -->
+			<X>2066.572</X>
+			<Y>1345.169</Y>
+			<Z>62.71964</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 37/59 -->
+			<X>2038.342</X>
+			<Y>1345.067</Y>
+			<Z>65.91164</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 37/60 -->
+			<X>2010.034</X>
+			<Y>1330.252</Y>
+			<Z>76.39746</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 37/61 -->
+			<X>1972.709</X>
+			<Y>1324.693</Y>
+			<Z>78.6902</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+	<Factions>
+		<Faction>7</Faction>
+		<Faction>32</Faction>
+		<Faction>67</Faction>
+	</Factions>
+	<VendorHotspots>
+		<VendorHotspot>
+			<!-- Pos: 32/66 -->
+			<X>1840.159</X>
+			<Y>1579.62</Y>
+			<Z>95.34322</Z>
+			<Type>Hotspot</Type>
+		</VendorHotspot>
+		<VendorHotspot>
+			<!-- Pos: 32/66 -->
+			<X>1840.731</X>
+			<Y>1569.809</Y>
+			<Z>96.58051</Z>
+			<Type>Hotspot</Type>
+		</VendorHotspot>
+	</VendorHotspots>
+	<Repair>
+		<!-- Pos: 32/66 -->
+		<Position>
+			<X>1842.44</X>
+			<Y>1570.19</Y>
+			<Z>96.58154</Z>
+		</Position>
+		<Name>Blacksmith Rand</Name>
+	</Repair>
+</Profile>

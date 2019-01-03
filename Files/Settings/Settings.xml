@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Settings>
+  <Path>F:\Blizzrad\World of Warcraft 1.12_en\WoW.exe</Path>
+  <AccountName>uuid123451</AccountName>
+  <StopOnRare>False</StopOnRare>
+  <NotifyOnRare>False</NotifyOnRare>
+  <PetFood></PetFood>
+  <AccountPassword>85642474</AccountPassword>
+  <RestManaAt>40</RestManaAt>
+  <Drink></Drink>
+  <RestHealthAt>45</RestHealthAt>
+  <Food></Food>
+  <MobSearchRange>150</MobSearchRange>
+  <MaxDiffToWp>200</MaxDiffToWp>
+  <CombatDistance>4</CombatDistance>
+  <MinFreeSlotsBeforeVendor>1</MinFreeSlotsBeforeVendor>
+  <KeepItemsFromQuality>3</KeepItemsFromQuality>
+  <WaypointModifier>0</WaypointModifier>
+  <BeepOnSay>False</BeepOnSay>
+  <BeepOnWhisper>False</BeepOnWhisper>
+  <BeepOnName>False</BeepOnName>
+  <BreakFor>0</BreakFor>
+  <ForceBreakAfter>0</ForceBreakAfter>
+  <UseIRC>False</UseIRC>
+  <IRCBotNickname>zhaoleiwarrior</IRCBotNickname>
+  <IRCBotChannel>#ppoopt</IRCBotChannel>
+  <SkinUnits>False</SkinUnits>
+  <NinjaSkin>False</NinjaSkin>
+  <LootUnits>True</LootUnits>
+  <Herb>False</Herb>
+  <Mine>False</Mine>
+  <TravelMode>False</TravelMode>
+  <GroupMode>True</GroupMode>
+  <LeaderMode>True</LeaderMode>
+  <Party1>小劳斧丶</Party1>
+  <Party2></Party2>
+  <Party3></Party3>
+  <Party4></Party4>
+  <Party5>小芙莉丶</Party5>
+  <Tanlet></Tanlet>
+  <TargetZ>12</TargetZ>
+  <LevelOut>8</LevelOut>
+  <MountName></MountName>
+  <LeaderDistance>15</LeaderDistance>
+</Settings>

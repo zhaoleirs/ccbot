@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Start: Silithus 0/0 -->
+<Profile>
+	<Hotspots>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6917.613</X>
+			<Y>947.792</Y>
+			<Z>14.9614</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6895.552</X>
+			<Y>959.8597</Y>
+			<Z>8.798699</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6866.086</X>
+			<Y>963.9401</Y>
+			<Z>2.866859</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6838.351</X>
+			<Y>967.7809</Y>
+			<Z>2.680626</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6803.585</X>
+			<Y>997.4554</Y>
+			<Z>-0.7504841</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6778.73</X>
+			<Y>1028.143</Y>
+			<Z>0.4881926</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6786.959</X>
+			<Y>1069.474</Y>
+			<Z>2.826142</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6771.372</X>
+			<Y>1124.911</Y>
+			<Z>1.377038</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6756.737</X>
+			<Y>1147.334</Y>
+			<Z>3.164443</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6743.169</X>
+			<Y>1185.671</Y>
+			<Z>2.607898</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6741.138</X>
+			<Y>1218.201</Y>
+			<Z>3.971224</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6776.981</X>
+			<Y>1240.922</Y>
+			<Z>6.403395</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6805.216</X>
+			<Y>1224.697</Y>
+			<Z>5.132541</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6823.159</X>
+			<Y>1198.956</Y>
+			<Z>2.34327</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6837.417</X>
+			<Y>1149.308</Y>
+			<Z>0.4339183</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6847.589</X>
+			<Y>1131.559</Y>
+			<Z>-0.4293662</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6859.246</X>
+			<Y>1117.35</Y>
+			<Z>1.972212</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6898.711</X>
+			<Y>1047.13</Y>
+			<Z>-1.497166</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 0/0 -->
+			<X>-6903.4</X>
+			<Y>1033.939</Y>
+			<Z>-0.9272977</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+	</Hotspots>
+	<Factions>
+		<Faction>91</Faction>
+		<Faction>14</Faction>
+		<Faction>413</Faction>
+		<Faction>22</Faction>
+	</Factions>
+	<VendorHotspots>
+		<VendorHotspot>
+			<!-- Pos: 51/38 -->
+			<X>-6864.004</X>
+			<Y>731.7033</Y>
+			<Z>45.66236</Z>
+			<Type>Hotspot</Type>
+		</VendorHotspot>
+		<VendorHotspot>
+			<!-- Pos: 49/36 -->
+			<X>-6806.292</X>
+			<Y>797.3645</Y>
+			<Z>51.36815</Z>
+			<Type>Hotspot</Type>
+		</VendorHotspot>
+	</VendorHotspots>
+	<Repair>
+		<!-- Pos: 51/38 -->
+		<Position>
+			<X>-6860.93</X>
+			<Y>753.044</Y>
+			<Z>42.47254</Z>
+		</Position>
+		<Name>Vargus</Name>
+	</Repair>
+</Profile>

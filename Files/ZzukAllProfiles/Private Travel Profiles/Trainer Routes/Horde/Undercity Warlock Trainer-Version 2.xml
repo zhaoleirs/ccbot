@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Start: Undercity 62/73 -->
+<Profile>
+	<Hotspots>
+		<Hotspot>
+			<!-- Pos: 62/73 -->
+			<X>1631.354</X>
+			<Y>228.7711</Y>
+			<Z>-43.10271</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 66/39 -->
+			<X>1627.994</X>
+			<Y>238.8271</Y>
+			<Z>-43.37222</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 66/39 -->
+			<X>1623.311</X>
+			<Y>239.1947</Y>
+			<Z>-44.23743</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 66/41 -->
+			<X>1614.819</X>
+			<Y>239.8714</Y>
+			<Z>-48.2338</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 66/42 -->
+			<X>1607.8</X>
+			<Y>238.2803</Y>
+			<Z>-52.15544</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 66/42 -->
+			<X>1603.536</X>
+			<Y>232.9602</Y>
+			<Z>-52.14857</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 66/43 -->
+			<X>1600.533</X>
+			<Y>232.3769</Y>
+			<Z>-52.15322</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 66/43 -->
+			<X>1596.546</X>
+			<Y>231.2733</Y>
+			<Z>-52.15226</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 67/44 -->
+			<X>1595.285</X>
+			<Y>221.3102</Y>
+			<Z>-57.16176</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 68/44 -->
+			<X>1593.029</X>
+			<Y>220.3109</Y>
+			<Z>-57.16176</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 67/45 -->
+			<X>1585.182</X>
+			<Y>223.6274</Y>
+			<Z>-62.15472</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 67/46 -->
+			<X>1579.972</X>
+			<Y>225.431</Y>
+			<Z>-61.9072</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 69/49 -->
+			<X>1563.443</X>
+			<Y>209.064</Y>
+			<Z>-60.72722</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 71/50 -->
+			<X>1555.21</X>
+			<Y>191.9106</Y>
+			<Z>-62.18388</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 73/45 -->
+			<X>1584.427</X>
+			<Y>167.856</Y>
+			<Z>-62.17884</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 74/44 -->
+			<X>1592.253</X>
+			<Y>162.4895</Y>
+			<Z>-62.17884</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 75/44 -->
+			<X>1592.74</X>
+			<Y>144.8017</Y>
+			<Z>-62.17884</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 79/43 -->
+			<X>1597.65</X>
+			<Y>111.6359</Y>
+			<Z>-62.17884</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 81/42 -->
+			<X>1603.584</X>
+			<Y>95.42488</Y>
+			<Z>-62.75341</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 82/42 -->
+			<X>1604.029</X>
+			<Y>85.77145</Y>
+			<Z>-65.89479</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 83/42 -->
+			<X>1604.553</X>
+			<Y>74.46542</Y>
+			<Z>-65.85564</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 83/42 -->
+			<X>1606.713</X>
+			<Y>68.79671</Y>
+			<Z>-62.39179</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 84/38 -->
+			<X>1631.344</X>
+			<Y>66.58239</Y>
+			<Z>-62.17556</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 83/31 -->
+			<X>1674.51</X>
+			<Y>73.68087</Y>
+			<Z>-62.27818</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 84/23 -->
+			<X>1728.725</X>
+			<Y>64.13608</Y>
+			<Z>-62.27382</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 85/21 -->
+			<X>1743.037</X>
+			<Y>55.65331</Y>
+			<Z>-56.03987</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 86/19 -->
+			<X>1751.918</X>
+			<Y>46.41893</Y>
+			<Z>-52.8169</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 87/18 -->
+			<X>1761.75</X>
+			<Y>35.76624</Y>
+			<Z>-49.61663</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 88/16 -->
+			<X>1775.513</X>
+			<Y>22.50848</Y>
+			<Z>-47.39047</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+	</Hotspots>
+</Profile>

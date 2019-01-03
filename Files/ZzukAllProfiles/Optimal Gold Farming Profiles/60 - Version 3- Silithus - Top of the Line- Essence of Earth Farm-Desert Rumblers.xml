@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Start: Silithus 20/10 -->
+<Profile>
+	<Hotspots>
+		<Hotspot>
+			<!-- Pos: 20/10 -->
+			<X>-6200.514</X>
+			<Y>1807.401</Y>
+			<Z>20.54106</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 22/8 -->
+			<X>-6151.575</X>
+			<Y>1758.539</Y>
+			<Z>29.73838</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 22/10 -->
+			<X>-6201.099</X>
+			<Y>1741.416</Y>
+			<Z>15.97017</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 23/12 -->
+			<X>-6247.566</X>
+			<Y>1726.165</Y>
+			<Z>4.518013</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 25/12 -->
+			<X>-6257.814</X>
+			<Y>1643.102</Y>
+			<Z>4.942588</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 26/15 -->
+			<X>-6308.927</X>
+			<Y>1615.658</Y>
+			<Z>16.2519</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 25/14 -->
+			<X>-6299.606</X>
+			<Y>1664.422</Y>
+			<Z>4.022944</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 25/10 -->
+			<X>-6198.9</X>
+			<Y>1653.831</Y>
+			<Z>9.11303</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 21/11 -->
+			<X>-6214.402</X>
+			<Y>1772.263</Y>
+			<Z>15.34533</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 21/12 -->
+			<X>-6255.442</X>
+			<Y>1787.839</Y>
+			<Z>10.41093</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 23/17 -->
+			<X>-6367.817</X>
+			<Y>1724.968</Y>
+			<Z>17.73772</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 21/18 -->
+			<X>-6386.234</X>
+			<Y>1776.328</Y>
+			<Z>3.229194</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 20/16 -->
+			<X>-6332.995</X>
+			<Y>1828.866</Y>
+			<Z>4.416996</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 18/17 -->
+			<X>-6359.786</X>
+			<Y>1890.737</Y>
+			<Z>20.44304</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+	</Hotspots>
+	<Factions>
+		<Faction>91</Faction>
+	</Factions>
+	<GhostHotspots>
+		<GhostHotspot>
+			<!-- Pos: 29/20 -->
+			<X>-6440.581</X>
+			<Y>1509.056</Y>
+			<Z>6.307178</Z>
+			<Type>Hotspot</Type>
+		</GhostHotspot>
+	</GhostHotspots>
+</Profile>

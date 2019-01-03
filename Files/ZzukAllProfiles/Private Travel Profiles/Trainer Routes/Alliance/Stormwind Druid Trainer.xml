@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Start: Stormwind City 53/64 -->
+<Profile>
+	<Hotspots>
+		<Hotspot>
+			<!-- Pos: 53/64 -->
+			<X>-8854.706</X>
+			<Y>658.1984</Y>
+			<Z>96.75265</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 52/60 -->
+			<X>-8825.395</X>
+			<Y>678.6805</Y>
+			<Z>97.50249</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 48/63 -->
+			<X>-8850.428</X>
+			<Y>730.0186</Y>
+			<Z>98.91269</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 46/66 -->
+			<X>-8870.689</X>
+			<Y>759.967</Y>
+			<Z>96.68662</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 43/70 -->
+			<X>-8908.235</X>
+			<Y>792.1684</Y>
+			<Z>87.45772</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 40/69 -->
+			<X>-8900.797</X>
+			<Y>833.1053</Y>
+			<Z>93.85358</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 39/69 -->
+			<X>-8901.617</X>
+			<Y>856.6769</Y>
+			<Z>96.21002</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 36/67 -->
+			<X>-8888.021</X>
+			<Y>892.1509</Y>
+			<Z>104.0059</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 35/68 -->
+			<X>-8892.664</X>
+			<Y>910.3042</Y>
+			<Z>110.5276</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 33/64 -->
+			<X>-8855.079</X>
+			<Y>930.5641</Y>
+			<Z>101.8713</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 32/59 -->
+			<X>-8810.373</X>
+			<Y>949.634</Y>
+			<Z>101.2415</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 31/55 -->
+			<X>-8778.602</X>
+			<Y>960.1491</Y>
+			<Z>100.4627</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 28/51 -->
+			<X>-8742.499</X>
+			<Y>993.7522</Y>
+			<Z>97.03494</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 23/51 -->
+			<X>-8738.062</X>
+			<Y>1063.707</Y>
+			<Z>89.91496</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+	</Hotspots>
+</Profile>

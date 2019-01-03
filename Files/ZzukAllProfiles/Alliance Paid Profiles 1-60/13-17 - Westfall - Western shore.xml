@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Start: Westfall 38/42 -->
+<Profile>
+	<Hotspots>
+		<Hotspot>
+			<!-- Pos: 38/42 -->
+			<X>-10393.34</X>
+			<Y>1686.576</Y>
+			<Z>38.77105</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 37/40 -->
+			<X>-10352.17</X>
+			<Y>1690.962</Y>
+			<Z>36.01125</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 39/38 -->
+			<X>-10302.26</X>
+			<Y>1635.809</Y>
+			<Z>44.26826</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 39/40 -->
+			<X>-10338.97</X>
+			<Y>1625.868</Y>
+			<Z>37.80027</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 39/42 -->
+			<X>-10387.94</X>
+			<Y>1639.413</Y>
+			<Z>35.67895</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 39/43 -->
+			<X>-10406.02</X>
+			<Y>1622.175</Y>
+			<Z>39.87379</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 40/42 -->
+			<X>-10380.27</X>
+			<Y>1587.012</Y>
+			<Z>41.65538</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 40/44 -->
+			<X>-10444.09</X>
+			<Y>1593.232</Y>
+			<Z>52.96715</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 42/43 -->
+			<X>-10421.56</X>
+			<Y>1514.164</Y>
+			<Z>50.61849</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 43/44 -->
+			<X>-10429.74</X>
+			<Y>1484.857</Y>
+			<Z>51.62191</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 44/44 -->
+			<X>-10449.44</X>
+			<Y>1455.705</Y>
+			<Z>47.58807</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 45/45 -->
+			<X>-10460.94</X>
+			<Y>1408.17</Y>
+			<Z>53.26938</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 46/46 -->
+			<X>-10475.96</X>
+			<Y>1377.401</Y>
+			<Z>51.84322</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 47/43 -->
+			<X>-10409.29</X>
+			<Y>1350.831</Y>
+			<Z>56.94419</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 48/41 -->
+			<X>-10379.66</X>
+			<Y>1303.475</Y>
+			<Z>40.97879</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 48/39 -->
+			<X>-10332.09</X>
+			<Y>1322.93</Y>
+			<Z>55.29985</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 47/36 -->
+			<X>-10245.61</X>
+			<Y>1355.915</Y>
+			<Z>41.39094</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 46/35 -->
+			<X>-10218.22</X>
+			<Y>1378.251</Y>
+			<Z>39.92157</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 45/36 -->
+			<X>-10240.37</X>
+			<Y>1410.414</Y>
+			<Z>40.63406</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 44/38 -->
+			<X>-10289.63</X>
+			<Y>1451.503</Y>
+			<Z>40.06</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 43/37 -->
+			<X>-10265.61</X>
+			<Y>1486.692</Y>
+			<Z>39.56543</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 43/39 -->
+			<X>-10328.98</X>
+			<Y>1482.978</Y>
+			<Z>37.86687</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 41/38 -->
+			<X>-10306.6</X>
+			<Y>1559.888</Y>
+			<Z>41.9747</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 40/39 -->
+			<X>-10327.61</X>
+			<Y>1584.463</Y>
+			<Z>40.74617</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 39/39 -->
+			<X>-10326.55</X>
+			<Y>1620.441</Y>
+			<Z>40.34839</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 39/38 -->
+			<X>-10287</X>
+			<Y>1639.401</Y>
+			<Z>43.59187</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+	</Hotspots>
+	<Factions>
+		<Faction>14</Faction>
+		<Faction>38</Faction>
+		<Faction>73</Faction>
+		<Faction>189</Faction>
+		<Faction>17</Faction>
+	</Factions>
+	<VendorHotspots>
+		<VendorHotspot>
+			<!-- Pos: 59/46 -->
+			<X>-10478.24</X>
+			<Y>926.8205</Y>
+			<Z>38.55256</Z>
+			<Type>Hotspot</Type>
+		</VendorHotspot>
+		<VendorHotspot>
+			<!-- Pos: 58/50 -->
+			<X>-10568.74</X>
+			<Y>972.4766</Y>
+			<Z>40.49702</Z>
+			<Type>Hotspot</Type>
+		</VendorHotspot>
+		<VendorHotspot>
+			<!-- Pos: 57/53 -->
+			<X>-10640.39</X>
+			<Y>1003.026</Y>
+			<Z>32.71877</Z>
+			<Type>Hotspot</Type>
+		</VendorHotspot>
+		<VendorHotspot>
+			<!-- Pos: 57/53 -->
+			<X>-10658.45</X>
+			<Y>996.0041</Y>
+			<Z>32.87482</Z>
+			<Type>Hotspot</Type>
+		</VendorHotspot>
+	</VendorHotspots>
+	<Repair>
+		<!-- Pos: 57/53 -->
+		<Position>
+			<X>-10658.5</X>
+			<Y>996.851</Y>
+			<Z>32.87503</Z>
+		</Position>
+		<Name>William MacGregor</Name>
+	</Repair>
+	<GhostHotspots>
+		<GhostHotspot>
+			<!-- Pos: 48/53 -->
+			<X>-10641.03</X>
+			<Y>1305.778</Y>
+			<Z>37.84972</Z>
+			<Type>Hotspot</Type>
+		</GhostHotspot>
+		<GhostHotspot>
+			<!-- Pos: 45/47 -->
+			<X>-10502.37</X>
+			<Y>1411.768</Y>
+			<Z>49.49269</Z>
+			<Type>Hotspot</Type>
+		</GhostHotspot>
+		<GhostHotspot>
+			<!-- Pos: 43/42 -->
+			<X>-10380.92</X>
+			<Y>1502.627</Y>
+			<Z>40.72099</Z>
+			<Type>Hotspot</Type>
+		</GhostHotspot>
+	</GhostHotspots>
+</Profile>

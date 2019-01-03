@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GrinderProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GrinderZones>
+    <GrinderZone>
+      <Name>Mulgore</Name>
+      <Hotspots>false</Hotspots>
+      <RandomizingHotspots>false</RandomizingHotspots>
+      <MinLevel>0</MinLevel>
+      <MaxLevel>100</MaxLevel>
+      <MinTargetLevel>0</MinTargetLevel>
+      <MaxTargetLevel>110</MaxTargetLevel>
+      <TargetEntry>
+        <int>3232</int>
+      </TargetEntry>
+      <TargetFactions />
+      <Vectors3>
+        <Vector3 X="-999.7889" Y="-1028.25" Z="15.87789" />
+        <Vector3 X="-1017.75" Y="-1036.432" Z="15.68993" />
+        <Vector3 X="-1038.937" Y="-1061.198" Z="23.05714" />
+        <Vector3 X="-1042.023" Y="-1065.702" Z="24.39086" />
+        <Vector3 X="-1056.755" Y="-1083.38" Z="27.94633" />
+        <Vector3 X="-1062.3" Y="-1115.304" Z="37.4453" />
+        <Vector3 X="-1050.087" Y="-1128.823" Z="44.86085" />
+        <Vector3 X="-1022.548" Y="-1152" Z="60.63861" />
+        <Vector3 X="-1014.727" Y="-1159.62" Z="65.344" />
+        <Vector3 X="-999.5757" Y="-1153.265" Z="68.30843" />
+        <Vector3 X="-977.0168" Y="-1142.192" Z="68.84693" />
+        <Vector3 X="-960.0632" Y="-1132.25" Z="67.37617" />
+        <Vector3 X="-964.7208" Y="-1124.85" Z="62.3609" />
+        <Vector3 X="-968.5894" Y="-1114.638" Z="56.0346" />
+        <Vector3 X="-975.5127" Y="-1099.716" Z="44.60194" />
+        <Vector3 X="-979.5382" Y="-1093.247" Z="44.41565" />
+        <Vector3 X="-972.4423" Y="-1088.139" Z="44.3913" />
+        <Vector3 X="-965.191" Y="-1079.989" Z="40.92727" />
+        <Vector3 X="-961.811" Y="-1075.701" Z="38.92062" />
+        <Vector3 X="-965.3963" Y="-1059.727" Z="32.21008" />
+        <Vector3 X="-963.5243" Y="-1037.041" Z="22.46294" />
+        <Vector3 X="-960.4825" Y="-1026.554" Z="19.29046" />
+        <Vector3 X="-979.6702" Y="-1021.987" Z="16.25492" />
+        <Vector3 X="-988.142" Y="-1024.175" Z="16.39969" />
+        <Vector3 X="-995.4922" Y="-1026.469" Z="16.17415" />
+      </Vectors3>
+      <Npc />
+      <BlackListRadius />
+      <NotLoop>false</NotLoop>
+    </GrinderZone>
+  </GrinderZones>
+</GrinderProfile>

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Start: Stormwind City 53/64 -->
+<Profile>
+	<Hotspots>
+		<Hotspot>
+			<!-- Pos: 53/64 -->
+			<X>-8855.893</X>
+			<Y>655.699</Y>
+			<Z>96.50742</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 58/57 -->
+			<X>-8794.666</X>
+			<Y>589.2385</Y>
+			<Z>97.47746</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 57/54 -->
+			<X>-8769.185</X>
+			<Y>607.9705</Y>
+			<Z>97.08939</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 60/51 -->
+			<X>-8739.544</X>
+			<Y>574.0128</Y>
+			<Z>97.43154</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 64/48 -->
+			<X>-8715.076</X>
+			<Y>519.8068</Y>
+			<Z>97.07794</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 64/49 -->
+			<X>-8720.413</X>
+			<Y>509.0789</Y>
+			<Z>96.38014</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 67/46 -->
+			<X>-8694.874</X>
+			<Y>475.0923</Y>
+			<Z>95.32172</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 68/47 -->
+			<X>-8704.875</X>
+			<Y>464.4912</Y>
+			<Z>96.11233</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 71/49 -->
+			<X>-8725.424</X>
+			<Y>420.6205</Y>
+			<Z>97.77379</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 74/52 -->
+			<X>-8752.223</X>
+			<Y>379.6686</Y>
+			<Z>101.0563</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+	</Hotspots>
+</Profile>

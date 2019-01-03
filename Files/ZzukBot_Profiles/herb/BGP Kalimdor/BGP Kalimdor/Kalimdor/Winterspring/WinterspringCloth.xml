@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GrinderProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GrinderZones>
+    <GrinderZone>
+      <Name>Winterspring</Name>
+      <Hotspots>false</Hotspots>
+      <RandomizingHotspots>false</RandomizingHotspots>
+      <MinLevel>0</MinLevel>
+      <MaxLevel>100</MaxLevel>
+      <MinTargetLevel>0</MinTargetLevel>
+      <MaxTargetLevel>110</MaxTargetLevel>
+      <TargetEntry>
+        <int>7453</int>
+        <int>7454</int>
+      </TargetEntry>
+      <TargetFactions />
+      <Vectors3>
+        <Vector3 X="7531.407" Y="-4845.182" Z="696.4367" />
+        <Vector3 X="7525.716" Y="-4838.545" Z="692.6185" />
+        <Vector3 X="7513.911" Y="-4813.893" Z="690.803" />
+        <Vector3 X="7496.02" Y="-4818.992" Z="688.444" />
+        <Vector3 X="7484.12" Y="-4820.009" Z="685.8668" />
+        <Vector3 X="7457.674" Y="-4814.293" Z="676.8393" />
+        <Vector3 X="7459.194" Y="-4822.907" Z="679.2927" />
+        <Vector3 X="7461.083" Y="-4850.724" Z="685.2813" />
+        <Vector3 X="7459.501" Y="-4864.717" Z="689.379" />
+        <Vector3 X="7460.494" Y="-4882.152" Z="688.4393" />
+        <Vector3 X="7473.521" Y="-4883.574" Z="686.9282" />
+        <Vector3 X="7504.915" Y="-4903.391" Z="689.1334" />
+        <Vector3 X="7535.819" Y="-4922.061" Z="691.3826" />
+        <Vector3 X="7540.836" Y="-4924.113" Z="691.7853" />
+        <Vector3 X="7532.859" Y="-4894.645" Z="691.2764" />
+        <Vector3 X="7521.459" Y="-4862.667" Z="692.6718" />
+        <Vector3 X="7523.673" Y="-4853.599" Z="695.1229" />
+        <Vector3 X="7526.364" Y="-4844.19" Z="695.7935" />
+        <Vector3 X="7526.284" Y="-4824.208" Z="691.6017" />
+      </Vectors3>
+      <Npc />
+      <BlackListRadius />
+      <NotLoop>false</NotLoop>
+    </GrinderZone>
+  </GrinderZones>
+</GrinderProfile>

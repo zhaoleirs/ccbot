@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Profile>
+	<IgnoreZAxis />
+	<Hotspots>
+		<Hotspot>
+			<X>762.50</X>
+			<Y>-4718.75</Y>
+			<Z>0</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<X>779.17</X>
+			<Y>-4768.75</Y>
+			<Z>0</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<X>777.08</X>
+			<Y>-4839.58</Y>
+			<Z>0</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<X>933.1499</X>
+			<Y>-4738.487</Y>
+			<Z>21.55099</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+	</Hotspots>
+	<Factions>
+		<Faction>0</Faction>
+	</Factions>
+</Profile>

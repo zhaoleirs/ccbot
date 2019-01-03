@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Start: Tanaris 45/46 -->
+<Profile>
+   <Hotspots>
+      <Hotspot>
+         <!-- Pos: 45/46 -->
+         <X>-8034.977</X>
+         <Y>-3360.818</Y>
+         <Z>53.37276</Z>
+         <Type>Hotspot</Type>
+      </Hotspot>
+      <Hotspot>
+         <!-- Pos: 44/49 -->
+         <X>-8137.02</X>
+         <Y>-3297.574</Y>
+         <Z>28.67544</Z>
+         <Type>Hotspot</Type>
+      </Hotspot>
+      <Hotspot>
+         <!-- Pos: 45/51 -->
+         <X>-8231.732</X>
+         <Y>-3328.11</Y>
+         <Z>19.67262</Z>
+         <Type>Hotspot</Type>
+      </Hotspot>
+      <Hotspot>
+         <!-- Pos: 44/53 -->
+         <X>-8336.213</X>
+         <Y>-3282.003</Y>
+         <Z>21.32898</Z>
+         <Type>Hotspot</Type>
+      </Hotspot>
+      <Hotspot>
+         <!-- Pos: 43/51 -->
+         <X>-8266.486</X>
+         <Y>-3206.321</Y>
+         <Z>17.08959</Z>
+         <Type>Hotspot</Type>
+      </Hotspot>
+      <Hotspot>
+         <!-- Pos: 42/52 -->
+         <X>-8296.839</X>
+         <Y>-3162.046</Y>
+         <Z>14.30314</Z>
+         <Type>Hotspot</Type>
+      </Hotspot>
+      <Hotspot>
+         <!-- Pos: 41/51 -->
+         <X>-8266.266</X>
+         <Y>-3087.849</Y>
+         <Z>9.866357</Z>
+         <Type>Hotspot</Type>
+      </Hotspot>
+      <Hotspot>
+         <!-- Pos: 41/48 -->
+         <X>-8121.123</X>
+         <Y>-3051.291</Y>
+         <Z>35.80462</Z>
+         <Type>Hotspot</Type>
+      </Hotspot>
+      <Hotspot>
+         <!-- Pos: 41/47 -->
+         <X>-8049.199</X>
+         <Y>-3107.417</Y>
+         <Z>49.29159</Z>
+         <Type>Hotspot</Type>
+      </Hotspot>
+      <Hotspot>
+         <!-- Pos: 42/46 -->
+         <X>-8020.504</X>
+         <Y>-3170.967</Y>
+         <Z>48.63198</Z>
+         <Type>Hotspot</Type>
+      </Hotspot>
+      <Hotspot>
+         <!-- Pos: 45/45 -->
+         <X>-7965.025</X>
+         <Y>-3358.417</Y>
+         <Z>76.16188</Z>
+         <Type>Hotspot</Type>
+      </Hotspot>
+      <Hotspot>
+         <!-- Pos: 47/46 -->
+         <X>-7995.543</X>
+         <Y>-3471.475</Y>
+         <Z>54.32303</Z>
+         <Type>Hotspot</Type>
+      </Hotspot>
+      <Hotspot>
+         <!-- Pos: 46/48 -->
+         <X>-8113.097</X>
+         <Y>-3450.348</Y>
+         <Z>38.19311</Z>
+         <Type>Hotspot</Type>
+      </Hotspot>
+   </Hotspots>
+   <VendorHotspots>
+      <VendorHotspot>
+         <!-- Pos: 51/29 -->
+         <X>-7235.895</X>
+         <Y>-3768.359</Y>
+         <Z>8.959373</Z>
+         <Type>Waypoint</Type>
+      </VendorHotspot>
+      <VendorHotspot>
+         <!-- Pos: 51/29 -->
+         <X>-7210.912</X>
+         <Y>-3775.203</Y>
+         <Z>8.47943</Z>
+         <Type>Waypoint</Type>
+      </VendorHotspot>
+      <VendorHotspot>
+         <!-- Pos: 51/28 -->
+         <X>-7204.055</X>
+         <Y>-3778.33</Y>
+         <Z>8.370193</Z>
+         <Type>Waypoint</Type>
+      </VendorHotspot>
+      <VendorHotspot>
+         <!-- Pos: 51/28 -->
+         <X>-7201.097</X>
+         <Y>-3772.187</Y>
+         <Z>8.473619</Z>
+         <Type>Waypoint</Type>
+      </VendorHotspot>
+      <VendorHotspot>
+         <!-- Pos: 51/28 -->
+         <X>-7199.4</X>
+         <Y>-3770.644</Y>
+         <Z>8.623032</Z>
+         <Type>Hotspot</Type>
+      </VendorHotspot>
+   </VendorHotspots>
+   <Repair>
+      <!-- Pos: 51/28 -->
+      <Position>
+         <X>-7200.43</X>
+         <Y>-3769.82</Y>
+         <Z>8.676395</Z>
+      </Position>
+      <Name>Krinkle Goodsteel</Name>
+   </Repair>
+</Profile>

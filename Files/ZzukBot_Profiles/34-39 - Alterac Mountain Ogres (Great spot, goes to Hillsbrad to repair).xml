@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Start: Alterac Mountains 49/60 -->
+<Profile>
+	<Hotspots>
+		<Hotspot>
+			<!-- Pos: 47/61 -->
+			<X>488.0117</X>
+			<Y>-739.2289</Y>
+			<Z>149.2437</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 51/55 -->
+			<X>430.8204</X>
+			<Y>-647.4662</Y>
+			<Z>165.703</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 52/53 -->
+			<X>337.2384</X>
+			<Y>-525.5439</Y>
+			<Z>162.08</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 54/52 -->
+			<X>262.8627</X>
+			<Y>-426.4311</Y>
+			<Z>154.2858</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 54/44 -->
+			<X>332.0763</X>
+			<Y>-347.6318</Y>
+			<Z>168.3661</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 53/41 -->
+			<X>343.8302</X>
+			<Y>-455.3165</Y>
+			<Z>168.358</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 51/40 -->
+			<X>414.0139</X>
+			<Y>-533.1265</Y>
+			<Z>168.5899</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 51/39 -->
+			<X>478.6053</X>
+			<Y>-568.8124</Y>
+			<Z>178.349</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 50/36 -->
+			<X>492.8959</X>
+			<Y>-648.9843</Y>
+			<Z>167.4001</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+		<Hotspot>
+			<!-- Pos: 49/33 -->
+			<X>504.6524</X>
+			<Y>-723.8403</Y>
+			<Z>160.809</Z>
+			<Type>Hotspot</Type>
+		</Hotspot>
+	</Hotspots>
+	<Factions>
+		<Faction>45</Faction>
+		<Faction>16</Faction>
+	</Factions>
+	<VendorHotspots>
+		<VendorHotspot>
+			<!-- Pos: 60/26 -->
+			<X>-156.0522</X>
+			<Y>-867.3315</Y>
+			<Z>57.12603</Z>
+			<Type>Hotspot</Type>
+		</VendorHotspot>
+	</VendorHotspots>
+	<Repair>
+		<!-- Pos: 60/26 -->
+		<Position>
+			<X>-158.525</X>
+			<Y>-867.18</Y>
+			<Z>56.89799</Z>
+		</Position>
+		<Name>Ott</Name>
+	</Repair>
+	<GhostHotspots>
+		<GhostHotspot>
+			<!-- Pos: 74/42 -->
+			<X>298.1447</X>
+			<Y>-627.9222</Y>
+			<Z>138.4489</Z>
+			<Type>Hotspot</Type>
+		</GhostHotspot>
+	</GhostHotspots>
+</Profile>

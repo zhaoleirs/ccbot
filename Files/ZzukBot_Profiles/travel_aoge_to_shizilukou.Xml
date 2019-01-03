@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<GlideProfile>
+ <MinLevel>1</MinLevel>
+ <MaxLevel>70</MaxLevel>
+ <NaturalRun>True</NaturalRun>
+ <LureMinutes>0</LureMinutes>
+ <SkipWaypoints>True</SkipWaypoints>
+ <Factions>0</Factions>
+ <Waypoint>1183.33 -4425.00</Waypoint>
+ <Waypoint>954.17 -4483.33</Waypoint>
+ <Waypoint>727.08 -4652.08</Waypoint>
+ <Waypoint>518.75 -4733.33</Waypoint>
+ <Waypoint>306.25 -4737.50</Waypoint>
+ <Waypoint>245.83 -4497.92</Waypoint>
+ <Waypoint>291.67 -3931.25</Waypoint>
+ <Waypoint>314.58 -3825.00</Waypoint>
+ <Waypoint>312.50 -3689.58</Waypoint>
+ <Waypoint>222.92 -3439.58</Waypoint>
+ <Waypoint>68.75 -2741.67</Waypoint>
+ <Waypoint>-445.83 -2625.00</Waypoint>
+ <EditPatrol>
+  <Color_1>FF</Color_1>
+  <Color_2>FF0000</Color_2>
+  <Color_3>FF00FF</Color_3>
+  <Color_4>FFFF00</Color_4>
+  <SpotLoc>1</SpotLoc>
+  <Continent>1</Continent>
+  <CharLevel>1</CharLevel>
+  <SHOWFLAG>4C0000FFFFFFFFFF</SHOWFLAG>
+  <Color_0>FF00</Color_0>
+ </EditPatrol>
+</GlideProfile>

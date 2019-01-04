@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using ZzukBot.AntiWarden;
+using ZzukBot.Constants;
 using ZzukBot.Engines.CustomClass;
 using ZzukBot.Engines.CustomClass.Objects;
 using ZzukBot.Engines.Grind.States;
@@ -72,7 +73,7 @@ namespace ZzukBot.Engines.Grind
             }
             else if (e.Message.Contains("mounted"))
             {
-                Lua.RunInMainthread("EzD_getdown()");
+                Lua.RunInMainthread(Strings.Dis_Mounted);
             }
             else if (e.Message.StartsWith("Target too close"))
             {

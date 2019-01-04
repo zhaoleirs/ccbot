@@ -14,7 +14,17 @@ namespace ZzukBot.Engines.Grind.Info
     {
         private int lastCheck;
 
+        private readonly Random ran = new Random();
+
+        private string[] msgs = { "???", "da guai?", "gengshang", "qu na er", "shen me renwu?", "....", ".....", "ni zuo renwu?" };
         internal int LastFightTick = 0;
+        internal string RandomMsg
+        {
+            get
+            {
+                return msgs[ran.Next(0, msgs.Length)];
+            }
+        }
 
         internal Dictionary<ulong, int> UnitsDottedByPlayer { get; set; } = new Dictionary<ulong, int>();
 

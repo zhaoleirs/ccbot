@@ -31,7 +31,8 @@ namespace ZzukBot.Engines.Grind.States
                 {
                     if (Wait.For("look_cheat_say", 30 * 1000))
                     {
-                        Lua.RunInMainthread("SendChatMessage('??','SAY')");
+                        
+                        Lua.RunInMainthread("SendChatMessage('"+ Grinder.Access.Info.Combat.RandomMsg + "','SAY')");
                     }
                     if (Wait.For("look_cheat", 60 * 1000))
                     {

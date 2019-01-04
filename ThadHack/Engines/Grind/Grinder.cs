@@ -70,6 +70,10 @@ namespace ZzukBot.Engines.Grind
                 Access.Info.Target.FixFacing = true;
                 Wait.Remove("FixFacingTimer");
             }
+            else if (e.Message.Contains("mounted"))
+            {
+                Lua.RunInMainthread("EzD_getdown()");
+            }
             else if (e.Message.StartsWith("Target too close"))
             {
                 if (!Access.Info.Combat.IsMoving)
@@ -303,6 +307,7 @@ namespace ZzukBot.Engines.Grind
                     tmpStates.Add(new PartyStateStartBreak());
                 }
                 tmpStates.Add(new StateTanlet());
+                tmpStates.Add(new PartyStateMounted());
 
                 if (Profile.RepairNPC != null)
                     tmpStates.Add(new PartyStateRepair());
@@ -350,6 +355,7 @@ namespace ZzukBot.Engines.Grind
                     tmpStates.Add(new StateStartBreak());
                 }
                 tmpStates.Add(new StateTanlet());
+                tmpStates.Add(new StateMounted());
 
                 if (Profile.RepairNPC != null)
                     tmpStates.Add(new StateRepair());
@@ -369,6 +375,12 @@ namespace ZzukBot.Engines.Grind
         internal bool Run()
         {
             if (!ObjectManager.EnumObjects()) return false;
+            Main.MainForm.UpdateControl("State: Party Loading", Main.MainForm.lGrindState);
+            if (Options.GroupMode )
+            {
+                PartyAssist.Init();
+            }
+            Main.MainForm.UpdateControl("State: Party Loaded", Main.MainForm.lGrindState);
             // start running the grindbot in endscene
             if (DirectX.RunInEndScene(RunGrinder))
             {

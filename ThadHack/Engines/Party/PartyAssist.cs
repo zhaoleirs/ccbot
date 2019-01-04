@@ -23,7 +23,10 @@ namespace ZzukBot.Engines.Party
         /// 
         /// </summary>
         public static List<PartyMember> members = new List<PartyMember>();
+        private static bool Applied;
         internal static bool FocusToVendor;
+        internal static bool Mounted=>!members.Exists(i=>!i.Mounted);
+
         internal static bool NeedResurrect=> !members.Exists(i => i.IsDead&&!i.ReportResurrect);
 
         internal static bool Resting=>members.Exists(i=>i.Rest);
@@ -96,6 +99,7 @@ namespace ZzukBot.Engines.Party
 
         internal static void Init()
         {
+            if (Applied) return;
             FocusToVendor = false;
             members.Clear();
             if (!string.IsNullOrEmpty(Options.Party.party1))
@@ -129,6 +133,8 @@ namespace ZzukBot.Engines.Party
                 members.Add(part);
                 Main.MainForm.AddLog("Add Leader:" + part.Name + ",instance:" + (part.instance() != null));
             }
+
+            Applied = true;
         }
         internal static PartyMember Local => members.FirstOrDefault(i => i.Name == ObjectManager.Player.Name);
 
@@ -136,11 +142,16 @@ namespace ZzukBot.Engines.Party
 
         internal static void OnChatMsg(int parType, string parOwner, string parMessage)
         {
+            if (!Applied) return;
             if (parType == 1)
             {
                 if (parMessage == "vendor")
                 {
                     FocusToVendor = true;
+                }
+                else if (parMessage == "mounted")
+                {
+                    Local.OnReport(7);
                 }
                 else if (parMessage.StartsWith("dead_"))
                 {
@@ -153,6 +164,7 @@ namespace ZzukBot.Engines.Party
                     var parms = parMessage.Split('_');
                     int index = Convert.ToInt32(parms[1]);
                     members[index].OnReport(0, parms[2]);
+                    Main.MainForm.AddLog("xyz," + members[index].isLeader + "," + parms[2] + members[index].Postion);
                 }
                 else if (parMessage.StartsWith("bagfull_"))
                 {

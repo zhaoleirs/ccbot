@@ -86,8 +86,6 @@ namespace ZzukBot.GUI_Forms
         {
             CCManager.LoadCCs();
             OptionManager.LoadSettings();
-            if(Options.GroupMode)
-                PartyAssist.Init();
             Memory.Init();
             try
             {

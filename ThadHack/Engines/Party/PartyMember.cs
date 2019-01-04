@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZzukBot.Engines.CustomClass;
 using ZzukBot.Engines.CustomClass.Objects;
+using ZzukBot.Engines.Grind;
 using ZzukBot.GUI_Forms;
 using ZzukBot.Helpers;
 using ZzukBot.Mem;
@@ -36,6 +37,17 @@ namespace ZzukBot.Engines.Party
         private bool LocalResting;
         private bool LocalBagFull;
         private bool LocalResurrect;
+        internal bool ReportMounted;
+        internal bool Mounted { get {
+                if (isLeader)
+                {
+                    return Grinder.Access.Info.Waypoints.NeedMounted;
+                }
+                else {
+                    return ReportMounted;
+                }
+            } }
+        private bool LocalMounted;
 
         internal XYZ Postion { get {
                 WoWUnit player = instance();
@@ -79,7 +91,7 @@ namespace ZzukBot.Engines.Party
             }
         }
         /// <summary>
-        /// 0-positoin 1-dead 2-bagfull 3-reston 4-restoff 5-bag_empty 6-resurrect
+        /// 0-positoin 1-dead 2-bagfull 3-reston 4-restoff 5-bag_empty 6-resurrect 7-mounted
         /// </summary>
         /// <param name="state">0-positoin 1-dead 2-bagfull</param>
         internal void Report(int state) {
@@ -119,10 +131,16 @@ namespace ZzukBot.Engines.Party
                     if (!ReportResurrect)
                         Lua.RunInMainthread("SendChatMessage('resurrect_" + Index + "','PARTY')");
                     break;
+                case 7:
+                    if (!LocalMounted) {
+                        LocalMounted = true;
+                        Lua.RunInMainthread("SendChatMessage('mounted','PARTY')");
+                    }
+                    break;
             }
         }
         /// <summary>
-        /// 0-positoin 1-dead 2-bagfull 3-reston 4-restoff 5-bag_empty  6-resurrect
+        /// 0-positoin 1-dead 2-bagfull 3-reston 4-restoff 5-bag_empty  6-resurrect 7-mounted
         /// </summary>
         /// <param name="state">0-positoin 1-dead 2-bagfull</param>
         /// <param name="value"></param>
@@ -150,6 +168,10 @@ namespace ZzukBot.Engines.Party
                     break;
                 case 6:
                     ReportResurrect = true;
+                    break;
+                case 7:
+                    ReportMounted = true;
+                    LocalMounted = false;
                     break;
             }
         }

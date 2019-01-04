@@ -10,6 +10,8 @@ namespace ZzukBot.Engines.Grind.Info
     {
         private Action LoadFirstWaypointCallback;
         private XYZ LastPostion = null;
+        internal bool NeedMounted => !string.IsNullOrEmpty(Options.MountName) && (Options.Herb||Options.Mine||Calc.Distance2D(ObjectManager.Player.Position, Grinder.Access.Info.Waypoints.CurrentHotspot) > 50);
+
         internal _Waypoints()
         {
             CurrentWaypointIndex = 0;

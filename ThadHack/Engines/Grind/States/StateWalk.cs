@@ -29,13 +29,7 @@ namespace ZzukBot.Engines.Grind.States
             // start movement to the current waypoint
             if (ObjectManager.Player.Casting != 0)
                 return;
-            if (!string.IsNullOrEmpty(Options.MountName)) {
-                if (Calc.Distance2D(ObjectManager.Player.Position, Grinder.Access.Info.Waypoints.CurrentHotspot) > 50) {
-                    if (!ObjectManager.Player.IsMounted) {
-                        ObjectManager.Player.Inventory.UseItem(Options.MountName);
-                    }
-                }
-            }
+       
             Shared.RandomJump();
             Grinder.Access.Info.PathAfterFightToWaypoint.AdjustPath();
 

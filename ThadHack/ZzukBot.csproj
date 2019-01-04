@@ -86,7 +86,9 @@
     <Compile Include="Engines\EngineManager.cs" />
     <Compile Include="Engines\CustomClass\PartyCustomClass.cs" />
     <Compile Include="Engines\Grind\States\PartyStates\partyStateGroup.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\partyStateMounted.cs" />
     <Compile Include="Engines\Grind\States\StateGrind.cs" />
+    <Compile Include="Engines\Grind\States\StateMounted.cs" />
     <Compile Include="Engines\Grind\States\stateTanlet.cs" />
     <Compile Include="Engines\Party\PartyAssist.cs" />
     <Compile Include="Engines\Grind\States\PartyStates\partyStateAfterFightToPath.cs" />

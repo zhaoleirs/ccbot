@@ -48,7 +48,10 @@ namespace ZzukBot.Helpers
             if (tmpItem == null) return;
             Items.Remove(tmpItem);
         }
-
+        internal static bool Contains(string parName)
+        {
+            return Items.Exists(i => i.Name == parName);
+        }
         internal static void RemoveAll()
         {
             //Items = new List<Item>();

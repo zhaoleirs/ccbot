@@ -37,7 +37,10 @@ namespace ZzukBot.Objects
         internal Inventory Inventory;
 
         internal volatile Spells Spells;
+        internal volatile Skills Skills;
 
+
+        internal IntPtr SkillField => Pointer.Add(8).ReadAs<IntPtr>().Add(0xB38);
         /// <summary>
         ///     Constructor
         /// </summary>
@@ -46,6 +49,7 @@ namespace ZzukBot.Objects
         {
             Inventory = new Inventory();
             Spells = new Spells();
+            //Skills = new Skills();
         }
 
         /// <summary>

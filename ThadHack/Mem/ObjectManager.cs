@@ -66,13 +66,13 @@ namespace ZzukBot.Mem
         internal static List<WoWGameObject> Mines
         {
            
-            get { return Objects.OfType<WoWGameObject>().Where(i => i.GatherInfo.Type==Enums.GatherType.Mining &&Player.Spells.GetSpellRank("Mining") >=i.GatherInfo.RequiredSkill).ToList(); }
+            get { return Objects.OfType<WoWGameObject>().Where(i => i.GatherInfo.Type==Enums.GatherType.Mining &&Player.Skills.GetSkill(Enums.Skills.MINING).CurrentLevel >=i.GatherInfo.RequiredSkill).ToList(); }
         }
 
 
         internal static List<WoWGameObject> Herbs
         {
-            get { return Objects.OfType<WoWGameObject>().Where(i => i.GatherInfo.Type == Enums.GatherType.Herbalism && Player.Spells.GetSpellRank("Herbalism") >= i.GatherInfo.RequiredSkill).ToList(); }
+            get { return Objects.OfType<WoWGameObject>().Where(i => i.GatherInfo.Type == Enums.GatherType.Herbalism && Player.Skills.GetSkill(Enums.Skills.HERBALISM).CurrentLevel >= i.GatherInfo.RequiredSkill).ToList(); }
         }
         /// <summary>
         ///     Access to the party leaders object

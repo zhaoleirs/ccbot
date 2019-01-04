@@ -9,6 +9,7 @@ namespace ZzukBot.Engines.Grind.Info.Path
         private XYZ posEndPos;
         private int posLastWaypointIndex;
         private XYZ[] posPath;
+        private XYZ lastPlayerPos;
 
         internal XYZ ToPos(XYZ parPosition)
         {
@@ -29,7 +30,19 @@ namespace ZzukBot.Engines.Grind.Info.Path
             {
                 recalc = !ToonBetweenPoints();
             }
-
+            if (lastPlayerPos == null)
+            {
+                lastPlayerPos = ObjectManager.Player.Position;
+            }
+            else if (Wait.For("path_time_out", 5000)) {
+                if (Calc.Distance3D(ObjectManager.Player.Position, lastPlayerPos) < 3)
+                {
+                    recalc = true;
+                }
+                else {
+                    lastPlayerPos = ObjectManager.Player.Position;
+                }
+            }
             if (posEndPos == null || Calc.Distance2D(parPosition, posEndPos) > 2f ||
                 recalc)
             {

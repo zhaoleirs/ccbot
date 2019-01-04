@@ -17,7 +17,7 @@ namespace ZzukBot.Engines.Grind.States
             if (!Wait.For("ReleasingSpirit", 1250)) return;
             ObjectManager.Player.CtmStopMovement();
             Wait.Remove("StartGhostWalk");
-            Functions.DoString("RepopMe()");
+            Lua.RunInMainthread("RepopMe()");
             Grinder.Access.Info.SpiritWalk.GeneratePath = true;
         }
     }

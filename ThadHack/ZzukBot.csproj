@@ -247,6 +247,7 @@
     <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Helpers\Waypoint.cs" />
     <Compile Include="Hooks\ChatHook.cs" />
+    <Compile Include="Ingame\Skills.cs" />
     <Compile Include="Mem\Extensions.cs" />
     <Compile Include="Mem\GetEndScene.cs" />
     <Compile Include="Mem\GlobalHooks.cs" />

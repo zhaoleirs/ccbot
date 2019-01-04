@@ -97,7 +97,7 @@ namespace ZzukBot.Engines.Grind.States
                     }
                     ObjectManager.Player.CtmStopMovement();
                     Grinder.Access.Info.Rest.ForceRest();
-                    Functions.DoString("RetrieveCorpse()");
+                    Lua.RunInMainthread("RetrieveCorpse()");
                 }
             }
         }

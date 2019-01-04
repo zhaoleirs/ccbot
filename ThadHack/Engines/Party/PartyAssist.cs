@@ -169,7 +169,6 @@ namespace ZzukBot.Engines.Party
                     var parms = parMessage.Split('_');
                     int index = Convert.ToInt32(parms[1]);
                     members[index].OnReport(0, parms[2]);
-                    Main.MainForm.AddLog("xyz," + members[index].isLeader + "," + parms[2] + members[index].Postion);
                 }
                 else if (parMessage.StartsWith("bagfull_"))
                 {

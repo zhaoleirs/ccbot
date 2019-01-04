@@ -369,12 +369,6 @@ namespace ZzukBot.Engines.Grind
         internal bool Run()
         {
             if (!ObjectManager.EnumObjects()) return false;
-            Main.MainForm.UpdateControl("State: Party Loading", Main.MainForm.lGrindState);
-            if (Options.GroupMode )
-            {
-                PartyAssist.Init();
-            }
-            Main.MainForm.UpdateControl("State: Party Loaded", Main.MainForm.lGrindState);
             // start running the grindbot in endscene
             if (DirectX.RunInEndScene(RunGrinder))
             {

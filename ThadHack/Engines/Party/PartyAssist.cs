@@ -174,6 +174,12 @@ namespace ZzukBot.Engines.Party
                     int index = Convert.ToInt32(parMessage.Substring(9));
                     members[index].OnReport(5);
                 }
+                else if (parMessage.StartsWith("resurrect_"))
+                {
+                    int index = Convert.ToInt32(parMessage.Substring(10));
+                    members[index].OnReport(6);
+                }
+                
                 else if (parMessage=="vendor")
                 {
                     FocusToVendor = true;

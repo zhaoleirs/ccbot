@@ -72,7 +72,7 @@ namespace ZzukBot.Engines.Party
 
                     WoWUnit player = instance();
                     if (player != null) {
-                        ReportDead = player.Health == 0;
+                        return player.Health <= 1;
                     }
                     return ReportDead;
                 }

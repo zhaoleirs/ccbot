@@ -20,8 +20,9 @@ namespace ZzukBot.Engines.Grind.States
         {
             if (PartyAssist.NeedResurrect)
             {
-                PartyAssist.Local.ReportResurrect = false;
                 base.Resurrect();
+                PartyAssist.Local.ReportResurrect = false;
+                PartyAssist.Local.ReportDead = false;
             }
             else {
                 PartyAssist.Local.Report(6);

@@ -26,9 +26,13 @@ namespace ZzukBot.Engines.Grind.States
             if (PartyAssist.Local.isLeader)
             {
                 var players = ObjectManager.Players;
-                int playerCount = players.Count(i => i.DistanceToPlayer < 50&&!i.IsInCombat&&!PartyAssist.members.Any(m=>i.Name==m.Name));
-                if (playerCount >=1)
+                int playerCount = players.Count(i => i.DistanceToPlayer < 50 && !i.IsInCombat && !PartyAssist.members.Any(m => i.Name == m.Name));
+                if (playerCount >= 1)
                 {
+                    if (Wait.For("look_cheat_say", 30 * 1000))
+                    {
+                        Lua.RunInMainthread("SendChatMessage('????','PARTY')");
+                    }
                     if (Wait.For("look_cheat", 60 * 1000))
                     {
                         Lua.RunInMainthread("SendChatMessage('vendor','PARTY')");

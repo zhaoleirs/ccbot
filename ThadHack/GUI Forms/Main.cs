@@ -11,6 +11,7 @@ using ZzukBot.Engines;
 using ZzukBot.Engines.CustomClass;
 using ZzukBot.Engines.Grind;
 using ZzukBot.Engines.Grind.Info;
+using ZzukBot.Engines.Party;
 using ZzukBot.Engines.ProfileCreation;
 using ZzukBot.Helpers;
 using ZzukBot.Hooks;
@@ -84,8 +85,10 @@ namespace ZzukBot.GUI_Forms
         internal void EndLaunchPrepare()
         {
             CCManager.LoadCCs();
-            Memory.Init();
             OptionManager.LoadSettings();
+            if(Options.GroupMode)
+                PartyAssist.Init();
+            Memory.Init();
             try
             {
                 using (var wc = new WebClient())

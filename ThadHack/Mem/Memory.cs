@@ -7,6 +7,7 @@ using Binarysharp.Assemblers.Fasm;
 using GreyMagic;
 using ZzukBot.AntiWarden;
 using ZzukBot.Constants;
+using ZzukBot.Engines.Party;
 using ZzukBot.Hooks;
 using static ZzukBot.Constants.Offsets;
 
@@ -52,7 +53,6 @@ namespace ZzukBot.Mem
             Libs.Clear();
             Libs.InjectFastcall();
             Libs.ReloadNav();
-
             ErrorEnumHook.Init();
             ChatHook.Init();
             GlobalHooks.Init();

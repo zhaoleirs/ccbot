@@ -1153,7 +1153,14 @@ namespace ZzukBot.Constants
             internal static IntPtr FirstDebuff = (IntPtr) 0x13C;
             internal static IntPtr NextBuff = (IntPtr) 0x4;
         }
-
+        internal enum Party : uint
+        {
+            leaderGuid = 0x00BC75F8,
+            party1Guid = 0x00BC6F48,
+            party2Guid = 0x00BC6F50,
+            party3Guid = 0x00BC6F58,
+            party4Guid = 0x00BC6F60
+        }
         internal static class Hacks
         {
             internal static IntPtr DisableCollision = (IntPtr) 0x6ABC5A;

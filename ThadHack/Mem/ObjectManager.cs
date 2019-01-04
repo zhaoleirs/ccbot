@@ -63,10 +63,84 @@ namespace ZzukBot.Mem
             get { return Objects.OfType<WoWUnit>().Where(i => i.WoWType == Enums.WoWObjectTypes.OT_UNIT).ToList(); }
         }
 
-        internal static List<WoWGameObject> Grinds
+        internal static List<WoWGameObject> Mines
         {
-            get { return Objects.OfType<WoWGameObject>().Where(i => i.WoWType == Enums.WoWObjectTypes.OT_GAMEOBJ).ToList(); }
+           
+            get { return Objects.OfType<WoWGameObject>().Where(i => i.GatherInfo.Type==Enums.GatherType.Mining &&Player.Spells.GetSpellRank("Mining") >=i.GatherInfo.RequiredSkill).ToList(); }
         }
+
+
+        internal static List<WoWGameObject> Herbs
+        {
+            get { return Objects.OfType<WoWGameObject>().Where(i => i.GatherInfo.Type == Enums.GatherType.Herbalism && Player.Spells.GetSpellRank("Herbalism") >= i.GatherInfo.RequiredSkill).ToList(); }
+        }
+        /// <summary>
+        ///     Access to the party leaders object
+        /// </summary>
+        internal static WoWUnit PartyLeader
+        {
+            get
+            {
+                var guid = ((int)Offsets.Party.leaderGuid).ReadAs<ulong>();
+                if (guid == 0) return null;
+                return Npcs.FirstOrDefault(i => i.Guid == guid);
+            }
+        }
+
+        /// <summary>
+        ///     Access to the object of party member 1
+        /// </summary>
+        internal static WoWUnit Party1
+        {
+            get
+            {
+                var guid = ((int)Offsets.Party.party1Guid).ReadAs<ulong>();
+                return GetPartyMember(guid);
+            }
+        }
+
+        /// <summary>
+        ///     Access to the object of party member 2
+        /// </summary>
+        internal static WoWUnit Party2
+        {
+            get
+            {
+                var guid = ((int)Offsets.Party.party2Guid).ReadAs<ulong>();
+                return GetPartyMember(guid);
+            }
+        }
+
+        /// <summary>
+        ///     Access to the object of party member 3
+        /// </summary>
+        internal static WoWUnit Party3
+        {
+            get
+            {
+                var guid = ((int)Offsets.Party.party3Guid).ReadAs<ulong>();
+                return GetPartyMember(guid);
+            }
+        }
+
+        /// <summary>
+        ///     Access to the object of party member 4
+        /// </summary>
+        internal static WoWUnit Party4
+        {
+            get
+            {
+                var guid = ((int)Offsets.Party.party4Guid).ReadAs<ulong>();
+                return GetPartyMember(guid);
+            }
+        }
+
+        private static  WoWUnit GetPartyMember(ulong guid)
+        {
+            if (guid == 0) return null;
+            return Npcs.FirstOrDefault(i => i.Guid == guid);
+        }
+
         internal static List<WoWGameObject> GameObjects => Objects.OfType<WoWGameObject>()
             .ToList();
 

@@ -25,13 +25,12 @@ namespace ZzukBot.Engines.Grind.Info
             InSightWithTarget = true;
             FixFacing = false;
         }
-        internal WoWGameObject NextGrind
+        internal WoWGameObject NextGrind(Enums.GatherType type)
         {
-            get
-            {
-                var grinds  = ObjectManager.Grinds;
-                return grinds.Where(i => !Grinder.Access.Info.Loot.LootBlacklist.Contains(i.Guid) && Calc.Distance3D(i.Position, ObjectManager.Player.Position) <= Options.MobSearchRange && Math.Abs(ObjectManager.Player.Position.Z - i.Position.Z) <= (int)Options.TargetZ && Options.GrindItems.Any(p => p.Contains(i.Name))).OrderBy(i => Calc.Distance3D(i.Position, ObjectManager.Player.Position)).FirstOrDefault();
-            }
+            
+            var grinds  = type==Enums.GatherType.Mining? ObjectManager.Mines: ObjectManager.Herbs;
+            return grinds.Where(i => !Grinder.Access.Info.Loot.LootBlacklist.Contains(i.Guid) && Calc.Distance3D(i.Position, ObjectManager.Player.Position) <= Options.MobSearchRange && Math.Abs(ObjectManager.Player.Position.Z - i.Position.Z) <= (int)Options.TargetZ && (Options.GrindItems.Contains("*")|| Options.GrindItems.Any(p => p.Contains(i.Name)))).OrderBy(i =>i.DistanceTo(ObjectManager.Player)).FirstOrDefault();
+            
         }
         // Get the next mob we should attack
         internal WoWUnit NextTarget

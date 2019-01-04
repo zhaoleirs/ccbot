@@ -17,6 +17,18 @@ namespace ZzukBot.Constants
             OT_CORPSE = 7
         }
 
+        /// <summary>
+        /// Gather types of WoW
+        /// </summary>
+        internal enum GatherType
+        {
+
+            Unknown = -2,
+            None = -1,
+            Herbalism = 2,
+            Mining = 3
+        }
+
         internal static class CreatureType
         {
             internal static int Beast = 1;

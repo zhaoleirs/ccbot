@@ -24,12 +24,9 @@ namespace ZzukBot.Engines.Grind.States
 
         internal override void Run()
         {
-            if (!Wait.Contains("mounted"))
+            if (Wait.ForOrAdd("mounted",5000))
             {
                 ObjectManager.Player.Inventory.UseItem(Options.MountName);
-            }
-            else {
-                Wait.For("mounted", 5000);
             }
 
         }

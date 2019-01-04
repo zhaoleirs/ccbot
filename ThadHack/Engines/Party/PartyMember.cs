@@ -39,7 +39,7 @@ namespace ZzukBot.Engines.Party
         private bool LocalResurrect;
         internal bool ReportMounted;
         internal bool Mounted { get {
-                if (isLeader)
+                if (isLocalPlayer&&isLeader)
                 {
                     return Grinder.Access.Info.Waypoints.NeedMounted;
                 }

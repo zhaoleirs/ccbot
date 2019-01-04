@@ -25,6 +25,8 @@ namespace ZzukBot.Engines.Party
         public static List<PartyMember> members = new List<PartyMember>();
         private static bool Applied;
         internal static bool FocusToVendor;
+        internal static bool AllMounted => !members.Exists(i => i.instance()!=null&&!i.instance().IsMounted);
+
         internal static bool Mounted=>!members.Exists(i=>!i.Mounted);
 
         internal static bool NeedResurrect=> !members.Exists(i => i.IsDead&&!i.ReportResurrect);
@@ -151,7 +153,10 @@ namespace ZzukBot.Engines.Party
                 }
                 else if (parMessage == "mounted")
                 {
-                    Local.OnReport(7);
+                    foreach (var m in members)
+                    {
+                        m.OnReport(7);
+                    }
                 }
                 else if (parMessage.StartsWith("dead_"))
                 {

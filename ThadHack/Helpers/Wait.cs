@@ -48,9 +48,34 @@ namespace ZzukBot.Helpers
             if (tmpItem == null) return;
             Items.Remove(tmpItem);
         }
-        internal static bool Contains(string parName)
+        internal static bool ForOrAdd(string parName, int parMs, bool parAutoReset = true)
         {
-            return Items.Exists(i => i.Name == parName);
+            // get the item with name XX
+            var tmpItem = Items
+                .FirstOrDefault(i => i.Name == parName);
+            // did we find a item?
+            if (tmpItem == null)
+            {
+                // we didnt found one! lets create it
+                tmpItem = new Item(parName, parAutoReset);
+                // and add it to the list
+                Items.Add(tmpItem);
+                // the time supplied in parMs didnt elapsed since
+                // item creation
+                return true;
+            }
+            // the item exists! lets check when it got created
+            var Elapsed = (DateTime.Now - tmpItem.Added).TotalMilliseconds >= parMs;
+            if (Elapsed)
+            {
+                if (tmpItem.AutoReset)
+                {
+                    // the time passed in parMs elapsed since the item creation
+                    // remove the item and return true
+                    Items.Remove(tmpItem);
+                }
+            }
+            return Elapsed;
         }
         internal static void RemoveAll()
         {

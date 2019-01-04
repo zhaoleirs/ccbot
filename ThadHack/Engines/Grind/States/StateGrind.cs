@@ -25,7 +25,7 @@ namespace ZzukBot.Engines.Grind.States
                 {
                     ObjectManager.Player.CtmStopMovement();
                 }
-                if (Wait.For("LootGrind", LastGrindId != grind.Guid ? 1000 : 3600))
+                if (Wait.ForOrAdd("LootGrind", 3600))
                 {
                     if (LastGrindId != grind.Guid)
                     {

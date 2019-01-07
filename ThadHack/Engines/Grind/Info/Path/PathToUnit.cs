@@ -24,13 +24,13 @@ namespace ZzukBot.Engines.Grind.Info.Path
 
         internal Tuple<bool, XYZ> ToUnit(WoWObject parUnit)
         {
-            if (Calc.Distance2D(ObjectManager.Player.Position, parUnit.Position) < 3)
+            if (Calc.Distance3D(ObjectManager.Player.Position, parUnit.Position) < 3)
                 return Tuple.Create(true, parUnit.Position);
 
 
             if (parUnit.Guid != unitLastGuid ||
                 parUnit.Pointer != unitLastPtr ||
-                Calc.Distance2D(parUnit.Position, unitLastPos) > 3)
+                Calc.Distance3D(parUnit.Position, unitLastPos) > 3)
             {
                 unitPath = Navigation.CalculatePath(ObjectManager.Player.Position,parUnit.Position, true);
                 unitLastWaypointIndex = 0;

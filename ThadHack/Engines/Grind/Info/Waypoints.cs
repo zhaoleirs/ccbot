@@ -25,7 +25,7 @@ namespace ZzukBot.Engines.Grind.Info
         {
             var point = Grinder.Access.Profile.OriginalHotspots[Grinder.Access.Profile.OriginalHotspots.Length - 1];
             var dis = Calc.Distance2D(ObjectManager.Player.Position, point.Position);
-            return dis <= disToPoint + (float)Options.WaypointModifier;
+            return dis <= disToPoint + (float)Options.WaypointModifier + (ObjectManager.Player.IsMounted ? 3 : 0);
         }
 
         // index of the current hotspot
@@ -216,13 +216,13 @@ namespace ZzukBot.Engines.Grind.Info
         internal bool NeedToLoadNextWaypoint(XYZ parPoint, float disToPoint = 1.3f)
         {
             var dis = Calc.Distance2D(ObjectManager.Player.Position, parPoint);
-            return dis <= disToPoint + (float) Options.WaypointModifier;
+            return dis <= disToPoint + (float) Options.WaypointModifier+(ObjectManager.Player.IsMounted?3:0);
         }
         internal bool distanceBigger(XYZ parPoint, float disToPoint = 1.3f)
         {
             if (ObjectManager.Player.Health == 0) return false;
             var dis = Calc.Distance2D(ObjectManager.Player.Position, parPoint);
-            return dis > disToPoint + (float)Options.WaypointModifier;
+            return dis > disToPoint + (float)Options.WaypointModifier + (ObjectManager.Player.IsMounted ? 3 : 0);
         }
         internal float distanceToNextWaypoint()
         {
@@ -232,7 +232,7 @@ namespace ZzukBot.Engines.Grind.Info
         internal bool NeedToLoadNextWaypoint(float disToPoint = 1.3f)
         {
             var dis = Calc.Distance2D(ObjectManager.Player.Position, CurrentWaypoint);
-            return dis <= disToPoint + (float) Options.WaypointModifier;
+            return dis <= disToPoint + (float) Options.WaypointModifier + (ObjectManager.Player.IsMounted ? 3 : 0);
         }
 
         internal void ResetGrindPath()

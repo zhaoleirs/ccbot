@@ -33,7 +33,8 @@ namespace ZzukBot.Engines.Grind.States
         internal override void Run()
         {
             var dis = gather.Distance3DTo(ObjectManager.Player);
-            if (dis < 1.3)
+            //GUI_Forms.Main.MainForm.AddLog("dd:"+dis);
+            if (dis < 3)
             {
                 
                 if (LastGrindId != gather.Guid)

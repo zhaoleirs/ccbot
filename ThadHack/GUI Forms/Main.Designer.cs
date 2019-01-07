@@ -31,6 +31,7 @@ namespace ZzukBot.GUI_Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.tcMain = new System.Windows.Forms.TabControl();
             this.tpGrind = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
             this.lbMoney = new System.Windows.Forms.Label();
             this.pbHP = new System.Windows.Forms.ProgressBar();
             this.lbLoot = new System.Windows.Forms.Label();
@@ -156,6 +157,8 @@ namespace ZzukBot.GUI_Forms
             this.tbAccount = new System.Windows.Forms.TextBox();
             this.lAccount = new System.Windows.Forms.Label();
             this.tpParty = new System.Windows.Forms.TabPage();
+            this.nudLeaderDistance = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
             this.pbPart2 = new System.Windows.Forms.ProgressBar();
             this.pbPart5 = new System.Windows.Forms.ProgressBar();
             this.pbPart4 = new System.Windows.Forms.ProgressBar();
@@ -188,8 +191,6 @@ namespace ZzukBot.GUI_Forms
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tpNews = new System.Windows.Forms.TabPage();
             this.rtbNews = new System.Windows.Forms.RichTextBox();
-            this.nudLeaderDistance = new System.Windows.Forms.NumericUpDown();
-            this.label12 = new System.Windows.Forms.Label();
             this.tcMain.SuspendLayout();
             this.tpGrind.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgChat)).BeginInit();
@@ -220,12 +221,12 @@ namespace ZzukBot.GUI_Forms
             ((System.ComponentModel.ISupportInitialize)(this.nudDrinkAt)).BeginInit();
             this.gbRelog.SuspendLayout();
             this.tpParty.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLeaderDistance)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.tpIRC.SuspendLayout();
             this.tpNotifications.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgNotifications)).BeginInit();
             this.tpNews.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLeaderDistance)).BeginInit();
             this.SuspendLayout();
             // 
             // tcMain
@@ -245,6 +246,7 @@ namespace ZzukBot.GUI_Forms
             // 
             // tpGrind
             // 
+            this.tpGrind.Controls.Add(this.button2);
             this.tpGrind.Controls.Add(this.lbMoney);
             this.tpGrind.Controls.Add(this.pbHP);
             this.tpGrind.Controls.Add(this.lbLoot);
@@ -264,6 +266,17 @@ namespace ZzukBot.GUI_Forms
             this.tpGrind.TabIndex = 0;
             this.tpGrind.Text = "Main";
             this.tpGrind.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(391, 13);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 12;
+            this.button2.Text = "skillInit";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // lbMoney
             // 
@@ -1664,6 +1677,27 @@ namespace ZzukBot.GUI_Forms
             this.tpParty.Text = "PartySetting";
             this.tpParty.UseVisualStyleBackColor = true;
             // 
+            // nudLeaderDistance
+            // 
+            this.nudLeaderDistance.Location = new System.Drawing.Point(111, 280);
+            this.nudLeaderDistance.Name = "nudLeaderDistance";
+            this.nudLeaderDistance.Size = new System.Drawing.Size(71, 21);
+            this.nudLeaderDistance.TabIndex = 35;
+            this.nudLeaderDistance.Value = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(17, 283);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(89, 12);
+            this.label12.TabIndex = 34;
+            this.label12.Text = "DistanceLeader";
+            // 
             // pbPart2
             // 
             this.pbPart2.Location = new System.Drawing.Point(189, 102);
@@ -1960,27 +1994,6 @@ namespace ZzukBot.GUI_Forms
             this.rtbNews.Text = "";
             this.rtbNews.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.rtbNews_LinkClicked);
             // 
-            // nudLeaderDistance
-            // 
-            this.nudLeaderDistance.Location = new System.Drawing.Point(111, 280);
-            this.nudLeaderDistance.Name = "nudLeaderDistance";
-            this.nudLeaderDistance.Size = new System.Drawing.Size(71, 21);
-            this.nudLeaderDistance.TabIndex = 35;
-            this.nudLeaderDistance.Value = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(17, 283);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(89, 12);
-            this.label12.TabIndex = 34;
-            this.label12.Text = "DistanceLeader";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2040,6 +2053,7 @@ namespace ZzukBot.GUI_Forms
             this.gbRelog.PerformLayout();
             this.tpParty.ResumeLayout(false);
             this.tpParty.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLeaderDistance)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tpIRC.ResumeLayout(false);
@@ -2047,7 +2061,6 @@ namespace ZzukBot.GUI_Forms
             this.tpNotifications.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgNotifications)).EndInit();
             this.tpNews.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nudLeaderDistance)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2220,6 +2233,7 @@ namespace ZzukBot.GUI_Forms
         internal System.Windows.Forms.ProgressBar pbPart5;
         internal System.Windows.Forms.NumericUpDown nudLeaderDistance;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button button2;
     }
 }
 

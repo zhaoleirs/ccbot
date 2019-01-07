@@ -5,6 +5,7 @@ using ZzukBot.Engines.Grind;
 using ZzukBot.Helpers;
 using ZzukBot.Ingame;
 using ZzukBot.Mem;
+using ZzukBot.Settings;
 using Ptr = ZzukBot.Constants.Offsets;
 
 namespace ZzukBot.Objects
@@ -38,7 +39,9 @@ namespace ZzukBot.Objects
 
         internal volatile Spells Spells;
         internal volatile Skills Skills;
+        internal int UnMountDelay;
 
+        internal bool CanMounted=> UnMountDelay<Environment.TickCount;
 
         internal IntPtr SkillField => Pointer.Add(8).ReadAs<IntPtr>().Add(0xB38);
         /// <summary>
@@ -49,9 +52,13 @@ namespace ZzukBot.Objects
         {
             Inventory = new Inventory();
             Spells = new Spells();
-            //Skills = new Skills();
         }
 
+        internal void InitSkills() {
+            if (Skills==null) {
+                Skills = new Skills();
+            }
+        }
         /// <summary>
         ///     Position of corpse
         /// </summary>

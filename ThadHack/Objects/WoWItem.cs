@@ -17,6 +17,19 @@ namespace ZzukBot.Objects
         {
         }
 
+
+        /// <summary>
+        ///     ID of the object
+        /// </summary>
+        public int Id => ReadRelative<int>(0x354);
+        /// <summary>
+        ///     Determines if we can use the item
+        /// </summary>
+        /// <returns></returns>
+        public bool CanUse()
+        {
+            return Functions.CanUseItem(ItemCachePointer);
+        }
         /// <summary>
         ///     Pointer to WDB cache
         /// </summary>

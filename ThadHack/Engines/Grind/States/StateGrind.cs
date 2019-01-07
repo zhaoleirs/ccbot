@@ -33,13 +33,14 @@ namespace ZzukBot.Engines.Grind.States
         internal override void Run()
         {
             var dis = gather.Distance3DTo(ObjectManager.Player);
-            if (dis < 5)
+            if (dis < 2)
             {
+                
                 if (LastGrindId != gather.Guid)
                 {
                     ObjectManager.Player.CtmStopMovement();
                 }
-                if (Wait.ForOrAdd("LootGrind", 3600))
+                if (LastGrindId != gather.Guid||Wait.ForOrAdd("LootGrind", 4500))
                 {
                     if (LastGrindId != gather.Guid)
                     {
@@ -48,15 +49,27 @@ namespace ZzukBot.Engines.Grind.States
                     }
                     ObjectManager.Player.RightClick(gather);
                 }
-                if (Wait.For("LootGrindOut", 3600 * 10))
+                if (Wait.For("LootGrindOut", 4500 * 10))
                 {
                     Grinder.Access.Info.Loot.AddToLootBlacklist(gather.Guid);
                 }
+                Wait.Remove("LootGrindMoving");
             }
             else
             {
+                if (dis <= 7) {
+                    if (ObjectManager.Player.IsMounted)
+                    {
+                        Lua.RunInMainthread(Constants.Strings.Dis_Mounted);
+                    }
+                }
                 Wait.Remove("LootGrind");
                 Wait.Remove("LootGrindOut");
+                if (Wait.For("LootGrindMoving", 25000))
+                {
+                    Grinder.Access.Info.Loot.AddToLootBlacklist(gather.Guid);
+                    return;
+                }
                 var it = Grinder.Access.Info.PathToUnit.ToUnit(gather);
                 if (it.Item1)
                 {

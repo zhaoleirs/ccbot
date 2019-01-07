@@ -1001,6 +1001,7 @@ namespace ZzukBot.Constants
 
             internal static IntPtr UnitReaction = (IntPtr) 0x006061E0;
             internal static IntPtr SetTarget = (IntPtr) 0x493540;
+            internal static IntPtr CanUseItem = (IntPtr)0x005EA930;
             internal static IntPtr LastHardwareAction = (IntPtr) 0x00CF0BC8;
             internal static IntPtr AutoLoot = (IntPtr) 0x4C1FA0;
             internal static IntPtr ClickToMove = (IntPtr) 0x00611130;

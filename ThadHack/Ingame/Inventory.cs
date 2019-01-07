@@ -370,6 +370,17 @@ namespace ZzukBot.Ingame
             Functions.DoString(Strings.EnchantOffhand);
         }
 
+        internal WoWItem GetItem(string name) {
+            var tmpItem =ObjectManager.Items.FirstOrDefault(i => string.Equals(i.Name, name, StringComparison.OrdinalIgnoreCase));
+            return tmpItem;
+        }
+
+        internal bool CanUse(string name)
+        {
+
+            var tmpItem = ObjectManager.Items.FirstOrDefault(i => string.Equals(i.Name, name, StringComparison.OrdinalIgnoreCase));
+            return tmpItem!=null&&tmpItem.CanUse();
+        }
         /// <summary>
         ///     Use an item
         /// </summary>

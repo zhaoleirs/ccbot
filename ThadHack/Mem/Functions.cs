@@ -20,6 +20,7 @@ namespace ZzukBot.Mem
         private static OnRightClickUnitDelegate OnRightClickUnitFunction;
         private static OnRightClickObjectDelegate OnRightClickObjectFunction;
         private static LootAllDelegate LootAllFunction;
+        private static CanUseItemDelegate CanUseItemFunction;
         private static UnitReactionDelegate UnitReactionFunction;
         private static SetTargetDelegate SetTargetFunction;
         private static ItemCacheGetRowDelegate ItemCacheGetRowFunction;
@@ -127,6 +128,18 @@ namespace ZzukBot.Mem
             return GetLootSlotsFunction();
         }
 
+        internal static bool CanUseItem(IntPtr ptr2)
+        {
+            if (!ObjectManager.IsIngame) return false;
+            if (CanUseItemFunction == null)
+                CanUseItemFunction = Memory.Reader.RegisterDelegate<CanUseItemDelegate>(funcs.CanUseItem);
+           
+                var ptr1 = ObjectManager.Player.Pointer;
+                if (ptr1 == IntPtr.Zero) return false;
+                var randomInt = 1;
+                var res = CanUseItemFunction(ptr1, ptr2, ref randomInt);
+                return res==1;
+        }
 
         internal static void EnterWorld()
         {
@@ -491,6 +504,9 @@ namespace ZzukBot.Mem
         [UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate IntPtr ClientConnectionDelegate
             ();
+
+        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
+        private delegate int CanUseItemDelegate(IntPtr parPlayerPtr, IntPtr parItemCacheEntryPtr, ref int parPtr);
 
         [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
         private delegate int GetCreatureRankDelegate

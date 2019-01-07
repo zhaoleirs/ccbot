@@ -840,6 +840,11 @@ namespace ZzukBot.GUI_Forms
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ObjectManager.Player.InitSkills();
+        }
+
 
         #endregion
 

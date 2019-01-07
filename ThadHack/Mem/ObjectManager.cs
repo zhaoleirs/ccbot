@@ -161,6 +161,8 @@ namespace ZzukBot.Mem
             Prepared = false;
         }
 
+    
+
         internal static void UpdateSpells()
         {
             ShouldUpdateSpells = true;
@@ -177,6 +179,7 @@ namespace ZzukBot.Mem
         internal static bool EnumObjects()
         {
             if (Offsets.Player.IsIngame.ReadAs<byte>() == 0) return false;
+            IsIngame = true;
             return _EnumObjects();
         }
 

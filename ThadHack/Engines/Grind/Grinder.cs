@@ -41,6 +41,7 @@ namespace ZzukBot.Engines.Grind
         
         private void ErrorEnum_OnNewError(ErrorEnumArgs e)
         {
+           // Main.MainForm.AddLog(e.Message);
             if (e.Message.StartsWith("Target not"))
             {
                 if (Access.Info.Combat.IsMovingBack) return;
@@ -53,6 +54,10 @@ namespace ZzukBot.Engines.Grind
                      e.Message.StartsWith("You need to be standing up to loot"))
             {
                 Functions.DoString("SitOrStand()");
+            }
+            else if (e.Message.StartsWith("You can't mount"))
+            {
+                ObjectManager.Player.UnMountDelay = Environment.TickCount + 20000;
             }
             else if (e.Message.StartsWith("You cannot attack that target") || e.Message.StartsWith("Invalid target"))
             {
@@ -376,6 +381,7 @@ namespace ZzukBot.Engines.Grind
         internal bool Run()
         {
             if (!ObjectManager.EnumObjects()) return false;
+            ObjectManager.Player.InitSkills();
             Main.MainForm.UpdateControl("State: Party Loading", Main.MainForm.lGrindState);
             if (Options.GroupMode )
             {

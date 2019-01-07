@@ -7,15 +7,14 @@ namespace ZzukBot.Engines.Grind.States
 {
     internal class StateMounted : State
     {
-        internal override int Priority => 11;
+        internal override int Priority => 20;
 
         internal override bool NeedToRun
         {
             get
             {
                 
-                bool needMounted = !ObjectManager.Player.IsMounted&&Grinder.Access.Info.Waypoints.NeedMounted;
-                
+                bool needMounted = !ObjectManager.Player.IsMounted&&ObjectManager.Player.CanMounted&& Grinder.Access.Info.Waypoints.NeedMounted;
                 return needMounted;
             }
         }// => ;

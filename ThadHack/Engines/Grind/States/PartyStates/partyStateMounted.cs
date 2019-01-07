@@ -18,7 +18,7 @@ namespace ZzukBot.Engines.Grind.States
                 if (mounted&&PartyAssist.Local.isLeader&&!PartyAssist.AllMounted&& Wait.ForOrAdd("part_mounted",5000)) {
                     PartyAssist.Local.Report(7);
                 }
-                return !ObjectManager.Player.IsMounted&&mounted;
+                return !ObjectManager.Player.IsMounted && ObjectManager.Player.CanMounted && !ObjectManager.Player.IsSwimming && mounted;
             }
         }
 

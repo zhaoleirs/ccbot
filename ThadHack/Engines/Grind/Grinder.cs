@@ -55,7 +55,7 @@ namespace ZzukBot.Engines.Grind
             {
                 Functions.DoString("SitOrStand()");
             }
-            else if (e.Message.StartsWith("You can't mount"))
+            else if (e.Message.StartsWith("You can't mount")|| e.Message.StartsWith("Cannot use while swimming"))
             {
                 ObjectManager.Player.UnMountDelay = Environment.TickCount + 20000;
             }
@@ -211,16 +211,19 @@ namespace ZzukBot.Engines.Grind
                             }
 
                             LastState = Engine.Pulse();
-                            if (LastState == "Resting" && LastLastState != "Resting")
+                            if (Options.GroupMode)
                             {
-                                PartyAssist.Local.Report(3);
-                            }
+                                if (LastState == "Resting" && LastLastState != "Resting")
+                                {
+                                    PartyAssist.Local.Report(3);
+                                }
 
-                            if (LastLastState == "Resting" && LastState != "Resting")
-                            {
-                                PartyAssist.Local.Report(4);
+                                if (LastLastState == "Resting" && LastState != "Resting")
+                                {
+                                    PartyAssist.Local.Report(4);
+                                }
+                                LastLastState = LastState;
                             }
-                            LastLastState = LastState;
                             Main.MainForm.UpdateControl("State: " + LastState, Main.MainForm.lGrindState);
                             Main.MainForm.UpdateControl("Exp: " + ObjectManager.Player.Level + "(" + ObjectManager.Player.CurrentXp + "/" + ObjectManager.Player.NextLevelXp + ") Players:" + ObjectManager.Players.Count, Main.MainForm.lbExp);
                             Main.MainForm.UpdateControl(ObjectManager.Player.HealthPercent, Main.MainForm.pbHP);
@@ -317,6 +320,12 @@ namespace ZzukBot.Engines.Grind
 
                 if (Profile.RepairNPC != null)
                     tmpStates.Add(new PartyStateRepair());
+
+                if (!string.IsNullOrEmpty(Options.Party.BattleGround))
+                {
+                    tmpStates.Add(new PartyStateBattleGroup());
+                }
+
                 tmpStates.Sort();
 
                 Engine = new _Engine(tmpStates);
@@ -365,6 +374,13 @@ namespace ZzukBot.Engines.Grind
 
                 if (Profile.RepairNPC != null)
                     tmpStates.Add(new StateRepair());
+
+                if (Profile.MailNPC != null)
+                    tmpStates.Add(new StateMail());
+
+                if (!string.IsNullOrEmpty(Options.Party.BattleGround)) {
+                    tmpStates.Add(new StateBattleGroup());
+                }
 
                 tmpStates.Sort();
 

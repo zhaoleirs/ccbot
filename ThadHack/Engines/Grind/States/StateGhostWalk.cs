@@ -12,12 +12,16 @@ namespace ZzukBot.Engines.Grind.States
     {
         internal override int Priority => 54;
 
-        internal override bool NeedToRun => ObjectManager.Player.InGhostForm;
+        internal override bool NeedToRun => ObjectManager.Player.InGhostForm&& ObjectManager.Player.Health==1;
 
         internal override string Name => "Ghostwalk";
 
         internal override void Run()
         {
+            if (ObjectManager.Player.InBattleGround) {
+                
+                return;
+            }
             if (!Wait.For("StartGhostWalk", 2000, false))
             {
                 return;
@@ -59,22 +63,6 @@ namespace ZzukBot.Engines.Grind.States
                 {
                     Grinder.Access.Info.SpiritWalk.ArrivedAtCorpse = true;
                     Resurrect();
-                    //if (Grinder.Access.Info.PathSafeGhostwalk.FindSafePath())
-                    //{
-                    //    var poi = Grinder.Access.Info.PathSafeGhostwalk.NextSafeWaypoint;
-                    //    if (!poi.Item2)
-                    //    {
-                    //        ObjectManager.Player.CtmTo(poi.Item1);
-                    //    }
-                    //    else
-                    //    {
-                    //        Resurrect();
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    Resurrect();
-                    //}
                 }
             }
             else
@@ -85,21 +73,24 @@ namespace ZzukBot.Engines.Grind.States
             }
         }
 
-        internal virtual void Resurrect()
+        internal void Resurrect()
         {
             if (Wait.For("ResurrectTimer112", 500))
             {
                 if (ObjectManager.Player.TimeUntilResurrect == 0)
                 {
-                    if (HookWardenMemScan.GetHack("Collision")!=null&&HookWardenMemScan.GetHack("Collision").IsActivated)
-                    {
-                        HookWardenMemScan.GetHack("Collision").Remove();
-                    }
-                    ObjectManager.Player.CtmStopMovement();
-                    Grinder.Access.Info.Rest.ForceRest();
-                    Lua.RunInMainthread("RetrieveCorpse()");
+                    Retrieve();
                 }
             }
+        }
+        internal virtual void Retrieve() {
+            if (HookWardenMemScan.GetHack("Collision") != null && HookWardenMemScan.GetHack("Collision").IsActivated)
+            {
+                HookWardenMemScan.GetHack("Collision").Remove();
+            }
+            ObjectManager.Player.CtmStopMovement();
+            Grinder.Access.Info.Rest.ForceRest();
+            Lua.RunInMainthread("RetrieveCorpse()");
         }
     }
 }

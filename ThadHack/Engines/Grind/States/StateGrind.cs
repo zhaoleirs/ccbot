@@ -33,15 +33,12 @@ namespace ZzukBot.Engines.Grind.States
         internal override void Run()
         {
             var dis = gather.Distance3DTo(ObjectManager.Player);
-            //GUI_Forms.Main.MainForm.AddLog("dd:"+dis);
+           // GUI_Forms.Main.MainForm.AddLog("dd:"+dis);
             if (dis < 3)
             {
                 
-                if (LastGrindId != gather.Guid)
-                {
-                    ObjectManager.Player.CtmStopMovement();
-                }
-                if (LastGrindId != gather.Guid||Wait.ForOrAdd("LootGrind", 4500))
+                ObjectManager.Player.CtmStopMovement();
+                if (LastGrindId != gather.Guid || Wait.ForOrAdd("LootGrind", 4500))
                 {
                     if (LastGrindId != gather.Guid)
                     {
@@ -50,6 +47,7 @@ namespace ZzukBot.Engines.Grind.States
                     }
                     ObjectManager.Player.RightClick(gather);
                 }
+                
                 if (Wait.For("LootGrindOut", 4500 * 10))
                 {
                     Grinder.Access.Info.Loot.AddToLootBlacklist(gather.Guid);
@@ -58,10 +56,20 @@ namespace ZzukBot.Engines.Grind.States
             }
             else
             {
-                if (dis <= 7) {
+                if (dis <= 10)
+                {
                     if (ObjectManager.Player.IsMounted)
                     {
                         Lua.RunInMainthread(Constants.Strings.Dis_Mounted);
+                    }
+                    ObjectManager.Player.CtmTo(gather.Position);
+                }
+                else {
+                    var it = Grinder.Access.Info.PathToUnit.ToUnit(gather);
+                    if (it.Item1)
+                    {
+                        //GUI_Forms.Main.MainForm.AddLog(ObjectManager.Player.Position + "=>" + it.Item2);
+                        ObjectManager.Player.CtmTo(it.Item2);
                     }
                 }
                 Wait.Remove("LootGrind");
@@ -71,11 +79,7 @@ namespace ZzukBot.Engines.Grind.States
                     Grinder.Access.Info.Loot.AddToLootBlacklist(gather.Guid);
                     return;
                 }
-                var it = Grinder.Access.Info.PathToUnit.ToUnit(gather);
-                if (it.Item1)
-                {
-                    ObjectManager.Player.CtmTo(it.Item2);
-                }
+               
             }
         }
     }

@@ -42,7 +42,7 @@ namespace ZzukBot.Engines.Grind.Info.Path
             {
                 playerLastPos = ObjectManager.Player.Position;
             }
-            else if (Wait.For("PathToUnitTime", 5000)) {
+            else if (Wait.For("PathToUnitTime", Wait.MoveOutTime)) {
                 if (Calc.Distance3D(playerLastPos, ObjectManager.Player.Position) < 3)
                 {
                     unitPath = Navigation.CalculatePath(ObjectManager.Player.Position, parUnit.Position, true);

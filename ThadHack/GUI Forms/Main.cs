@@ -86,6 +86,7 @@ namespace ZzukBot.GUI_Forms
         {
             CCManager.LoadCCs();
             OptionManager.LoadSettings();
+          
             Memory.Init();
             try
             {
@@ -254,6 +255,7 @@ namespace ZzukBot.GUI_Forms
             Options.StopOnRare = cbStopOnRare.Checked;
 
             Options.MountName = tbMount.Text;
+            Options.MailTo = tbMailTo.Text;
             Options.PetFood = tbPetFood.Text;
             Options.AccountName = tbAccount.Text;
             Options.AccountPassword = tbPassword.Text;
@@ -301,6 +303,7 @@ namespace ZzukBot.GUI_Forms
             Options.Party.party4 = tbParty4.Text;
             Options.Party.party5 = tbParty5.Text;
             Options.Party.LeaderDistance = (int)nudLeaderDistance.Value;
+            Options.Party.BattleGround = tbBattleGround.Text;
 
             Options.TargetZ = nudTargetZ.Value;
 
@@ -332,6 +335,7 @@ namespace ZzukBot.GUI_Forms
             {
                 EngineManager.StartGrinder();
             });
+
         }
 
         private void Start(ref int FrameCounter, bool IsIngame)
@@ -688,6 +692,7 @@ namespace ZzukBot.GUI_Forms
             DirectX.StopRunning();
             if (EngineManager.CurrentEngineType != Engines.Engines.Grind) return;
             EngineManager.StopCurrentEngine();
+            PartyAssist.Release();
             lGrindLoadProfile.Text = "Profile: ";
             lGrindState.Text = "State: ";
         }
@@ -775,6 +780,7 @@ namespace ZzukBot.GUI_Forms
             Options.NotifyOnRare = cbNotifyRare.Checked;
             Options.StopOnRare = cbStopOnRare.Checked;
             Options.MountName = tbMount.Text;
+            Options.MailTo = tbMailTo.Text;
             Options.PetFood = tbPetFood.Text;
             Options.AccountName = tbAccount.Text;
             Options.AccountPassword = tbPassword.Text;
@@ -822,6 +828,7 @@ namespace ZzukBot.GUI_Forms
             Options.Party.party4 = tbParty4.Text;
             Options.Party.party5 = tbParty5.Text;
             Options.Party.LeaderDistance = (int)nudLeaderDistance.Value;
+            Options.Party.BattleGround = tbBattleGround.Text;
 
             Options.TargetZ = nudTargetZ.Value;
 

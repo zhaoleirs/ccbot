@@ -11,6 +11,7 @@ namespace ZzukBot.Ingame
     internal class Inventory
     {
         private readonly List<ulong> VendorExclude = new List<ulong>();
+        private readonly List<ulong> MailExclude = new List<ulong>();
 
         /// <summary>
         ///     Get free slots
@@ -19,6 +20,96 @@ namespace ZzukBot.Ingame
 
         internal int FreeSlotsWithQuiver => _FreeSlots(true);
 
+        private Tuple<int, int> MailItem
+        {
+            get
+            {
+                // Itera through base bag
+                for (var i = 0; i < 16; i++)
+                {
+                    // get guid of the item stored in current slot (i = slot number)
+                    ulong tmpSlotGuid = 0;
+                    try
+                    {
+                        tmpSlotGuid = ObjectManager.Player.GetDescriptor<ulong>(0x850 + i * 8);
+                    }
+                    catch
+                    {
+                    }
+                    if (tmpSlotGuid != 0)
+                    {
+                        var tmp = ObjectManager.Items.FirstOrDefault(x => x.Guid == tmpSlotGuid);
+                        if (tmp.StackCount >= 10&&tmp.StackCount==tmp.Info.MaxStackCount)
+                        {
+                            var itemName = Options.ProtectedItems.FirstOrDefault(x => x.StartsWith("*") && tmp.Name.Contains(x.TrimStart('*')));
+
+                            if (string.IsNullOrEmpty(itemName) && !Options.ProtectedItems.Contains(tmp.Name))
+                            {
+                                if (!MailExclude.Contains(tmp.Guid)) {
+                                    MailExclude.Add(tmp.Guid);
+                                    return Tuple.Create(0, i + 1);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                var tmpItems = new List<WoWItem>();
+                var BagsFound = ObjectManager.Items.Where(x => x.Slots != 0).ToList();
+                for (var i = 0; i < 4; i++)
+                {
+                    // read bag guid (i = bag number starting right)
+                    var bagGuid = (IntPtr.Add(new IntPtr(0xBDD060), i * 8)).ReadAs<ulong>();
+                    if (bagGuid == 0) continue;
+
+                    var tmpBag = BagsFound.FirstOrDefault(x => bagGuid == x.Guid);
+                    if (tmpBag == null) continue;
+                    tmpItems.Add(tmpBag);
+                }
+                // Filter out our bags from the item list maintained
+                // by the object manager
+
+
+                var counter = 1;
+                // iterate over the bag list
+                foreach (var bag in tmpItems)
+                {
+                    // iterate over the current bag and count free slots
+                    // i = current slot
+                    for (var i = 1; i < bag.Slots + 1; i++)
+                    {
+                        ulong tmpSlotGuid = 0;
+                        try
+                        {
+                            tmpSlotGuid = bag.GetDescriptor<ulong>(0xC0 + i * 8);
+                        }
+                        catch
+                        {
+                        }
+                        if (tmpSlotGuid != 0)
+                        {
+                            var tmp = ObjectManager.Items
+                               .FirstOrDefault(x => x.Guid == tmpSlotGuid);
+                            if (tmp.StackCount >= 10 && tmp.StackCount == tmp.Info.MaxStackCount)
+                            {
+                                var itemName = Options.ProtectedItems.FirstOrDefault(x => x.StartsWith("*") && tmp.Name.Contains(x.TrimStart('*')));
+
+                                if (string.IsNullOrEmpty(itemName) && !Options.ProtectedItems.Contains(tmp.Name))
+                                {
+                                    if (!MailExclude.Contains(tmp.Guid))
+                                    {
+                                        MailExclude.Add(tmp.Guid);
+                                        return Tuple.Create(counter, i);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    counter++;
+                }
+                return Tuple.Create(-1, -1);
+            }
+        }
         private Tuple<int, int> VendorItem
         {
             get
@@ -286,7 +377,18 @@ namespace ZzukBot.Ingame
             }
             return false;
         }
-
+        internal bool MailItems()
+        {
+            var slot = MailItem;
+            if (slot.Item1 != -1)
+            {
+                Functions.DoString(
+                    "PickupContainerItem(" + slot.Item1 + "," + slot.Item2 + ")"
+                    );
+                return true;
+            }
+            return false;
+        }
         internal bool VendorItems()
         {
             var slot = VendorItem;

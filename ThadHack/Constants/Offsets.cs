@@ -999,6 +999,7 @@ namespace ZzukBot.Constants
             internal static IntPtr GetCreatureType = (IntPtr) 0x00605570;
             internal static IntPtr CastSpellByName = (IntPtr) 0x004B4AB0;
 
+
             internal static IntPtr UnitReaction = (IntPtr) 0x006061E0;
             internal static IntPtr SetTarget = (IntPtr) 0x493540;
             internal static IntPtr CanUseItem = (IntPtr)0x005EA930;

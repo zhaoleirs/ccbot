@@ -27,11 +27,13 @@ namespace ZzukBot.Engines.Grind
                 var tmpHotspots = sub.Element("Hotspots");
                 var tmpIgnoreZAxis = sub.Element("IgnoreZAxis");
                 var tmpVendorHotspots = sub.Element("VendorHotspots");
+                var tmpMailHotspots = sub.Element("MailHotspots");
                 var tmpGhostrHotspots = sub.Element("GhostHotspots");
                 var tmpFactions = sub.Element("Factions");
                 var tmpVendor = sub.Element("Vendor");
                 var tmpRepair = sub.Element("Repair");
                 var tmpRestock = sub.Element("Restock");
+                var tmpMail = sub.Element("Mail");
                 var tmpIds= sub.Element("Ids");
                 var tmpRestockItems = sub.Element("RestockItems");
                 Shared.IgnoreZAxis = tmpIgnoreZAxis != null;
@@ -45,6 +47,7 @@ namespace ZzukBot.Engines.Grind
                 ExtractVendor(tmpVendor);
                 // parse the Repair
                 ExtractRepairNpcAndWaypoints(tmpVendorHotspots, tmpRepair);
+                ExtractMailNpcAndItems(tmpMailHotspots, tmpMail);
                 // parse the Restock
                 ExtractRestockNpcAndItems(tmpRestock, tmpRestockItems);
                 ExtractGhosthotspots(tmpGhostrHotspots);
@@ -122,7 +125,51 @@ namespace ZzukBot.Engines.Grind
                 GhostHotspots = tmpListGhostHotspots.ToArray();
             }
         }
+        private void ExtractMailNpcAndItems(XElement tmpMailHotspots, XElement tmpMail) {
+            if (tmpMail != null)
+            {
+                if (tmpMailHotspots != null)
+                {
+                    var tmpMailVendorHotspots = new List<Waypoint>();
+                    // ReSharper disable once LoopCanBeConvertedToQuery
+                    foreach (var x in tmpMailHotspots.Nodes().ToList())
+                    {
+                        var tmpX = x as XElement;
+                        if (tmpX.Name == "MailHotspot")
+                        {
+                            var _vec3 = new XYZ
+                            {
+                                X = Convert.ToSingle(tmpX.Element("X").Value),
+                                Y = Convert.ToSingle(tmpX.Element("Y").Value),
+                                Z = Convert.ToSingle(tmpX.Element("Z").Value)
+                            };
 
+                            var tmpWp = new Waypoint
+                            {
+                                Position = _vec3,
+                                Type = (Enums.PositionType)
+                                    Enum.Parse(typeof(Enums.PositionType), tmpX.Element("Type").Value, true)
+                            };
+
+                            tmpMailVendorHotspots.Add(tmpWp);
+                        }
+                    }
+                    MailHotspots = tmpMailVendorHotspots.ToArray();
+                }
+
+                var vec3 = new XYZ
+                {
+                    X = Convert.ToSingle(
+                        tmpMail.Element("Position").Element("X").Value),
+                    Y = Convert.ToSingle(
+                        tmpMail.Element("Position").Element("Y").Value),
+                    Z = Convert.ToSingle(
+                        tmpMail.Element("Position").Element("Z").Value)
+                };
+
+                MailNPC = new NPC(tmpMail.Element("Name").Value,vec3, "");
+            }
+        }
         private void ExtractRepairNpcAndWaypoints(XElement tmpVendorHotspots, XElement tmpRepair)
         {
             if (tmpRepair != null)
@@ -266,6 +313,7 @@ namespace ZzukBot.Engines.Grind
 
         // Holding the vendor hotspots of the currently loaded profile
         internal Waypoint[] VendorHotspots { get; private set; }
+        internal Waypoint[] MailHotspots { get; private set; }
 
         internal Waypoint[] GhostHotspots { get; private set; }
         // Holding all factions to kill
@@ -275,6 +323,7 @@ namespace ZzukBot.Engines.Grind
         internal NPC VendorNPC { get; private set; }
         // Repair infos
         internal NPC RepairNPC { get; private set; }
+        internal NPC MailNPC { get; private set; }
         // Restock infos
         internal NPC RestockNPC { get; private set; }
         // Items to restock

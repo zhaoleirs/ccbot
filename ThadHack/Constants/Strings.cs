@@ -34,6 +34,12 @@
 
         internal const string GT_IsVendorOpen = "vendorSh1";
 
+        internal const string IsMailOpen =
+        "if MailFrame:IsVisible() then mailSh1 = 'true' else mailSh1 = 'false' end";
+
+        internal const string GT_IsMailOpen = "mailSh1";
+
+
         internal const string Dis_Mounted = "for i=0,15 do local c = GetPlayerBuffTexture(i) if c and (string.find(string.lower(c), '_mount_') or string.find(string.lower(c), 'spell_nature_swiftness')) then CancelPlayerBuff(i) end end";
 
         internal const string RepairAll =

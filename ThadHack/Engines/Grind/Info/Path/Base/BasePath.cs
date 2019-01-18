@@ -94,7 +94,7 @@ namespace ZzukBot.Engines.Grind.Info.Path.Base
                 {
                     LastPostion= playerPosition;
                 }
-                else if (Wait.For("basepathout", 5000))
+                else if (Wait.For("basepathout", Wait.MoveOutTime))
                 {
                    // Main.MainForm.AddLog("basepathout:"+ Calc.Distance3D(playerPosition, LastPostion));
                     if (Calc.Distance3D(playerPosition, LastPostion) < 3)

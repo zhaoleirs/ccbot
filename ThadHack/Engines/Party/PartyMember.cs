@@ -64,9 +64,7 @@ namespace ZzukBot.Engines.Party
                 if (isLocalPlayer)
                 {
                     var full= !Options.LootUnits || ObjectManager.Player.Inventory.FreeSlots < Options.MinFreeSlotsBeforeVendor;
-                    if (full) {
-                        Report(2);
-                    }
+                    LocalBagFull = full;
                 }
                 return ReportBagFull;
             }
@@ -95,46 +93,40 @@ namespace ZzukBot.Engines.Party
         /// </summary>
         /// <param name="state">0-positoin 1-dead 2-bagfull</param>
         internal void Report(int state) {
+            string channel = "PARTY";//CHANNEL
             switch (state)
             {
                 case 0:
-                    Lua.RunInMainthread("SendChatMessage('xyz_" + Index + "_" + instance().Position + "','PARTY')");
+                    Lua.RunInMainthread("SendChatMessage('xyz_" + Index + "_" + instance().Position + "','"+ channel + "',nil,"+PartyAssist.ChannelNumber + ")");
                     break;
                 case 1:
                     LocalResurrect = false;
-                    Lua.RunInMainthread("SendChatMessage('dead_" + Index + "','PARTY')");
+                    if(!ReportDead)
+                        Lua.RunInMainthread("SendChatMessage('dead_" + Index + "','" + channel + "',nil," + PartyAssist.ChannelNumber + ")");
                     break;
-                case 2:
-                    LocalBagFull=true;
-                    if (LocalBagFull!=ReportBagFull)
-                    {
-                        Lua.RunInMainthread("SendChatMessage('bagfull_" + Index + "','PARTY')");
-                    }
+                case 2: 
+                    Lua.RunInMainthread("SendChatMessage('bagfull_" + Index + "','" + channel + "',nil," + PartyAssist.ChannelNumber + ")");
                     break;
                 case 3:
                     LocalResting = true;
-                    Lua.RunInMainthread("SendChatMessage('reston_" + Index + "','PARTY')");
+                    Lua.RunInMainthread("SendChatMessage('reston_" + Index + "','" + channel + "',nil," + PartyAssist.ChannelNumber + ")");
                     break;
                 case 4:
                     LocalResting = false;
-                    Lua.RunInMainthread("SendChatMessage('restoff_" + Index + "','PARTY')");
+                    Lua.RunInMainthread("SendChatMessage('restoff_" + Index + "','" + channel + "',nil," + PartyAssist.ChannelNumber + ")");
                     break;
                 case 5:
-                    LocalBagFull = false;
-                    if (LocalBagFull != ReportBagFull)
-                    {
-                        Lua.RunInMainthread("SendChatMessage('bagempty_" + Index + "','PARTY')");
-                    }
+                    Lua.RunInMainthread("SendChatMessage('bagempty_" + Index + "','" + channel + "',nil," + PartyAssist.ChannelNumber + ")");
                     break;
                 case 6:
                     LocalResurrect = true;
                     if (!ReportResurrect)
-                        Lua.RunInMainthread("SendChatMessage('resurrect_" + Index + "','PARTY')");
+                        Lua.RunInMainthread("SendChatMessage('resurrect_" + Index + "','" + channel + "',nil," + PartyAssist.ChannelNumber + ")");
                     break;
                 case 7:
                     if (!LocalMounted) {
                         LocalMounted = true;
-                        Lua.RunInMainthread("SendChatMessage('mounted','PARTY')");
+                        Lua.RunInMainthread("SendChatMessage('mounted','" + channel + "',nil," + PartyAssist.ChannelNumber + ")");
                     }
                     break;
             }
@@ -187,6 +179,9 @@ namespace ZzukBot.Engines.Party
             this.isLeader = isLeader;
             this.pb = pb;
             ReportPosition = new XYZ();
+            if (isLocalPlayer) {
+                Functions.DoString("JoinChannelByName('" + PartyAssist.Channel + "','fuccckbot',ChatFrame1:GetID())");
+            }
         }
         
         /// <summary>
@@ -233,6 +228,14 @@ namespace ZzukBot.Engines.Party
         internal void Update(bool inSign)
         {
             if (isLocalPlayer) {
+                if (PartyAssist.ChannelNumber=="0") {
+                    Functions.DoString("msgChannelType=0 for i=1,30 do local channel,name = GetChannelName(i) if name=='" + PartyAssist.Channel + "' then msgChannelType=channel return end end");
+                    PartyAssist.ChannelNumber = Functions.GetText("msgChannelType");
+                    if (PartyAssist.ChannelNumber != "0") {
+                        Main.MainForm.AddLog("PartyChannel:" + PartyAssist.ChannelNumber);
+                        Functions.DoString("SendChatMessage('init_report_init','CHANNEL',nil," + PartyAssist.ChannelNumber + ")");
+                    }
+                }
                 if (ObjectManager.Player.InGhostForm)
                 {
                     Report(LocalResurrect?6:1);
@@ -259,7 +262,6 @@ namespace ZzukBot.Engines.Party
                     {
                         if (LocalBagFull)
                         {
-
                             Report(2);
                         }
                         else

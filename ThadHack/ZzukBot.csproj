@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Constants\Enums.cs" />
     <Compile Include="Constants\GameConstants.cs" />
+    <Compile Include="Constants\PrivateEnums.cs" />
     <Compile Include="Constants\Strings.cs" />
     <Compile Include="Constants\Structs.cs" />
     <Compile Include="Constants\WinImports.cs" />
@@ -87,7 +88,10 @@
     <Compile Include="Engines\CustomClass\PartyCustomClass.cs" />
     <Compile Include="Engines\Grind\States\PartyStates\partyStateGroup.cs" />
     <Compile Include="Engines\Grind\States\PartyStates\partyStateMounted.cs" />
+    <Compile Include="Engines\Grind\States\PartyStates\PartyStateBattleGroup.cs" />
     <Compile Include="Engines\Grind\States\StateGrind.cs" />
+    <Compile Include="Engines\Grind\States\StateBattleGroup.cs" />
+    <Compile Include="Engines\Grind\States\StateMail.cs" />
     <Compile Include="Engines\Grind\States\StateMounted.cs" />
     <Compile Include="Engines\Grind\States\stateTanlet.cs" />
     <Compile Include="Engines\Party\PartyAssist.cs" />

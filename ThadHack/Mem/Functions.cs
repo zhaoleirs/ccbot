@@ -45,6 +45,7 @@ namespace ZzukBot.Mem
             _DoString(parLuaCode, funcs.DoString);
             //DoString_Stub(new IntPtr((uint)Offsets.functions.DoString), parLuaCode, parScriptName);
         }
+     
 
         internal static void CastSpellByName(string parSpellName)
         {

@@ -3,12 +3,17 @@ using System.Text;
 using ZzukBot.Constants;
 using ZzukBot.Helpers;
 using ZzukBot.Mem;
+using static ZzukBot.Constants.GameConstants;
 using Ptr = ZzukBot.Constants.Offsets;
 
 namespace ZzukBot.Objects
 {
     internal class WoWItem : WoWObject
     {
+
+        private ItemCacheEntry _Info;
+        private bool GotCache;
+
         /// <summary>
         ///     Constructor taking guid aswell Ptr to object
         /// </summary>
@@ -29,6 +34,18 @@ namespace ZzukBot.Objects
         public bool CanUse()
         {
             return Functions.CanUseItem(ItemCachePointer);
+        }
+
+        public ItemCacheEntry Info
+        {
+            get
+            {
+                if (GotCache) return _Info;
+                _Info = ObjectManager.LookupItemCacheEntry(ItemId, PrivateEnums.ItemCacheLookupType.None) ??
+                        default(ItemCacheEntry);
+                GotCache = true;
+                return _Info;
+            }
         }
         /// <summary>
         ///     Pointer to WDB cache

@@ -25,6 +25,7 @@ namespace ZzukBot.Engines.Grind.States
         {
             if (Wait.ForOrAdd("mounted",5000))
             {
+                ObjectManager.Player.CtmStopMovement();
                 ObjectManager.Player.Inventory.UseItem(Options.MountName);
             }
 

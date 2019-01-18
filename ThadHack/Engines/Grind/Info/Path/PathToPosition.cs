@@ -34,7 +34,7 @@ namespace ZzukBot.Engines.Grind.Info.Path
             {
                 lastPlayerPos = ObjectManager.Player.Position;
             }
-            else if (Wait.For("path_time_out", 5000)) {
+            else if (Wait.For("path_time_out", Wait.MoveOutTime)) {
                 if (Calc.Distance3D(ObjectManager.Player.Position, lastPlayerPos) < 3)
                 {
                     recalc = true;

@@ -40,21 +40,21 @@ namespace ZzukBot.Engines.Grind.Info
         {
             get
             {
-                var mobs = ObjectManager.Npcs;
+                var mobs = ObjectManager.Player.InBattleGround?ObjectManager.Players:ObjectManager.Npcs;
                 if (Options.GroupMode)
                 {
                         mobs = mobs
-                        .Where(i => !Grinder.Access.Info.Combat.BlacklistContains(i) && i.IsMob && !i.IsPlayerPet && i.Health != 0 &&(PartyAssist.TargetPartyMember(i.TargetGuid)||(i.Reaction != Enums.UnitReaction.Friendly&&PartyAssist.PartyMemberTarget(i.Guid)))).ToList();//
+                        .Where(i => !Grinder.Access.Info.Combat.BlacklistContains(i) &&(ObjectManager.Player.InBattleGround||i.IsMob && !i.IsPlayerPet) && i.Health != 0 &&(PartyAssist.TargetPartyMember(i.TargetGuid)||(i.Reaction != Enums.UnitReaction.Friendly&&PartyAssist.PartyMemberTarget(i.Guid)))).ToList();//
                 }
                 else {
                 mobs = mobs
                     .Where(i =>
-                        i.IsMob && i.Health != 0 && i.Reaction != Enums.UnitReaction.Friendly &&
+                         i.Health != 0 && i.Reaction != Enums.UnitReaction.Friendly && (ObjectManager.Player.InBattleGround || i.IsMob && !i.IsPlayerPet &&
                         (i.TargetGuid == ObjectManager.Player.Guid || ObjectManager.Player.TargetGuid == i.Guid ||
                             (ObjectManager.Player.HasPet && i.TargetGuid == ObjectManager.Player.Pet.Guid)||
                             (i.IsInCombat && i.TappedByMe &&
-                             (i.Debuffs.Count > 0 || i.IsCrowdControlled) && UnitsDottedByPlayer.ContainsKey(i.Guid) && !ObjectManager.Player.IsEating && !ObjectManager.Player.IsDrinking
-                             )) && !i.IsPlayerPet
+                             (i.Debuffs.Count > 0 || i.IsCrowdControlled) && UnitsDottedByPlayer.ContainsKey(i.Guid)))) && !ObjectManager.Player.IsEating && !ObjectManager.Player.IsDrinking
+                             
                     )
                     .ToList();
                 }

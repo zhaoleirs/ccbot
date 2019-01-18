@@ -55,7 +55,7 @@ namespace ZzukBot.Engines
         }
         internal static void ChooseProfile(bool parLoadLast, Profile profile) {
            
-            if (parLoadLast && Options.LastProfile != "")
+            if (parLoadLast &&!string.IsNullOrEmpty(Options.LastProfile))
             {
                 tmpProfileName = Options.LastProfile;
                 profile();

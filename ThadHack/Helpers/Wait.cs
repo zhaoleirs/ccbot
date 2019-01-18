@@ -8,6 +8,7 @@ namespace ZzukBot.Helpers
     {
         // internal list which stores all items
         private static List<Item> Items = new List<Item>();
+        internal static int MoveOutTime=10000;
 
         /// <summary>
         ///     Did X ms pass after starting the stopwatch for name

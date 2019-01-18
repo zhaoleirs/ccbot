@@ -10,7 +10,7 @@ namespace ZzukBot.Engines.Grind.Info
     {
         private Action LoadFirstWaypointCallback;
         private XYZ LastPostion = null;
-        internal bool NeedMounted => !string.IsNullOrEmpty(Options.MountName) && (Options.Herb||Options.Mine||Calc.Distance2D(ObjectManager.Player.Position, Grinder.Access.Info.Waypoints.CurrentHotspot) > 50);
+        internal bool NeedMounted => !string.IsNullOrEmpty(Options.MountName) && ObjectManager.Player.Inventory.GetItem(Options.MountName)!=null && (Options.Herb||Options.Mine||Calc.Distance2D(ObjectManager.Player.Position, Grinder.Access.Info.Waypoints.CurrentHotspot) > 50);
 
         internal _Waypoints()
         {
@@ -43,25 +43,24 @@ namespace ZzukBot.Engines.Grind.Info
         /// </summary>
         internal XYZ CurrentWaypoint
         {
-            get
+            get {
+            var playerPosition = ObjectManager.Player.Position;
+            if (LastPostion == null)
             {
-                var playerPosition = ObjectManager.Player.Position;
-                if (LastPostion==null)
+                LastPostion = playerPosition;
+            }
+            if (Wait.For("waypointout", Wait.MoveOutTime))
+            {
+                if (Calc.Distance3D(playerPosition, LastPostion) < 3)
                 {
-                    LastPostion= playerPosition;
+                    LoadWaypoints();
                 }
-                if (Wait.For("waypointout", 5000))
+                else
                 {
-                    if (Calc.Distance3D(playerPosition, LastPostion) < 3)
-                    {
-                        LoadWaypoints();
-                    }
-                    else
-                    {
-                        LastPostion = playerPosition;
-                    }
+                    LastPostion = playerPosition;
                 }
-                return CurrentWaypoints[CurrentWaypointIndex];
+            }
+            return CurrentWaypoints[CurrentWaypointIndex];
             }
         }
 
@@ -170,8 +169,17 @@ namespace ZzukBot.Engines.Grind.Info
                 CurrentHotspotIndex = tmp;
             else
             {
-                Array.Reverse(Grinder.Access.Profile.Hotspots);
-                CurrentHotspotIndex = 1;
+                if (Options.Herb || Options.Mine)
+                {
+                    RevertHotspotsToOriginal();
+                    CurrentHotspotIndex = 0;
+                    Grinder.Access.Info.Mail.AfterMail = true;
+                    Grinder.Access.Info.Mail.RegenerateSubPath = true;
+                }
+                else {
+                    Array.Reverse(Grinder.Access.Profile.Hotspots);
+                    CurrentHotspotIndex = 1;
+                }
             }
             // load the next set of waypoints and set the index to 0
             Grinder.Access.Info.Waypoints.LoadWaypoints();

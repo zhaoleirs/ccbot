@@ -66,8 +66,6 @@ namespace ZzukBot.Engines.Grind.Info
 
         internal bool InSpaceTime() {
             bool pRet = SpaceTimeTotal >= Environment.TickCount;
-           //if (pRet&&Helpers.Wait.For("InSpaceTime", 60000))
-           //    GUI_Forms.Main.MainForm.AddLog(SpaceTimeTotal + "," + Environment.TickCount);
             return pRet;
         }
         internal void SetBreakAt(int parModifier)

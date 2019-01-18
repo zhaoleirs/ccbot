@@ -23,18 +23,13 @@ namespace ZzukBot.Engines.Grind.States
 
         internal override void Run()
         {
-            if (PartyAssist.Local.isLeader)
+            if (PartyAssist.Local.isLeader&&string.IsNullOrEmpty(Options.Party.BattleGround)&& Options.BreakFor>0)
             {
                 var players = ObjectManager.Players;
                 int playerCount = players.Count(i => i.DistanceToPlayer < 50 && !i.IsInCombat && !PartyAssist.members.Any(m => i.Name == m.Name));
                 if (playerCount >= 1)
                 {
-                    if (Wait.For("look_cheat_say", 30 * 1000))
-                    {
-                        
-                        Lua.RunInMainthread("SendChatMessage('"+ Grinder.Access.Info.Combat.RandomMsg + "','SAY')");
-                    }
-                    if (Wait.For("look_cheat", 60 * 1000))
+                    if (Wait.For("look_cheat", Options.BreakFor * 1000))
                     {
                         Lua.RunInMainthread("SendChatMessage('vendor','PARTY')");
                         Options.SpaceTime = 5;

@@ -7,6 +7,7 @@ using ZzukBot.GUI_Forms;
 using ZzukBot.Helpers;
 using ZzukBot.Ingame;
 using ZzukBot.Objects;
+using static ZzukBot.Constants.GameConstants;
 using obj = ZzukBot.Engines.CustomClass.Objects;
 
 namespace ZzukBot.Mem
@@ -26,6 +27,7 @@ namespace ZzukBot.Mem
         ///     Objectmanager internal dictionary
         /// </summary>
         private static readonly Dictionary<ulong, WoWObject> _Objects = new Dictionary<ulong, WoWObject>();
+        private static readonly Dictionary<int, IntPtr> _itemCachePtrs = new Dictionary<int, IntPtr>();
 
         private static volatile List<WoWObject> Objects = new List<WoWObject>();
         private static volatile bool ShouldUpdateSpells;
@@ -69,7 +71,15 @@ namespace ZzukBot.Mem
             get { return Objects.OfType<WoWGameObject>().Where(i => i.GatherInfo.Type==Enums.GatherType.Mining &&Player.Skills.GetSkill(Enums.Skills.MINING).CurrentLevel >=i.GatherInfo.RequiredSkill).ToList(); }
         }
 
-
+        internal static ItemCacheEntry? LookupItemCacheEntry(int parItemId, PrivateEnums.ItemCacheLookupType parLookupType)
+        {
+            if (_itemCachePtrs.ContainsKey(parItemId))
+                return Memory.Reader.Read<ItemCacheEntry>(_itemCachePtrs[parItemId]);
+            var res = Functions.ItemCacheGetRow(parItemId);
+            if (res == IntPtr.Zero) return null;
+            _itemCachePtrs.Add(parItemId, res);
+            return Memory.Reader.Read<ItemCacheEntry>(res);
+        }
         internal static List<WoWGameObject> Herbs
         {
             get { return Objects.OfType<WoWGameObject>().Where(i => i.GatherInfo.Type == Enums.GatherType.Herbalism && Player.Skills.GetSkill(Enums.Skills.HERBALISM).CurrentLevel >= i.GatherInfo.RequiredSkill).ToList(); }

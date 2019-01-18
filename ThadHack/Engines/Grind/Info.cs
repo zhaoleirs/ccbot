@@ -17,6 +17,7 @@ namespace ZzukBot.Engines.Grind
         {
             Waypoints = new _Waypoints();
             Rest = new _Rest();
+            Mail = new _Mail();
             Target = new _Target();
             Combat = new _Combat();
             Loot = new _Loot();
@@ -40,6 +41,7 @@ namespace ZzukBot.Engines.Grind
         internal _SpiritWalk SpiritWalk { get; set; }
         internal _Waypoints Waypoints { get; set; }
         internal _Rest Rest { get; set; }
+        internal _Mail Mail { get; set; }
         internal _Target Target { get; set; }
         internal _Combat Combat { get; set; }
         internal _Loot Loot { get; set; }

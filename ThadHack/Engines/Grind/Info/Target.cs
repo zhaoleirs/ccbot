@@ -37,17 +37,16 @@ namespace ZzukBot.Engines.Grind.Info
         {
             get
             {
-                var mobs = ObjectManager.Npcs;
+                var mobs = ObjectManager.Player.InBattleGround ? ObjectManager.Players : ObjectManager.Npcs;
 
                 mobs = mobs
                     .Where(
                         i =>
-                            i.IsMob&&!i.IsPlayerPet &&ObjectManager.Player.Level-i.Level<Options.LevelOut&&i.CreatureRank==0 && i.Health != 0 && !Grinder.Access.Info.Combat.BlacklistContains(i) &&
+                            i.Health != 0 &&i.RoundEnemyCount<3&&i.Reaction != Enums.UnitReaction.Friendly && (ObjectManager.Player.InBattleGround || (i.IsMob&&!i.IsPlayerPet && ObjectManager.Player.Level - i.Level < Options.LevelOut && i.CreatureRank == 0)  && !Grinder.Access.Info.Combat.BlacklistContains(i) &&
                             (Grinder.Access.Profile.Factions == null || Grinder.Access.Profile.Factions.Contains(i.FactionID)) &&
-                            (Grinder.Access.Profile.Ids == null || Grinder.Access.Profile.Ids.Contains(i.NpcID)) &&
-                            i.Reaction != Enums.UnitReaction.Friendly && (!i.TappedByOther || i.IsUntouched) &&
+                            (Grinder.Access.Profile.Ids == null || Grinder.Access.Profile.Ids.Contains(i.NpcID))&& (!i.TappedByOther || i.IsUntouched) &&
                             Calc.Distance3D(i.Position, ObjectManager.Player.Position) <= Options.MobSearchRange &&
-                            Math.Abs(ObjectManager.Player.Position.Z - i.Position.Z) <= (int)Options.TargetZ && i.SummonedBy == 0 )
+                            Math.Abs(ObjectManager.Player.Position.Z - i.Position.Z) <= (int)Options.TargetZ && i.SummonedBy == 0 ))
                     .OrderBy(i =>Calc.Distance3D(i.Position, ObjectManager.Player.Position)).ToList();
                 return mobs.FirstOrDefault();
             }

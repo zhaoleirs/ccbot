@@ -252,6 +252,14 @@ namespace ZzukBot.Objects
         /// </summary>
         internal int Health => GetDescriptor<int>(Offsets.Descriptors.Health);
 
+        internal int RoundEnemyCount
+        {
+            get
+            {
+                var mobs = ObjectManager.Player.InBattleGround ? ObjectManager.Players : ObjectManager.Npcs;
+                return mobs.Count(i => Calc.Distance2D(i.Position, this.Position) < 20 && i.Health != 0 && i.Reaction != Enums.UnitReaction.Friendly && i.Reaction != Enums.UnitReaction.Neutral);
+            }
+        }
         internal int MaxHealth => GetDescriptor<int>(Offsets.Descriptors.MaxHealth);
 
         public int HealthPercent => (int) (Health/(float) MaxHealth*100);

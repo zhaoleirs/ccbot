@@ -32,6 +32,11 @@ namespace ZzukBot.Engines.Grind.States
             {
                 Grinder.Access.Info.Vendor.RegenerateSubPath = true;
             }
+
+            Wait.Remove("LootGrind");
+            Wait.Remove("LootGrindOut");
+            Wait.Remove("LootGrindMoving");
+
             Grinder.Access.Info.PathAfterFightToWaypoint.SetAfterFightMovement();
             Grinder.Access.Info.Combat.LastFightTick = Environment.TickCount + ran.Next(50, 100);
             Grinder.Access.Info.Loot.RemoveRespawnedMobsFromBlacklist(Grinder.Access.Info.Combat.Attackers);

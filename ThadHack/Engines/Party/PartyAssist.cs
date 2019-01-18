@@ -24,7 +24,11 @@ namespace ZzukBot.Engines.Party
         /// </summary>
         public static List<PartyMember> members = new List<PartyMember>();
         private static bool Applied;
+        internal static string Channel="FxxTxxGxxM";
         internal static bool FocusToVendor;
+        internal static int ChatParType;
+        internal static string ChannelNumber="0";
+
         internal static bool AllMounted => !members.Exists(i => i.instance()!=null&&!i.instance().IsMounted);
 
         internal static bool Mounted=>!members.Exists(i=>!i.Mounted);
@@ -98,7 +102,11 @@ namespace ZzukBot.Engines.Party
             }
             return false;
         }
-
+        internal static void Release() {
+            Applied = false;
+            FocusToVendor = false;
+            members.Clear();
+        }
         internal static void Init()
         {
             if (Applied) return;
@@ -145,7 +153,10 @@ namespace ZzukBot.Engines.Party
         internal static void OnChatMsg(int parType, string parOwner, string parMessage)
         {
             if (!Applied) return;
-            if (parType == 1)
+            if (parMessage == "init_report_init") {
+                ChatParType = parType;
+            }
+            if (parType == ChatParType||parType==1)
             {
                 if (parMessage == "vendor")
                 {
@@ -245,7 +256,8 @@ namespace ZzukBot.Engines.Party
             }
 
             if (InSignAll()) {
-                var unit=ObjectManager.Npcs.Where(i => i.Health!=0&&TargetPartyMemberInCombat(i.TargetGuid)).OrderBy(i=> i.HealthPercent==1?1000000000:i.HealthPercent).FirstOrDefault(); 
+                var mods =ObjectManager.Player.InBattleGround ? ObjectManager.Players : ObjectManager.Npcs;
+                var unit= mods.Where(i => i.Health!=0&&TargetPartyMemberInCombat(i.TargetGuid)).OrderBy(i=> i.HealthPercent==1?1000000000:i.HealthPercent).FirstOrDefault(); 
                 if (unit != null) {
                     Grinder.Access.Info.Combat.RemoveFromBlacklist(unit.Guid);
                     ObjectManager.Player.SetTarget(unit);

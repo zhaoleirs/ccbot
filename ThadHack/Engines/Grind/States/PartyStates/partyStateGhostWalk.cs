@@ -15,17 +15,30 @@ namespace ZzukBot.Engines.Grind.States
     internal class PartyStateGhostWalk : StateGhostWalk
     {
 
-        internal override bool NeedToRun => base.NeedToRun;
-        internal override void Resurrect()
+        internal override bool NeedToRun
+        {
+            get
+            {
+                bool run = base.NeedToRun;
+                if (!run)
+                {
+
+                    PartyAssist.Local.ReportResurrect = false;
+                    PartyAssist.Local.ReportDead = false;
+                }
+                return run;
+            }
+        }
+        internal override void Retrieve()
         {
             if (PartyAssist.NeedResurrect)
             {
-                base.Resurrect();
-                PartyAssist.Local.ReportResurrect = false;
-                PartyAssist.Local.ReportDead = false;
+                base.Retrieve();
             }
-            else {
-                PartyAssist.Local.Report(6);
+            else
+            {
+                if (Wait.For("party_res",4000))
+                    PartyAssist.Local.Report(6);
             }
         }
     }

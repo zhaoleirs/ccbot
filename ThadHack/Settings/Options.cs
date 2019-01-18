@@ -25,7 +25,7 @@ namespace ZzukBot.Settings
         internal static string[] ProtectedItems = {};
         internal static decimal WaypointModifier = 0;
 
-        internal static string LastProfile = "";
+        internal static string LastProfile;
 
         internal static int CapFpsTo = 60;
 
@@ -58,6 +58,7 @@ namespace ZzukBot.Settings
         internal static string[] GrindItems = { };
         internal static int SpaceTime=0;
         internal static string MountName;
+        internal static string MailTo;
 
         public static class Party
         {
@@ -68,6 +69,7 @@ namespace ZzukBot.Settings
             public static string party4;
             public static string party5;
             internal static int LeaderDistance;
+            internal static string BattleGround;
         }
     }
 }

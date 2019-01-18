@@ -6,6 +6,7 @@ namespace ZzukBot.Engines.Grind.Info.Path
     {
         internal BasePath Ghostwalk;
         internal BasePath GrindToVendor;
+        internal BasePath GrindToMail;
         internal BasePath VendorToGrind;
     }
 }

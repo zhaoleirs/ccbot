@@ -15,6 +15,7 @@ namespace ZzukBot.Engines.Grind.Info.Path
 
         internal void SetAfterFightMovement()
         {
+            if (Options.Mine || Options.Herb||ObjectManager.Player.InBattleGround) return;
             AfterFightMovement = true;
             _AdjustWaypoints = true;
         }

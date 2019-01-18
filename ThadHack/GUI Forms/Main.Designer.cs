@@ -157,6 +157,8 @@ namespace ZzukBot.GUI_Forms
             this.tbAccount = new System.Windows.Forms.TextBox();
             this.lAccount = new System.Windows.Forms.Label();
             this.tpParty = new System.Windows.Forms.TabPage();
+            this.tbBattleGround = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.nudLeaderDistance = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
             this.pbPart2 = new System.Windows.Forms.ProgressBar();
@@ -191,6 +193,8 @@ namespace ZzukBot.GUI_Forms
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tpNews = new System.Windows.Forms.TabPage();
             this.rtbNews = new System.Windows.Forms.RichTextBox();
+            this.tbMailTo = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.tcMain.SuspendLayout();
             this.tpGrind.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgChat)).BeginInit();
@@ -914,6 +918,8 @@ namespace ZzukBot.GUI_Forms
             // 
             // tpSettings
             // 
+            this.tpSettings.Controls.Add(this.tbMailTo);
+            this.tpSettings.Controls.Add(this.label14);
             this.tpSettings.Controls.Add(this.tbMount);
             this.tpSettings.Controls.Add(this.nudLevelOut);
             this.tpSettings.Controls.Add(this.label11);
@@ -949,7 +955,7 @@ namespace ZzukBot.GUI_Forms
             // 
             // nudLevelOut
             // 
-            this.nudLevelOut.Location = new System.Drawing.Point(79, 345);
+            this.nudLevelOut.Location = new System.Drawing.Point(79, 348);
             this.nudLevelOut.Name = "nudLevelOut";
             this.nudLevelOut.Size = new System.Drawing.Size(71, 21);
             this.nudLevelOut.TabIndex = 19;
@@ -979,7 +985,7 @@ namespace ZzukBot.GUI_Forms
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 348);
+            this.label5.Location = new System.Drawing.Point(11, 351);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 12);
             this.label5.TabIndex = 18;
@@ -1658,6 +1664,8 @@ namespace ZzukBot.GUI_Forms
             // 
             // tpParty
             // 
+            this.tpParty.Controls.Add(this.tbBattleGround);
+            this.tpParty.Controls.Add(this.label13);
             this.tpParty.Controls.Add(this.nudLeaderDistance);
             this.tpParty.Controls.Add(this.label12);
             this.tpParty.Controls.Add(this.pbPart2);
@@ -1676,6 +1684,22 @@ namespace ZzukBot.GUI_Forms
             this.tpParty.TabIndex = 6;
             this.tpParty.Text = "PartySetting";
             this.tpParty.UseVisualStyleBackColor = true;
+            // 
+            // tbBattleGround
+            // 
+            this.tbBattleGround.Location = new System.Drawing.Point(114, 330);
+            this.tbBattleGround.Name = "tbBattleGround";
+            this.tbBattleGround.Size = new System.Drawing.Size(71, 21);
+            this.tbBattleGround.TabIndex = 12;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(17, 339);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(77, 12);
+            this.label13.TabIndex = 36;
+            this.label13.Text = "BattleGround";
             // 
             // nudLeaderDistance
             // 
@@ -1994,6 +2018,22 @@ namespace ZzukBot.GUI_Forms
             this.rtbNews.Text = "";
             this.rtbNews.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.rtbNews_LinkClicked);
             // 
+            // tbMailTo
+            // 
+            this.tbMailTo.Location = new System.Drawing.Point(78, 323);
+            this.tbMailTo.Name = "tbMailTo";
+            this.tbMailTo.Size = new System.Drawing.Size(71, 21);
+            this.tbMailTo.TabIndex = 20;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(14, 326);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(41, 12);
+            this.label14.TabIndex = 21;
+            this.label14.Text = "MailTo";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2234,6 +2274,10 @@ namespace ZzukBot.GUI_Forms
         internal System.Windows.Forms.NumericUpDown nudLeaderDistance;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button button2;
+        internal System.Windows.Forms.TextBox tbBattleGround;
+        private System.Windows.Forms.Label label13;
+        internal System.Windows.Forms.TextBox tbMailTo;
+        private System.Windows.Forms.Label label14;
     }
 }
 

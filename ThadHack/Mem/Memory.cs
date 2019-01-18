@@ -9,6 +9,7 @@ using ZzukBot.AntiWarden;
 using ZzukBot.Constants;
 using ZzukBot.Engines.Party;
 using ZzukBot.Hooks;
+using ZzukBot.Settings;
 using static ZzukBot.Constants.Offsets;
 
 namespace ZzukBot.Mem
@@ -67,9 +68,12 @@ namespace ZzukBot.Mem
             ObjectManager.Init();
 
             // Apply no collision hack with trees
-            /*var DisableCollision = new Hack(Hacks.DisableCollision, new byte[] {0x0F, 0x85, 0x1B, 0x01, 0x00, 0x00},
+            if (Options.Herb || Options.Mine)
+            {
+                var DisableCollision = new Hack(Hacks.DisableCollision, new byte[] { 0x0F, 0x85, 0x1B, 0x01, 0x00, 0x00 },
                 "Collision");
-            HookWardenMemScan.AddHack(DisableCollision);*/
+                HookWardenMemScan.AddHack(DisableCollision);
+            }
             //DisableCollision.Apply();
             // Ctm Patch
             var CtmPatch = new Hack(Hacks.CtmPatch,
@@ -83,8 +87,10 @@ namespace ZzukBot.Mem
             //Wallclimb.Apply();
 
             //Coll
-            /*var Collision3 = new Hack(Hacks.Collision3, new byte[] {0xEB, 0x69}, "Collision3");
-            HookWardenMemScan.AddHack(Collision3);*/
+            //if (Options.Herb || Options.Mine) {
+            //var Collision3 = new Hack(Hacks.Collision3, new byte[] {0xEB, 0x69}, "Collision3");
+            //HookWardenMemScan.AddHack(Collision3);
+            //}
 
             // Loot patch
             var LootPatch = new Hack(Hacks.LootPatch, new byte[] {0xEB}, "LootPatch");

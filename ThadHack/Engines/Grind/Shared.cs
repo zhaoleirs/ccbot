@@ -17,11 +17,11 @@ namespace ZzukBot.Engines.Grind
 
         internal static void RandomJump()
         {
-            if (JumpTime.AddSeconds(20)<DateTime.Now)
-            {
-                Functions.DoString("Jump()");
-                ResetJumper();
-            }
+            //if (JumpTime.AddSeconds(20)<DateTime.Now)
+            //{
+            //    Functions.DoString("Jump()");
+            //    ResetJumper();
+            //}
         }
 
         internal static void ResetJumper()

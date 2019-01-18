@@ -5,6 +5,24 @@ using ZzukBot.Settings;
 
 namespace ZzukBot.Engines.Grind.Info
 {
+    internal class _Mail
+    {
+        internal bool RegenerateSubPath = true;
+
+        internal bool AfterMail { get; set; }
+        internal bool MailProcess;
+        internal bool NeedToMail
+        {
+            get
+            {
+                if (!MailProcess)
+                {
+                    MailProcess = AfterMail && ObjectManager.Player.Inventory.FreeSlots < Options.MinFreeSlotsBeforeVendor;
+                }
+                return MailProcess;
+            }
+        }
+    }
     internal class _Rest
     {
         private bool ForceEatRest;

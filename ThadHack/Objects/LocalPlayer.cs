@@ -40,8 +40,9 @@ namespace ZzukBot.Objects
         internal volatile Spells Spells;
         internal volatile Skills Skills;
         internal int UnMountDelay;
+        internal bool InBattleGround =>!string.IsNullOrEmpty(Options.Party.BattleGround)&&GetMapID!=1;
 
-        internal bool CanMounted=> UnMountDelay<Environment.TickCount;
+        internal bool CanMounted=> !IsInCombat&&UnMountDelay<Environment.TickCount;
 
         internal IntPtr SkillField => Pointer.Add(8).ReadAs<IntPtr>().Add(0xB38);
         /// <summary>
@@ -129,11 +130,11 @@ namespace ZzukBot.Objects
         /// </summary>
         internal bool IsLooting => Offsets.Player.IsLooting.ReadAs<int>() != 0;
 
-        internal int LootSlots => Functions.GetLootSlots();
-
         /// <summary>
         ///     How many items can we loot?
         /// </summary>
+        internal int LootSlots => Functions.GetLootSlots();
+
         /// <summary>
         ///     the ID of the map we are on
         /// </summary>
@@ -404,6 +405,11 @@ namespace ZzukBot.Objects
         ///     Rightclick on a unit
         /// </summary>
         internal void RightClick(WoWUnit parUnit)
+        {
+            Functions.OnRightClickUnit(parUnit.Pointer, 1);
+        }
+
+        internal void RightClick(WoWItem parUnit)
         {
             Functions.OnRightClickUnit(parUnit.Pointer, 1);
         }

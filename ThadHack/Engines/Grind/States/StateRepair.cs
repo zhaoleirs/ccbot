@@ -22,7 +22,6 @@ namespace ZzukBot.Engines.Grind.States
         internal override void Run()
         {
             // close enough to vendor?
-            //GUI_Forms.Main.MainForm.AddLog(Calc.Distance3D(ObjectManager.Player.Position, Grinder.Access.Profile.RepairNPC.Coordinates).ToString());
             if (Calc.Distance3D(ObjectManager.Player.Position, Grinder.Access.Profile.RepairNPC.Coordinates) < 5)
             {
                 Grinder.Access.Info.PathAfterFightToWaypoint.DisableAfterFightMovement();

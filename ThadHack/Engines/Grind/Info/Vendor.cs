@@ -50,7 +50,16 @@ namespace ZzukBot.Engines.Grind.Info
                 return _NeedToVendor;
             }
         }
-
+        internal bool MailOpen
+        {
+            get
+            {
+                var encryptedName = Strings.GT_IsMailOpen.GenLuaVarName();
+                Functions.DoString(Strings.IsMailOpen.Replace(Strings.GT_IsMailOpen, encryptedName));
+                var res = Functions.GetText(encryptedName) == "true";
+                return res;
+            }
+        }
         internal bool GossipOpen
         {
             get

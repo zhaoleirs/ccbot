@@ -109,6 +109,10 @@ namespace ZzukBot.Settings
                 Main.MainForm.tbMount);
 
 
+            GetElement("MailTo",
+                ref Options.MailTo,
+                Main.MainForm.tbMailTo);
+
             GetElement("AccountPassword",
                 ref Options.AccountPassword,
                 Main.MainForm.tbPassword);
@@ -253,6 +257,17 @@ namespace ZzukBot.Settings
             GetElement("LeaderDistance",
             ref Options.Party.LeaderDistance,
             Main.MainForm.nudLeaderDistance);
+
+
+            GetElement("BattleGround",
+            ref Options.Party.BattleGround,
+            Main.MainForm.tbBattleGround);
+
+            var element = doc.Element("Settings");
+            if (element.Element("LastProfile") == null) {
+                element.Add(new XElement("LastProfile", ""));
+            }
+            Options.LastProfile = element.Element("LastProfile").Value;
             //GetProtectedItems(ref Options.ProtectedItems, Main.MainForm.tbProtectedItems);
         }
 
@@ -266,9 +281,11 @@ namespace ZzukBot.Settings
             SaveElement("RestManaAt", Options.RestManaAt);
             SaveElement("LevelOut", Options.LevelOut);
             SaveElement("Drink", Options.Drink);
+            SaveElement("LastProfile", Options.LastProfile);
             SaveElement("RestHealthAt", Options.RestHealthAt);
             SaveElement("Food", Options.Food);
             SaveElement("MountName", Options.MountName);
+            SaveElement("MailTo", Options.MailTo);
             SaveElement("MobSearchRange", Options.MobSearchRange);
             SaveElement("MaxDiffToWp", Options.MaxDiffToWp);
             SaveElement("CombatDistance", Options.CombatDistance);
@@ -308,6 +325,7 @@ namespace ZzukBot.Settings
             SaveElement("Party4", Options.Party.party4);
             SaveElement("Party5", Options.Party.party5);
             SaveElement("LeaderDistance", Options.Party.LeaderDistance);
+            SaveElement("BattleGround", Options.Party.BattleGround);
 
             UpdateProtectedItems();
             UpdateGrindItems();
